@@ -3,32 +3,54 @@
     internal class Program
     {
         static Random rand = new Random();
-        const int HORIZONTAL = 3;     //how many horizontal lines
         const int VERTICAL = 3;      // how many vertical lines
+        const int HORIZONTAL = 3;     //how many horizontal lines
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello and Welcome to Slot Machine Game!");
             string[] slotSymbols = { "0", "1" };//, "2", "3", "4", "5", "6", "7", "8", "9", "J" };
-            string[,] slotMachineArray = new string[HORIZONTAL, VERTICAL];
+            string[,] slotMachineArray = new string[VERTICAL, HORIZONTAL];
 
             while (true)
             {
+                Console.WriteLine("Hello and Welcome to Slot Machine Game!");
                 Console.WriteLine();
                 //fill array with random strings from slotSymbols array
-                for (int i = 0; i < HORIZONTAL; i++)
+                for (int i = 0; i < VERTICAL; i++)
                 {
-                    for (int c = 0; c < VERTICAL; c++)
+                    for (int c = 0; c < HORIZONTAL; c++)
                     {
                         int randomIndex = rand.Next(slotSymbols.Length);
                         slotMachineArray[i, c] = slotSymbols[randomIndex];
                         Console.Write($"{slotMachineArray[i, c]} ");
                     }
                     Console.WriteLine();
-
                 }
-                if (slotMachineArray[1, 0] == slotMachineArray[1, 1] && slotMachineArray[1, 0] == slotMachineArray[1, 2])
+
+                // Check for vertical lines
+                int horizontalMinutsOne = HORIZONTAL - 1;
+                int verticalMinutOne = VERTICAL - 1;
+                for (int i = 0; i < VERTICAL; i++)
                 {
-                    Console.WriteLine("Win");
+                int verticalMatchCount = 0;
+                    for (int c = 0; c < HORIZONTAL; c++)
+                    {
+                        if (c + 1 != HORIZONTAL)
+                        {
+                            if (slotMachineArray[i, c] == slotMachineArray[i, c + 1])
+                            {
+                                verticalMatchCount++;
+                                if (verticalMatchCount == horizontalMinutsOne)
+                                {
+                                    Console.Write($"Win horizontal line {i+1}\n");
+                                }
+                            }
+                            else
+                            {
+                                verticalMatchCount = 0;
+                                break;
+                            }
+                        }
+                    }
                 }
 
                 Console.WriteLine("If want to play again press Y");
@@ -40,14 +62,6 @@
                 }
 
             }//end of while loop
-
-
-
-
-
-
-
-
         }
     }
 }
