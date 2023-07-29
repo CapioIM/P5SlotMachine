@@ -31,7 +31,7 @@
                 int verticalMinutOne = VERTICAL - 1;
                 for (int i = 0; i < VERTICAL; i++)
                 {
-                int verticalMatchCount = 0;
+                    int verticalMatchCount = 0;
                     for (int c = 0; c < HORIZONTAL; c++)
                     {
                         if (c + 1 != HORIZONTAL)
@@ -41,7 +41,7 @@
                                 verticalMatchCount++;
                                 if (verticalMatchCount == horizontalMinutsOne)
                                 {
-                                    Console.Write($"Win horizontal line {i+1}\n");
+                                    Console.Write($"Win horizontal line {i + 1}\n");
                                 }
                             }
                             else
