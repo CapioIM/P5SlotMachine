@@ -4,7 +4,7 @@
     {
         static Random rand = new Random();
         const int VERTICAL_LINES_IN_GAME = 3;      // how many vertical lines
-        const int HORIZONTAL_LINES_IN_GAME = 3;     //how many horizontal lines
+        const int HORIZONTAL_LINES_IN_GAME = 4;     //how many horizontal lines
         static void Main(string[] args)
         {
             string[] slotSymbols = { "0" };//, "1", "2", "3", "4", "5", "6", "7", "8", "9", "J" };
@@ -39,17 +39,19 @@
                 {
                     for (int c = 0; c < HORIZONTAL_LINES_IN_GAME; c++)
                     {
+                                                                                //horizontal lines check/win output
                         if (amountOfLanesPlay > i && c != horizontalMinutsOne && slotMachineArray[i, c] == slotMachineArray[i, c + 1])
                         {
                             horizontalLineMatching++;
-                            if (horizontalLineMatching == verticalMinutOne)
+                            if (horizontalLineMatching == horizontalMinutsOne)
                             {
-                                Console.WriteLine($"Win line nr: {i + 1}");
+                                Console.WriteLine($"Win | line nr: {i + 1}");
                             }
                         }
-                        if (amountOfLanesPlay > HORIZONTAL_LINES_IN_GAME)
+
+                        if (amountOfLanesPlay > HORIZONTAL_LINES_IN_GAME)       //vertical lines after 3(in case that horizontal lines are 3) check/win output
                         {
-                            if (amountOfLanesPlay - HORIZONTAL_LINES_IN_GAME > c && i != verticalMinutOne && slotMachineArray[i, c] == slotMachineArray[i + 1, c])
+                            if (amountOfLanesPlay - VERTICAL_LINES_IN_GAME > i && c != verticalMinutOne && slotMachineArray[c, i] == slotMachineArray[c + 1, i])
                             {
                                 verticalLineMatching++;
                                 if (verticalLineMatching == verticalMinutOne)
@@ -58,6 +60,7 @@
                                 }
                             }
                         }
+                        //diagonal code here 
                     }
                     verticalLineMatching = 0;
                     horizontalLineMatching = 0;
