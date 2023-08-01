@@ -33,37 +33,46 @@
                 }
 
                 int horizontalLineMatching = 0;               //horizontal -  line check and win output
-                int verticalLineMatching = 0;              //vertical | line check and win output    
 
                 for (int i = 0; i < VERTICAL_LINES_IN_GAME; i++)
                 {
                     for (int c = 0; c < HORIZONTAL_LINES_IN_GAME; c++)
                     {
-                                                                                //horizontal lines check/win output
-                        if (amountOfLanesPlay > i && c != horizontalMinutsOne && slotMachineArray[i, c] == slotMachineArray[i, c + 1])
+                        //horizontal lines check/win output
+                        if (amountOfLanesPlay >i && c != horizontalMinutsOne && slotMachineArray[i, c] == slotMachineArray[i, c + 1])
                         {
                             horizontalLineMatching++;
                             if (horizontalLineMatching == horizontalMinutsOne)
                             {
+                                Console.WriteLine($"Win - line nr: {i + 1}");
+                            }
+                        }
+                        else
+                        {
+                            horizontalLineMatching = 0;
+                            break;
+                        }
+                    }
+                }
+                int verticalLineMatching = 0;              //vertical | line check and win output    
+                for (int i = 0; i < VERTICAL_LINES_IN_GAME; i++)
+                {
+                    for (int c = 0; c < HORIZONTAL_LINES_IN_GAME; c++)
+                    {
+                        if (amountOfLanesPlay - VERTICAL_LINES_IN_GAME > i && c < horizontalMinutsOne && slotMachineArray[i, c] == slotMachineArray[i + 1, c])
+                        {
+                            verticalLineMatching++;
+                            if (verticalLineMatching == verticalMinutOne)
+                            {
                                 Console.WriteLine($"Win | line nr: {i + 1}");
                             }
                         }
-
-                        if (amountOfLanesPlay > HORIZONTAL_LINES_IN_GAME)       //vertical lines after 3(in case that horizontal lines are 3) check/win output
+                        else
                         {
-                            if (amountOfLanesPlay - VERTICAL_LINES_IN_GAME > i && c != verticalMinutOne && slotMachineArray[c, i] == slotMachineArray[c + 1, i])
-                            {
-                                verticalLineMatching++;
-                                if (verticalLineMatching == verticalMinutOne)
-                                {
-                                    Console.WriteLine($"Win vertical line nr: {i + 1}");
-                                }
-                            }
+                            verticalLineMatching = 0;
+                            break;
                         }
-                        //diagonal code here 
                     }
-                    verticalLineMatching = 0;
-                    horizontalLineMatching = 0;
                 }
 
 
