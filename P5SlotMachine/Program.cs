@@ -7,8 +7,8 @@
         const int HORIZONTAL_LINES_IN_GAME = 3;     //how many horizontal lines
         static void Main(string[] args)
         {
-            string[] slotSymbols = { "0" };//, "1", "2", "3", "4", "5", "6", "7", "8", "9", "J" };
-            string[,] slotMachineArray = new string[VERTICAL_LINES_IN_GAME, HORIZONTAL_LINES_IN_GAME];
+            string[] slotSymbols = { "0" };//, "1", "2", "3", "4", "5", "6", "7", "8", "9", "J" };             // test symbols
+            string[,] slotMachineArray = new string[VERTICAL_LINES_IN_GAME, HORIZONTAL_LINES_IN_GAME];          //slot machine array size
 
             while (true)
             {
@@ -18,8 +18,8 @@
                 Console.WriteLine();
 
                 int amountOfLanesPlay = Convert.ToInt32(Console.ReadLine());
-                int horizontalMinutsOne = HORIZONTAL_LINES_IN_GAME - 1;         //loop doesnt run out of array range
-                int verticalMinutOne = VERTICAL_LINES_IN_GAME - 1;
+                int horizontalMinusOne = HORIZONTAL_LINES_IN_GAME - 1;         //loop doesnt run out of array range
+                int verticalMinusOne = VERTICAL_LINES_IN_GAME - 1;
 
                 for (int down = 0; down < VERTICAL_LINES_IN_GAME; down++)                //fill array with random strings from slotSymbols array
                 {
@@ -39,10 +39,10 @@
                     for (int right = 0; right < HORIZONTAL_LINES_IN_GAME; right++)
                     {
                         //horizontal lines check/win output
-                        if (amountOfLanesPlay >down && right != horizontalMinutsOne && slotMachineArray[down, right] == slotMachineArray[down, right + 1])
+                        if (amountOfLanesPlay >down && right != horizontalMinusOne && slotMachineArray[down, right] == slotMachineArray[down, right + 1])
                         {
                             horizontalLineMatching++;
-                            if (horizontalLineMatching == horizontalMinutsOne)
+                            if (horizontalLineMatching == horizontalMinusOne)
                             {
                                 Console.WriteLine($"Win - line nr: {down + 1}");
                             }
@@ -55,16 +55,16 @@
                     }
                 }
                 int verticalLineMatching = 0;              //vertical | line check and win output    
-                for (int down = 0; down < VERTICAL_LINES_IN_GAME; down++)
+                for (int right = 0; right < HORIZONTAL_LINES_IN_GAME; right++)
                 {
-                    for (int right = 0; right < HORIZONTAL_LINES_IN_GAME; right++)
+                    for (int down = 0; down < VERTICAL_LINES_IN_GAME; down++)
                     {
-                        if (amountOfLanesPlay - VERTICAL_LINES_IN_GAME > down && right < horizontalMinutsOne && slotMachineArray[down, right] == slotMachineArray[down + 1, right])
+                        if (amountOfLanesPlay - VERTICAL_LINES_IN_GAME > right && down != verticalMinusOne && slotMachineArray[down, right] == slotMachineArray[down + 1, right])
                         {
                             verticalLineMatching++;
-                            if (verticalLineMatching == verticalMinutOne)
+                            if (verticalLineMatching == verticalMinusOne)
                             {
-                                Console.WriteLine($"Win | line nr: {down + 1}");
+                                Console.WriteLine($"Win | line nr: {right +1}");
                             }
                         }
                         else
@@ -74,10 +74,6 @@
                         }
                     }
                 }
-
-
-
-
 
                 Console.WriteLine("If want to play again press Y");
                 string playAgain = Console.ReadKey().KeyChar.ToString().ToLower();
