@@ -18,6 +18,7 @@
                 Console.WriteLine();
 
                 int amountOfLanesPlay = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
                 int rightMinusOne = ROWS_LINES_IN_GAME - 1;         //loop doesnt run out of array range
                 int downMinusOne = COLUMNS_LINES_IN_GAME - 1;
 
