@@ -4,7 +4,7 @@
     {
         static Random rand = new Random();
         const int VERTICAL_LINES_IN_GAME = 3;      // how many vertical lines
-        const int HORIZONTAL_LINES_IN_GAME = 4;     //how many horizontal lines
+        const int HORIZONTAL_LINES_IN_GAME = 3;     //how many horizontal lines
         static void Main(string[] args)
         {
             string[] slotSymbols = { "0" };//, "1", "2", "3", "4", "5", "6", "7", "8", "9", "J" };
@@ -21,30 +21,30 @@
                 int horizontalMinutsOne = HORIZONTAL_LINES_IN_GAME - 1;         //loop doesnt run out of array range
                 int verticalMinutOne = VERTICAL_LINES_IN_GAME - 1;
 
-                for (int i = 0; i < VERTICAL_LINES_IN_GAME; i++)                //fill array with random strings from slotSymbols array
+                for (int down = 0; down < VERTICAL_LINES_IN_GAME; down++)                //fill array with random strings from slotSymbols array
                 {
-                    for (int c = 0; c < HORIZONTAL_LINES_IN_GAME; c++)
+                    for (int right = 0; right < HORIZONTAL_LINES_IN_GAME; right++)
                     {
                         int randomIndex = rand.Next(slotSymbols.Length);
-                        slotMachineArray[i, c] = slotSymbols[randomIndex];
-                        Console.Write($"{slotMachineArray[i, c]} ");
+                        slotMachineArray[down, right] = slotSymbols[randomIndex];
+                        Console.Write($"{slotMachineArray[down, right]} ");
                     }
                     Console.WriteLine();
                 }
 
                 int horizontalLineMatching = 0;               //horizontal -  line check and win output
 
-                for (int i = 0; i < VERTICAL_LINES_IN_GAME; i++)
+                for (int down = 0; down < VERTICAL_LINES_IN_GAME; down++)
                 {
-                    for (int c = 0; c < HORIZONTAL_LINES_IN_GAME; c++)
+                    for (int right = 0; right < HORIZONTAL_LINES_IN_GAME; right++)
                     {
                         //horizontal lines check/win output
-                        if (amountOfLanesPlay >i && c != horizontalMinutsOne && slotMachineArray[i, c] == slotMachineArray[i, c + 1])
+                        if (amountOfLanesPlay >down && right != horizontalMinutsOne && slotMachineArray[down, right] == slotMachineArray[down, right + 1])
                         {
                             horizontalLineMatching++;
                             if (horizontalLineMatching == horizontalMinutsOne)
                             {
-                                Console.WriteLine($"Win - line nr: {i + 1}");
+                                Console.WriteLine($"Win - line nr: {down + 1}");
                             }
                         }
                         else
@@ -55,16 +55,16 @@
                     }
                 }
                 int verticalLineMatching = 0;              //vertical | line check and win output    
-                for (int i = 0; i < VERTICAL_LINES_IN_GAME; i++)
+                for (int down = 0; down < VERTICAL_LINES_IN_GAME; down++)
                 {
-                    for (int c = 0; c < HORIZONTAL_LINES_IN_GAME; c++)
+                    for (int right = 0; right < HORIZONTAL_LINES_IN_GAME; right++)
                     {
-                        if (amountOfLanesPlay - VERTICAL_LINES_IN_GAME > i && c < horizontalMinutsOne && slotMachineArray[i, c] == slotMachineArray[i + 1, c])
+                        if (amountOfLanesPlay - VERTICAL_LINES_IN_GAME > down && right < horizontalMinutsOne && slotMachineArray[down, right] == slotMachineArray[down + 1, right])
                         {
                             verticalLineMatching++;
                             if (verticalLineMatching == verticalMinutOne)
                             {
-                                Console.WriteLine($"Win | line nr: {i + 1}");
+                                Console.WriteLine($"Win | line nr: {down + 1}");
                             }
                         }
                         else
