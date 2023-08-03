@@ -1,34 +1,41 @@
-﻿namespace P5SlotMachine
+﻿using System.Runtime.CompilerServices;
+
+namespace P5SlotMachine
 {
     internal class Program
     {
         static Random rand = new Random();
         const int COLUMNS_LINES_IN_GAME = 3;      // how many vertical lines
         const int ROWS_LINES_IN_GAME = 5;     //how many horizontal lines
+        const int DIAGONAL_LINES = 2;
         static void Main(string[] args)
         {
             string[] slotSymbols = { "0" };//, "1", "2", "3", "4", "5", "6", "7", "8", "9", "J" };             // test symbols
             string[,] slotMachineArray = new string[COLUMNS_LINES_IN_GAME, ROWS_LINES_IN_GAME];          //slot machine array size
+            int rowAndColumnLines = ROWS_LINES_IN_GAME + COLUMNS_LINES_IN_GAME;                         //rows and column lines amount
 
             while (true)
             {
                 Console.WriteLine("Hello and Welcome to Slot Machine Game!");
-                Console.WriteLine("Lines: 1-3 Vertical!\n Lines 4-6 vertical and horizontal!\n lines 7-8 vertical, horizontal and diagonal");
+                Console.WriteLine($"" +
+                    $" Lines: 1-{COLUMNS_LINES_IN_GAME} Vertical!\n" +
+                    $" lines {COLUMNS_LINES_IN_GAME+1}-{rowAndColumnLines} vertical and horizontal!\n" +
+                    $" lines {rowAndColumnLines+1}-{rowAndColumnLines+DIAGONAL_LINES} vertical, horizontal and diagonal");
                 Console.WriteLine("How many lines would you like to play?");
                 Console.WriteLine();
 
                 int amountOfLanesPlay = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
-                int rightMinusOne = ROWS_LINES_IN_GAME - 1;         //loop doesnt run out of array range
-                int downMinusOne = COLUMNS_LINES_IN_GAME - 1;
+                int rowMinusOne = ROWS_LINES_IN_GAME - 1;         //loop doesnt run out of array range
+                int columnMinusOne = COLUMNS_LINES_IN_GAME - 1;
 
-                for (int down = 0; down < COLUMNS_LINES_IN_GAME; down++)                //fill array with random strings from slotSymbols array
+                for (int columnIndex = 0; columnIndex < COLUMNS_LINES_IN_GAME; columnIndex++)                //fill array with random strings from slotSymbols array
                 {
-                    for (int right = 0; right < ROWS_LINES_IN_GAME; right++)
+                    for (int rowIndex = 0; rowIndex < ROWS_LINES_IN_GAME; rowIndex++)
                     {
                         int randomIndex = rand.Next(slotSymbols.Length);
-                        slotMachineArray[down, right] = slotSymbols[randomIndex];
-                        Console.Write($"{slotMachineArray[down, right]} ");
+                        slotMachineArray[columnIndex, rowIndex] = slotSymbols[randomIndex];
+                        Console.Write($"{slotMachineArray[columnIndex, rowIndex]} ");
                     }
                     Console.WriteLine();
                 }
@@ -40,16 +47,16 @@
                 }
 
                 int rightLineMatching = 0;                      //horizontal -  line check and win output
-                for (int down = 0; down < rowsToPlay; down++)
+                for (int columnIndex = 0; columnIndex < rowsToPlay; columnIndex++)
                 {
-                    for (int right = 0; right < ROWS_LINES_IN_GAME; right++)
+                    for (int rowIndex = 0; rowIndex < ROWS_LINES_IN_GAME; rowIndex++)
                     {
-                        if (right != rightMinusOne && slotMachineArray[down, right] == slotMachineArray[down, right + 1])
+                        if (rowIndex != rowMinusOne && slotMachineArray[columnIndex, rowIndex] == slotMachineArray[columnIndex, rowIndex + 1])
                         {
                             rightLineMatching++;
-                            if (rightLineMatching == rightMinusOne)
+                            if (rightLineMatching == rowMinusOne)
                             {
-                                Console.WriteLine($"Win - line nr: {down + 1}");
+                                Console.WriteLine($"Win - line nr: {columnIndex + 1}");
                             }
                         }
                         else
@@ -67,16 +74,16 @@
                 }
 
                 int downLineMatching = 0;              //vertical | line check and win output    
-                for (int right = 0; right < columnsToPlay; right++)
+                for (int rowIndex = 0; rowIndex < columnsToPlay; rowIndex++)
                 {
-                    for (int down = 0; down < COLUMNS_LINES_IN_GAME; down++)
+                    for (int columnIndex = 0; columnIndex < COLUMNS_LINES_IN_GAME; columnIndex++)
                     {
-                        if (down != downMinusOne && slotMachineArray[down, right] == slotMachineArray[down + 1, right])
+                        if (columnIndex != columnMinusOne && slotMachineArray[columnIndex, rowIndex] == slotMachineArray[columnIndex + 1, rowIndex])
                         {
                             downLineMatching++;
-                            if (downLineMatching == downMinusOne)
+                            if (downLineMatching == columnMinusOne)
                             {
-                                Console.WriteLine($"Win | line nr: {right + 1}");
+                                Console.WriteLine($"Win | line nr: {rowIndex + rowMinusOne}");
                             }
                         }
                         else
