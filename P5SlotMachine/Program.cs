@@ -19,8 +19,8 @@ namespace P5SlotMachine
                 Console.WriteLine("Hello and Welcome to Slot Machine Game!");
                 Console.WriteLine($"" +
                     $" Lines: 1-{ROW_LINES_IN_GAME} Vertical!\n" +
-                    $" Lines {ROW_LINES_IN_GAME+1}-{rowAndColumnLines} vertical and horizontal!\n" +
-                    $" Lines {rowAndColumnLines+1}-{rowAndColumnLines+DIAGONAL_LINES_IN_GAME} vertical, horizontal and diagonal");
+                    $" Lines {ROW_LINES_IN_GAME + 1}-{rowAndColumnLines} vertical and horizontal!\n" +
+                    $" Lines {rowAndColumnLines + 1}-{rowAndColumnLines + DIAGONAL_LINES_IN_GAME} vertical, horizontal and diagonal");
                 Console.WriteLine("How many lines would you like to play?");
                 Console.WriteLine();
 
@@ -97,12 +97,30 @@ namespace P5SlotMachine
                 //Diagonal lines check
 
                 int diagonalToPlay = amountOfLanesPlay;
-                if(diagonalToPlay-COLUMN_LINES_IN_GAME-ROW_LINES_IN_GAME<=DIAGONAL_LINES_IN_GAME)
+                int diagonalcheck = 0;
+                if (diagonalToPlay - COLUMN_LINES_IN_GAME - ROW_LINES_IN_GAME <= DIAGONAL_LINES_IN_GAME)
                 {
-                    Console.WriteLine(diagonalToPlay);
-                    diagonalToPlay=amountOfLanesPlay - COLUMN_LINES_IN_GAME -ROW_LINES_IN_GAME; 
-                    Console.WriteLine(diagonalToPlay);
+                    diagonalToPlay = amountOfLanesPlay - COLUMN_LINES_IN_GAME - ROW_LINES_IN_GAME;
                 }
+
+                for (int i = 0; i < diagonalToPlay; i++)
+                {
+                    if (slotMachineArray[i, i] == slotMachineArray[i + 1, i + 1])
+                    {
+                        diagonalcheck++;
+                        Console.WriteLine($"Win diagonal line {diagonalToPlay}");
+                    }
+                    else
+                    {
+                        diagonalcheck = 0;
+                        break;
+                    }
+
+                }
+
+
+
+
 
                 Console.WriteLine("If want to play again press Y");
                 string playAgain = Console.ReadKey().KeyChar.ToString().ToLower();
