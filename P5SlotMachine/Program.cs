@@ -7,12 +7,16 @@ namespace P5SlotMachine
         static Random rand = new Random();
         const int ROW_LINES_IN_GAME = 3;      // how many vertical lines
         const int COLUMN_LINES_IN_GAME = 3;     //how many horizontal lines
-        const int DIAGONAL_LINES_IN_GAME = 2;
+        const int DIAGONAL_LINES_IN_GAME = 2;   // how many diagonal lines
+        const int PLAYER_STARTING_BALANCE = 50;
         static void Main(string[] args)
         {
             string[] slotSymbols = { "0" };//, "1", "2", "3", "4", "5", "6", "7", "8", "9", "J" };             // test symbols
             string[,] slotMachineArray = new string[ROW_LINES_IN_GAME, COLUMN_LINES_IN_GAME];          //slot machine array size
             int rowAndColumnLines = COLUMN_LINES_IN_GAME + ROW_LINES_IN_GAME;                         //rows and column lines amount
+            int playerBalance = PLAYER_STARTING_BALANCE;
+            double betPerLane = 0;
+            int amountOfLanesPlay = 0;
 
             while (true)
             {
@@ -21,13 +25,34 @@ namespace P5SlotMachine
                     $" Lines: 1-{ROW_LINES_IN_GAME} Vertical!\n" +
                     $" Lines {ROW_LINES_IN_GAME + 1}-{rowAndColumnLines} vertical and horizontal!\n" +
                     $" Lines {rowAndColumnLines + 1}-{rowAndColumnLines + DIAGONAL_LINES_IN_GAME} vertical, horizontal and diagonal");
-                Console.WriteLine("How many lines would you like to play?");
+                while (true)
+                {
+
+                    Console.WriteLine("How many lines would you like to play?");
+                    Console.WriteLine();
+                    amountOfLanesPlay = Convert.ToInt32(Console.ReadLine());
+                    if (amountOfLanesPlay > ROW_LINES_IN_GAME + COLUMN_LINES_IN_GAME + DIAGONAL_LINES_IN_GAME)  // amountOfLanesPlay cannot be more than max amount of lanes to play
+                    {
+                        amountOfLanesPlay = ROW_LINES_IN_GAME + COLUMN_LINES_IN_GAME + DIAGONAL_LINES_IN_GAME;
+                    }
+
+                    Console.WriteLine("How much would you like to bet per lane?");
+                    betPerLane = Convert.ToInt32(Console.ReadLine());
+                    if (playerBalance < amountOfLanesPlay * betPerLane)
+                    {
+                        Console.WriteLine("You have insufficient funds! Please place lower bet!");
+                    }
+                    else
+                    {
+                        break;                    }
+
+                }
                 Console.WriteLine();
 
-                int amountOfLanesPlay = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
                 int columnMinusOne = COLUMN_LINES_IN_GAME - 1;         //loop doesnt run out of array range
                 int rowMinusOne = ROW_LINES_IN_GAME - 1;
+
 
                 for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)                //fill array with random strings from slotSymbols array
                 {
@@ -49,7 +74,7 @@ namespace P5SlotMachine
                 int rightLineMatching = 0;                      //horizontal -  line check and win output
                 for (int rowIndex = 0; rowIndex < rowsToPlay; rowIndex++)
                 {
-                    for (int columnIndex = 0; columnIndex < COLUMN_LINES_IN_GAME; columnIndex++)
+                    for (int columnIndex = 0; columnIndex <= columnMinusOne; columnIndex++)
                     {
                         if (columnIndex != columnMinusOne && slotMachineArray[rowIndex, columnIndex] == slotMachineArray[rowIndex, columnIndex + 1])
                         {
