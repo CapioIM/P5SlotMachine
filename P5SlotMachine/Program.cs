@@ -83,7 +83,7 @@ namespace P5SlotMachine
                             downLineMatching++;
                             if (downLineMatching == rowMinusOne)
                             {
-                                Console.WriteLine($"Win | line nr: {columnIndex + columnMinusOne}");
+                                Console.WriteLine($"Win | line nr: {columnIndex + 1}");
                             }
                         }
                         else
@@ -100,7 +100,7 @@ namespace P5SlotMachine
                 int diagonalCheckRight = 0;
                 int diagonalCheckLeft = 0;
 
-                /*
+
                 if (diagonalToPlay - COLUMN_LINES_IN_GAME - ROW_LINES_IN_GAME <= DIAGONAL_LINES_IN_GAME)
                 {
                     diagonalToPlay = amountOfLanesPlay - COLUMN_LINES_IN_GAME - ROW_LINES_IN_GAME;
@@ -123,15 +123,15 @@ namespace P5SlotMachine
                             diagonalCheckRight = 0;
                         }
                     }
+                    if (diagonalCheckRight == DIAGONAL_LINES_IN_GAME)
+                    {
+                        Console.WriteLine($"Win diagonal line 1 ");  // should I make another variable just for diagonal lines 1 and 2
+                    }
+
                     if (diagonalToPlay == 2)
                     {
-                        if (diagonalCheckRight == DIAGONAL_LINES_IN_GAME)
-                        {
-                            Console.WriteLine($"Win diagonal line 1 ");  // should I make another variable just for diagonal lines 1 and 2
-                        }
-
                         //to check diagonal line from right to left
-                        if (slotMachineArray[rowMinusOne, columnMinusOne] == slotMachineArray[rowMinusOne - (1+i), columnMinusOne - (1+i)])
+                        if (slotMachineArray[rowMinusOne, columnMinusOne] == slotMachineArray[rowMinusOne - (1 + i), columnMinusOne - (1 + i)])
                         {
                             diagonalCheckLeft++;
                         }
@@ -145,7 +145,8 @@ namespace P5SlotMachine
                         }
                     }
                 }
-                */
+
+
                 Console.WriteLine("If want to play again press Y");
                 string playAgain = Console.ReadKey().KeyChar.ToString().ToLower();
 
