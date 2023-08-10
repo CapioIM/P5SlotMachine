@@ -100,6 +100,7 @@ namespace P5SlotMachine
                 int diagonalCheckRight = 0;
                 int diagonalCheckLeft = 0;
 
+                /*
                 if (diagonalToPlay - COLUMN_LINES_IN_GAME - ROW_LINES_IN_GAME <= DIAGONAL_LINES_IN_GAME)
                 {
                     diagonalToPlay = amountOfLanesPlay - COLUMN_LINES_IN_GAME - ROW_LINES_IN_GAME;
@@ -144,7 +145,7 @@ namespace P5SlotMachine
                         }
                     }
                 }
-
+                */
                 Console.WriteLine("If want to play again press Y");
                 string playAgain = Console.ReadKey().KeyChar.ToString().ToLower();
 
