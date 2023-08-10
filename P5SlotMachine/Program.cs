@@ -25,9 +25,11 @@ namespace P5SlotMachine
                     $" Lines: 1-{ROW_LINES_IN_GAME} Vertical!\n" +
                     $" Lines {ROW_LINES_IN_GAME + 1}-{rowAndColumnLines} vertical and horizontal!\n" +
                     $" Lines {rowAndColumnLines + 1}-{rowAndColumnLines + DIAGONAL_LINES_IN_GAME} vertical, horizontal and diagonal");
-                while (true)
-                {
+                Console.WriteLine();
+                Console.WriteLine($"Your Balance is {playerBalance} !");
 
+                while (true)  // loop for bet as long as there is enough of balance
+                {
                     Console.WriteLine("How many lines would you like to play?");
                     Console.WriteLine();
                     amountOfLanesPlay = Convert.ToInt32(Console.ReadLine());
@@ -44,7 +46,8 @@ namespace P5SlotMachine
                     }
                     else
                     {
-                        break;                    }
+                        break;
+                    }
 
                 }
                 Console.WriteLine();
@@ -81,6 +84,7 @@ namespace P5SlotMachine
                             rightLineMatching++;
                             if (rightLineMatching == columnMinusOne)
                             {
+
                                 Console.WriteLine($"Win - line nr: {rowIndex + 1}");
                             }
                         }
