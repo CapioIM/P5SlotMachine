@@ -97,30 +97,53 @@ namespace P5SlotMachine
                 //Diagonal lines check
 
                 int diagonalToPlay = amountOfLanesPlay;
-                int diagonalcheck = 0;
+                int diagonalCheckRight = 0;
+                int diagonalCheckLeft = 0;
+
                 if (diagonalToPlay - COLUMN_LINES_IN_GAME - ROW_LINES_IN_GAME <= DIAGONAL_LINES_IN_GAME)
                 {
                     diagonalToPlay = amountOfLanesPlay - COLUMN_LINES_IN_GAME - ROW_LINES_IN_GAME;
                 }
-
-                for (int i = 0; i < diagonalToPlay; i++)
+                else
                 {
-                    if (slotMachineArray[i, i] == slotMachineArray[i + 1, i + 1])
-                    {
-                        diagonalcheck++;
-                        Console.WriteLine($"Win diagonal line {diagonalToPlay}");
-                    }
-                    else
-                    {
-                        diagonalcheck = 0;
-                        break;
-                    }
-
+                    diagonalToPlay = DIAGONAL_LINES_IN_GAME;
                 }
 
+                for (int i = 0; i < DIAGONAL_LINES_IN_GAME; i++)
+                {
+                    if (diagonalToPlay >= 1)
+                    {
+                        if (slotMachineArray[i, i] == slotMachineArray[i + 1, i + 1])  // to check diagonal from left to righ
+                        {
+                            diagonalCheckRight++;
+                        }
+                        else
+                        {
+                            diagonalCheckRight = 0;
+                        }
+                    }
+                    if (diagonalToPlay == 2)
+                    {
+                        if (diagonalCheckRight == DIAGONAL_LINES_IN_GAME)
+                        {
+                            Console.WriteLine($"Win diagonal line 1 ");  // should I make another variable just for diagonal lines 1 and 2
+                        }
 
-
-
+                        //to check diagonal line from right to left
+                        if (slotMachineArray[rowMinusOne, columnMinusOne] == slotMachineArray[rowMinusOne - (1+i), columnMinusOne - (1+i)])
+                        {
+                            diagonalCheckLeft++;
+                        }
+                        else
+                        {
+                            diagonalCheckLeft = 0;
+                        }
+                        if (diagonalCheckLeft == DIAGONAL_LINES_IN_GAME)
+                        {
+                            Console.WriteLine("Win diagonal line 2 ");
+                        }
+                    }
+                }
 
                 Console.WriteLine("If want to play again press Y");
                 string playAgain = Console.ReadKey().KeyChar.ToString().ToLower();
