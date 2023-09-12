@@ -74,30 +74,6 @@ namespace P5SlotMachine
                     rowsToPlay = amountOfLanesPlay;
                 }
 
-                int rightLineMatching = 0;                      //horizontal -  line check and win output
-                /*
-                for (int rowIndex = 0; rowIndex < rowsToPlay; rowIndex++)
-                {
-                    for (int columnIndex = 0; columnIndex <= columnMinusOne; columnIndex++)
-                    {
-                        if (columnIndex != columnMinusOne && slotMachineArray[rowIndex, columnIndex] == slotMachineArray[rowIndex, columnIndex + 1])
-                        {
-                            rightLineMatching++;
-                            if (rightLineMatching == columnMinusOne)
-                            {
-
-                                Console.WriteLine($"Win - line nr: {rowIndex + 1}"); 
-                                //if (slotMachineArray[])
-                            }
-                        }
-                        else
-                        {
-                            rightLineMatching = 0;
-                            break;
-                        }
-                    }
-                }
-*/
                 int rowCharCheck = 0;
                 int rowLineMatch = 0;
                 for (int rowIndex = 0; rowIndex < rowsToPlay; rowIndex++)
@@ -109,7 +85,7 @@ namespace P5SlotMachine
                         if (rowCharCheck == slotMachineArray[rowIndex, columnIndex])
                         {
                             slotsMatched++;
-                            if (slotsMatched == columnMinusOne)
+                            if (slotsMatched == COLUMN_LINES_IN_GAME)
                             {
                                 Console.WriteLine($"Win - line nr: {rowIndex + 1}");
                             }
