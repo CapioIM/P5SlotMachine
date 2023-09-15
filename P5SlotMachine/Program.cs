@@ -55,7 +55,7 @@ namespace P5SlotMachine
 
                 int columnMinusOne = COLUMN_LINES_IN_GAME - 1;         //loop doesnt run out of array range
                 int rowMinusOne = ROW_LINES_IN_GAME - 1;                //loop doesnt run out of array range
-              //  double winAmount = 0;
+                                                                        //  double winAmount = 0;
 
                 for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)                //fill array with random strings from slotSymbols array
                 {
@@ -80,7 +80,7 @@ namespace P5SlotMachine
                 {
                     rowCharCheck = slotMachineArray[rowIndex, 0];
                     int slotsMatched = 0;
-                    for(int columnIndex = 0; columnIndex < COLUMN_LINES_IN_GAME;columnIndex++)
+                    for (int columnIndex = 0; columnIndex < COLUMN_LINES_IN_GAME; columnIndex++)
                     {
                         if (rowCharCheck == slotMachineArray[rowIndex, columnIndex])
                         {
@@ -90,38 +90,35 @@ namespace P5SlotMachine
                                 Console.WriteLine($"Win - line nr: {rowIndex + 1}");
                             }
                         }
-
                     }
                 }
 
-
-                int columnsToPlay = COLUMN_LINES_IN_GAME;   //run loop under when amountOfLanesPlay > 3 for amount of times = to width of array
+                
+                int columnsToPlay = COLUMN_LINES_IN_GAME;
                 if (amountOfLanesPlay - ROW_LINES_IN_GAME < COLUMN_LINES_IN_GAME)
                 {
-                    columnsToPlay = amountOfLanesPlay - ROW_LINES_IN_GAME;
+                    columnsToPlay = amountOfLanesPlay;
                 }
 
-                int downLineMatching = 0;              //vertical | line check and win output    
+                int columnMatch = 0;
+                int columnCharCheck = 0;         //vertical | line check and win output    
                 for (int columnIndex = 0; columnIndex < columnsToPlay; columnIndex++)
                 {
+                    columnCharCheck = slotMachineArray[0, columnIndex];
+                    int slotsMatched = 0;
                     for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)
                     {
-                        if (rowIndex != rowMinusOne && slotMachineArray[rowIndex, columnIndex] == slotMachineArray[rowIndex + 1, columnIndex])
+                        if (columnCharCheck == slotMachineArray[rowIndex,columnIndex])
                         {
-                            downLineMatching++;
-                            if (downLineMatching == rowMinusOne)
+                            columnMatch++;
+                            if (columnCharCheck == COLUMN_LINES_IN_GAME)
                             {
                                 Console.WriteLine($"Win | line nr: {columnIndex + 1}");
                             }
                         }
-                        else
-                        {
-                            downLineMatching = 0;
-                            break;
-                        }
                     }
                 }
-
+                
                 //Diagonal lines check
 
                 int diagonalToPlay = amountOfLanesPlay;
