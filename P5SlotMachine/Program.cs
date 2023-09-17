@@ -1,8 +1,4 @@
-﻿using System.Data.Common;
-using System.Runtime.CompilerServices;
-using System.Transactions;
-
-namespace P5SlotMachine
+﻿namespace P5SlotMachine
 {
     internal class Program
     {
@@ -11,7 +7,7 @@ namespace P5SlotMachine
         const int COLUMN_LINES_IN_GAME = 3;     //how many horizontal lines
         const int DIAGONAL_LINES_IN_GAME = 2;   // how many diagonal lines
         const int DIAGONAL_LINE_LENGTH = 3;
-        const int PLAYER_STARTING_BALANCE = 50;
+        const int PLAYER_STARTING_BALANCE = 500;
         static void Main(string[] args)
         {
             int[] slotSymbols = { 0 };//, 1, 2, 3, 4, 5, 6, 7, 8, 9};             // test symbols
@@ -132,10 +128,10 @@ namespace P5SlotMachine
                     }
 
 
-                    if (diagonalLanesPlays >= 0)
+                    if (diagonalLanesPlays >= 0)                //    if (diagonalLanesPlays >= 0)
                     {
-                    int diagonalCharStore = slotMachineArray[0, 0];
-                    int diagonalCharMatch = 0;
+                        int diagonalCharStore = slotMachineArray[0, 0];
+                        int diagonalCharMatch = 0;
                         for (int diagonal = 0; diagonal < DIAGONAL_LINE_LENGTH; diagonal++)   // magic Number ????????? seems like i picked DIAGONAL_LINES_IN_GAME  BECAUSE IT FITS
                         {
                             if (diagonalCharStore == slotMachineArray[diagonal, diagonal])
@@ -147,29 +143,32 @@ namespace P5SlotMachine
                                 Console.WriteLine($"    Win diagonal line 1");
                             }
                         }
+                        diagonalLanesPlays--;
                     }
-
-
                     /*
                     if (0 < diagonalLanesPlays && diagonalLanesPlays < DIAGONAL_LINES_IN_GAME) // if diagonal line 2 is playing  (diagoanlLanesPlays = 1)
                     {
                         int diagonalCharStore = slotMachineArray[2, 0];
                         int diagonalCharMatch = 0;
-                        for ( int diagonal = 2;diagonal>=0; diagonal--)
+
+                        for (int diagonalColumn = 2; diagonalColumn >= 0; diagonalColumn--)
                         {
-                            if (diagonalCharStore == slotMachineArray[diagonal, diagonal])
+                            for (int diagonalRow = 0; diagonalRow < DIAGONAL_LINE_LENGTH; diagonalRow++)
                             {
-                                diagonalCharMatch++;
-                            }
-                            if (diagonalCharMatch == DIAGONAL_LINE_LENGTH)
-                            {
-                                Console.WriteLine($"    Win diagonal line 2");
+                                if (diagonalCharStore == slotMachineArray[diagonalRow, diagonalColumn])
+                                {
+                                    diagonalCharMatch++;
+                                }
+                                if (diagonalCharMatch == DIAGONAL_LINE_LENGTH)
+                                {
+                                    Console.WriteLine($"    Win diagonal line 2");
+                                }
+                                break;
                             }
                         }
                     }
                     */
                 }
-
 
                 Console.WriteLine("If want to play again press Y");
                 string playAgain = Console.ReadKey().KeyChar.ToString().ToLower();
