@@ -54,8 +54,6 @@ namespace P5SlotMachine
                 }
                 Console.WriteLine();
 
-                int columnMinusOne = COLUMN_LINES_IN_GAME - 1;         //loop doesnt run out of array range
-                int rowMinusOne = ROW_LINES_IN_GAME - 1;                //loop doesnt run out of array range
                                                                         //  double winAmount = 0;
 
                 for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)                //fill array with random strings from slotSymbols array
