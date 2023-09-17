@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Data.Common;
+using System.Runtime.CompilerServices;
 using System.Transactions;
 
 namespace P5SlotMachine
@@ -68,57 +69,60 @@ namespace P5SlotMachine
                     Console.WriteLine();
                 }
 
-                int rowsToPlay = ROW_LINES_IN_GAME;            //run for loop under for amount of times selected
+                //how many row lines to be played
+                int rowsToPlay = ROW_LINES_IN_GAME;
                 if (amountOfLanesPlay < ROW_LINES_IN_GAME)
                 {
                     rowsToPlay = amountOfLanesPlay;
                 }
-
-                int rowCharCheck = 0;
-                int rowLineMatch = 0;
+                // row lines check and output to the screen
                 for (int rowIndex = 0; rowIndex < rowsToPlay; rowIndex++)
                 {
-                    rowCharCheck = slotMachineArray[rowIndex, 0];
-                    int slotsMatched = 0;
+                    int rowCharCheck = slotMachineArray[rowIndex, 0];       // store character
+                    int rowLineMatch = 0;                                   // reset chars matched against stored character
                     for (int columnIndex = 0; columnIndex < COLUMN_LINES_IN_GAME; columnIndex++)
                     {
-                        if (rowCharCheck == slotMachineArray[rowIndex, columnIndex])
+                        if (rowCharCheck == slotMachineArray[rowIndex, columnIndex])        //check char against stored char
                         {
-                            slotsMatched++;
-                            if (slotsMatched == COLUMN_LINES_IN_GAME)
+                            rowLineMatch++;
+                            if (rowLineMatch == COLUMN_LINES_IN_GAME)                   // amount of chars matched has to equal to length of row
                             {
-                                Console.WriteLine($"Win - line nr: {rowIndex + 1}");
+                                Console.WriteLine($"Win - line nr: {rowIndex + 1}");            //output win lane
                             }
                         }
                     }
                 }
 
-                
-                int columnsToPlay = COLUMN_LINES_IN_GAME;
-                if (amountOfLanesPlay - ROW_LINES_IN_GAME < COLUMN_LINES_IN_GAME)
+                //  calculation of column lanes to be played
+                int columnLinesToPlay = 0;                      // initiate columns to not be played
+                if (amountOfLanesPlay > ROW_LINES_IN_GAME)      // if columns are playable 
                 {
-                    columnsToPlay = amountOfLanesPlay;
-                }
+                    columnLinesToPlay = COLUMN_LINES_IN_GAME;      // set amount of playable columns to max amount
 
-                int columnMatch = 0;
-                int columnCharCheck = 0;         //vertical | line check and win output    
-                for (int columnIndex = 0; columnIndex < columnsToPlay; columnIndex++)
+                    // if columns are playable and not max column amount are playing, calculate how many columns are playing
+                    if (ROW_LINES_IN_GAME <= amountOfLanesPlay && amountOfLanesPlay < ROW_LINES_IN_GAME + COLUMN_LINES_IN_GAME)
+                    {
+                        columnLinesToPlay = amountOfLanesPlay - ROW_LINES_IN_GAME;
+                    }
+                }
+                // column lanes match and output on screen
+                for (int columnIndex = 0; columnIndex < columnLinesToPlay; columnIndex++)
                 {
-                    columnCharCheck = slotMachineArray[0, columnIndex];
-                    int slotsMatched = 0;
+                    int columnLinesMatch = 0;
+                    int charStore = slotMachineArray[0, columnIndex];
                     for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)
                     {
-                        if (columnCharCheck == slotMachineArray[rowIndex,columnIndex])
+                        if (charStore == slotMachineArray[rowIndex, columnIndex])
                         {
-                            columnMatch++;
-                            if (columnCharCheck == COLUMN_LINES_IN_GAME)
+                            columnLinesMatch++;
+                            if (columnLinesMatch == COLUMN_LINES_IN_GAME)
                             {
                                 Console.WriteLine($"Win | line nr: {columnIndex + 1}");
                             }
                         }
                     }
                 }
-                
+
                 //Diagonal lines check
 
                 int diagonalToPlay = amountOfLanesPlay;
