@@ -54,7 +54,7 @@ namespace P5SlotMachine
                 }
                 Console.WriteLine();
 
-                                                                        //  double winAmount = 0;
+                //  double winAmount = 0;
 
                 for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)                //fill array with random strings from slotSymbols array
                 {
@@ -91,31 +91,30 @@ namespace P5SlotMachine
                     }
                 }
 
-                //  calculation of column lanes to be played
-                int columnLinesToPlay = 0;                      // initiate columns to not be played
+                //  calculation of column lanes to be played + columns are played if amount of lanes played is more than rows in array
                 if (amountOfLanesPlay > ROW_LINES_IN_GAME)      // if columns are playable 
                 {
-                    columnLinesToPlay = COLUMN_LINES_IN_GAME;      // set amount of playable columns to max amount
+                    int columnLinesToPlay = COLUMN_LINES_IN_GAME;      // set amount of playable columns to max amount
 
                     // if columns are playable and not max column amount are playing, calculate how many columns are playing
                     if (ROW_LINES_IN_GAME <= amountOfLanesPlay && amountOfLanesPlay < ROW_LINES_IN_GAME + COLUMN_LINES_IN_GAME)
                     {
                         columnLinesToPlay = amountOfLanesPlay - ROW_LINES_IN_GAME;
                     }
-                }
-                // column lanes match and output on screen
-                for (int columnIndex = 0; columnIndex < columnLinesToPlay; columnIndex++)
-                {
-                    int columnLinesMatch = 0;
-                    int charStore = slotMachineArray[0, columnIndex];
-                    for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)
+                    // column lanes match and output on screen
+                    for (int columnIndex = 0; columnIndex < columnLinesToPlay; columnIndex++)
                     {
-                        if (charStore == slotMachineArray[rowIndex, columnIndex])
+                        int columnLinesMatch = 0;
+                        int charStore = slotMachineArray[0, columnIndex];
+                        for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)
                         {
-                            columnLinesMatch++;
-                            if (columnLinesMatch == COLUMN_LINES_IN_GAME)
+                            if (charStore == slotMachineArray[rowIndex, columnIndex])
                             {
-                                Console.WriteLine($"Win | line nr: {columnIndex + 1}");
+                                columnLinesMatch++;
+                                if (columnLinesMatch == COLUMN_LINES_IN_GAME)
+                                {
+                                    Console.WriteLine($"Win | line nr: {columnIndex + 1}");
+                                }
                             }
                         }
                     }
@@ -123,7 +122,7 @@ namespace P5SlotMachine
 
                 //Diagonal lines check
 
-             
+
 
 
                 Console.WriteLine("If want to play again press Y");
