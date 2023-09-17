@@ -10,6 +10,7 @@ namespace P5SlotMachine
         const int ROW_LINES_IN_GAME = 3;      // how many vertical lines
         const int COLUMN_LINES_IN_GAME = 3;     //how many horizontal lines
         const int DIAGONAL_LINES_IN_GAME = 2;   // how many diagonal lines
+        const int DIAGONAL_LINE_LENGTH = 3;
         const int PLAYER_STARTING_BALANCE = 50;
         static void Main(string[] args)
         {
@@ -85,7 +86,7 @@ namespace P5SlotMachine
                             rowLineMatch++;
                             if (rowLineMatch == COLUMN_LINES_IN_GAME)                   // amount of chars matched has to equal to length of row
                             {
-                                Console.WriteLine($"Win - line nr: {rowIndex + 1}");            //output win lane
+                                Console.WriteLine($"    Win - line nr: {rowIndex + 1}");            //output win lane
                             }
                         }
                     }
@@ -113,7 +114,7 @@ namespace P5SlotMachine
                                 columnLinesMatch++;
                                 if (columnLinesMatch == COLUMN_LINES_IN_GAME)
                                 {
-                                    Console.WriteLine($"Win | line nr: {columnIndex + 1}");
+                                    Console.WriteLine($"    Win | line nr: {columnIndex + 1}");
                                 }
                             }
                         }
@@ -122,7 +123,52 @@ namespace P5SlotMachine
 
                 //Diagonal lines check
 
+                if (amountOfLanesPlay > ROW_LINES_IN_GAME + COLUMN_LINES_IN_GAME)
+                {
+                    int diagonalLanesPlays = DIAGONAL_LINES_IN_GAME;
+                    if (ROW_LINES_IN_GAME + COLUMN_LINES_IN_GAME >= amountOfLanesPlay && amountOfLanesPlay < ROW_LINES_IN_GAME + COLUMN_LINES_IN_GAME + DIAGONAL_LINES_IN_GAME)
+                    {
+                        diagonalLanesPlays = amountOfLanesPlay - ROW_LINES_IN_GAME - COLUMN_LINES_IN_GAME;
+                    }
 
+
+                    if (diagonalLanesPlays >= 0)
+                    {
+                    int diagonalCharStore = slotMachineArray[0, 0];
+                    int diagonalCharMatch = 0;
+                        for (int diagonal = 0; diagonal < DIAGONAL_LINE_LENGTH; diagonal++)   // magic Number ????????? seems like i picked DIAGONAL_LINES_IN_GAME  BECAUSE IT FITS
+                        {
+                            if (diagonalCharStore == slotMachineArray[diagonal, diagonal])
+                            {
+                                diagonalCharMatch++;
+                            }
+                            if (diagonalCharMatch == DIAGONAL_LINE_LENGTH)
+                            {
+                                Console.WriteLine($"    Win diagonal line 1");
+                            }
+                        }
+                    }
+
+
+                    /*
+                    if (0 < diagonalLanesPlays && diagonalLanesPlays < DIAGONAL_LINES_IN_GAME) // if diagonal line 2 is playing  (diagoanlLanesPlays = 1)
+                    {
+                        int diagonalCharStore = slotMachineArray[2, 0];
+                        int diagonalCharMatch = 0;
+                        for ( int diagonal = 2;diagonal>=0; diagonal--)
+                        {
+                            if (diagonalCharStore == slotMachineArray[diagonal, diagonal])
+                            {
+                                diagonalCharMatch++;
+                            }
+                            if (diagonalCharMatch == DIAGONAL_LINE_LENGTH)
+                            {
+                                Console.WriteLine($"    Win diagonal line 2");
+                            }
+                        }
+                    }
+                    */
+                }
 
 
                 Console.WriteLine("If want to play again press Y");
