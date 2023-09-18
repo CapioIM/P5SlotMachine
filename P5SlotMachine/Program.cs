@@ -145,36 +145,33 @@
                         }
                         diagonalLanesPlays--;
                     }
-                    /*
+
                     if (0 < diagonalLanesPlays && diagonalLanesPlays < DIAGONAL_LINES_IN_GAME) // if diagonal line 2 is playing  (diagoanlLanesPlays = 1)
                     {
                         int diagonalCharStore = slotMachineArray[2, 0];
                         int diagonalCharMatch = 0;
+                        int diagonalRow = 0;
 
                         for (int diagonalColumn = 2; diagonalColumn >= 0; diagonalColumn--)
                         {
-                            for (int diagonalRow = 0; diagonalRow < DIAGONAL_LINE_LENGTH; diagonalRow++)
+                            if (diagonalCharStore == slotMachineArray[diagonalRow, diagonalColumn])
                             {
-                                if (diagonalCharStore == slotMachineArray[diagonalRow, diagonalColumn])
-                                {
-                                    diagonalCharMatch++;
-                                }
-                                if (diagonalCharMatch == DIAGONAL_LINE_LENGTH)
-                                {
-                                    Console.WriteLine($"    Win diagonal line 2");
-                                }
-                                break;
+                                diagonalCharMatch++;
                             }
+                            if (diagonalCharMatch == DIAGONAL_LINE_LENGTH)
+                            {
+                                Console.WriteLine($"    Win diagonal line 2");
+                            }
+                            diagonalRow++;
                         }
                     }
-                    */
                 }
 
-                Console.WriteLine("If want to play again press Y");
+                Console.WriteLine("If want to play again press any key, if dont want to play press N .");
                 string playAgain = Console.ReadKey().KeyChar.ToString().ToLower();
 
                 Console.Clear();
-                if (playAgain != "y")
+                if (playAgain == "n")
                 {
                     break;
                 }
