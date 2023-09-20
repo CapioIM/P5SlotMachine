@@ -7,7 +7,7 @@
         const int COLUMN_LINES_IN_GAME = 3;     //how many horizontal lines
         const int DIAGONAL_LINES_IN_GAME = 2;   // how many diagonal lines
         const int DIAGONAL_LINE_LENGTH = 3;     //length of diagonal line
-        const int PLAYER_STARTING_BALANCE = 50;        
+        const int PLAYER_STARTING_BALANCE = 50;
         static void Main(string[] args)
         {
             int[] slotSymbols = { 0 };//, 1, 2, 3, 4, 5, 6, 7, 8, 9};             // test symbols
@@ -30,7 +30,8 @@
                 Console.WriteLine($"Your Balance is {playerBalanceTotal} !");
                 Console.WriteLine();
 
-                while (true)  // loop for bet as long as there is enough of balance program continues
+                bool sufficientBetFunds = true;
+                while (sufficientBetFunds)  // loop for bet as long as there is enough of balance program continues
                 {
                     Console.WriteLine("How many lines would you like to play?");
                     Console.WriteLine();
@@ -48,11 +49,10 @@
                     }
                     else                                                                                        // continue program if bet amount is less than money balance 
                     {
-                        break;
+                        playerBalanceTotal -= amountOfLanesPlay * betPerLane;
+                        sufficientBetFunds = false;
                     }
-
                 }
-                Console.WriteLine();
 
 
                 for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)                //fill array with random strings from slotSymbols array
