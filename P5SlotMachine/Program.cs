@@ -156,7 +156,7 @@
                     }
 
                     //2nd/reverse diagonal line check
-                    if (0 < diagonalLanesPlay && diagonalLanesPlay < DIAGONAL_LINES_IN_GAME) // if diagonal line 2 is playing  (diagoanlLanesPlays = 1)
+                    if (diagonalLanesPlay > 0 && diagonalLanesPlay < DIAGONAL_LINES_IN_GAME) // if diagonal line 2 is playing  (diagoanlLanesPlays = 1)
                     {
                         int diagonalCharStore = slotMachineArray[2, 0];
                         int diagonalCharMatch = 0;
@@ -172,7 +172,7 @@
                         }
                         if (diagonalCharMatch == DIAGONAL_LINE_LENGTH)
                         {
-                            lineWinAmount ++;
+                            lineWinAmount++;
                             Console.WriteLine($" Win diagonal line 2 . You Won {lineWinAmount} !");
                         }
                     }
