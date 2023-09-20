@@ -17,10 +17,9 @@
             int amountOfLanesPlay = 0;
             double betPerLane = 0;
 
-            while (true)
+            while (playerBalanceTotal > 0)
             {
                 // Game starting text
-
                 Console.WriteLine("Hello and Welcome to Slot Machine Game!");
                 Console.WriteLine($"" +
                     $" Lines: 1-{ROW_LINES_IN_GAME} Vertical!\n" +
@@ -74,7 +73,6 @@
                 }
 
                 double lineWinAmount = 0;
-                double winMultiplyer = 10;
 
                 // row lines check and output to the screen
                 for (int rowIndex = 0; rowIndex < rowsToPlay; rowIndex++)
