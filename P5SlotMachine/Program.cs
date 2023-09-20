@@ -8,6 +8,8 @@
         const int DIAGONAL_LINES_IN_GAME = 2;   // how many diagonal lines
         const int DIAGONAL_LINE_LENGTH = 3;     //length of diagonal line
         const int PLAYER_STARTING_BALANCE = 50;
+        const double WIN_MULTIPLIER = 10;
+
         static void Main(string[] args)
         {
             int[] slotSymbols = { 0 };//, 1, 2, 3, 4, 5, 6, 7, 8, 9};             // test symbols
@@ -73,7 +75,6 @@
                 }
 
                 double lineWinAmount = 0;
-                double winMultiplyer = 10;
 
                 // row lines check and output to the screen
                 for (int rowIndex = 0; rowIndex < rowsToPlay; rowIndex++)
@@ -85,13 +86,12 @@
                         if (rowCharCheck == slotMachineArray[rowIndex, columnIndex])        //check char against stored char
                         {
                             rowCharMatch++;
-                            if (rowCharMatch == COLUMN_LINES_IN_GAME)                   // amount of chars matched has to equal to length of row
-                            {
-                                lineWinAmount = betPerLane * winMultiplyer;
-                                playerBalanceTotal = playerBalanceTotal + lineWinAmount;
-                                Console.WriteLine($" Win - line nr: {rowIndex + 1} . You Won {lineWinAmount} !");            //output win lane
-                            }
                         }
+                    }
+                    if (rowCharMatch == COLUMN_LINES_IN_GAME)                   // amount of chars matched has to equal to length of row
+                    {
+                        lineWinAmount++;
+                        Console.WriteLine($" Win - line nr: {rowIndex + 1} . You Won {lineWinAmount} !");            //output win lane
                     }
                 }
 
@@ -115,13 +115,12 @@
                             if (charStore == slotMachineArray[rowIndex, columnIndex])       //stored character is checked against character at specific place array
                             {
                                 columnLinesMatch++;
-                                if (columnLinesMatch == COLUMN_LINES_IN_GAME)
-                                {
-                                    lineWinAmount = betPerLane * winMultiplyer;
-                                    playerBalanceTotal = playerBalanceTotal + lineWinAmount;
-                                    Console.WriteLine($" Win | line nr: {columnIndex + 1} . You Won {lineWinAmount} !");
-                                }
                             }
+                        }
+                        if (columnLinesMatch == COLUMN_LINES_IN_GAME)
+                        {
+                            lineWinAmount++;
+                            Console.WriteLine($" Win | line nr: {columnIndex + 1} . You Won {lineWinAmount} !");
                         }
                     }
                 }
@@ -130,14 +129,14 @@
 
                 if (amountOfLanesPlay > ROW_LINES_IN_GAME + COLUMN_LINES_IN_GAME)
                 {
-                    int diagonalLanesPlays = DIAGONAL_LINES_IN_GAME;
+                    int diagonalLanesPlay = DIAGONAL_LINES_IN_GAME;
                     if (ROW_LINES_IN_GAME + COLUMN_LINES_IN_GAME >= amountOfLanesPlay && amountOfLanesPlay < ROW_LINES_IN_GAME + COLUMN_LINES_IN_GAME + DIAGONAL_LINES_IN_GAME)
                     {
-                        diagonalLanesPlays = amountOfLanesPlay - ROW_LINES_IN_GAME - COLUMN_LINES_IN_GAME;
+                        diagonalLanesPlay = amountOfLanesPlay - ROW_LINES_IN_GAME - COLUMN_LINES_IN_GAME;
                     }
 
 
-                    if (diagonalLanesPlays >= 0)                //    if (diagonalLanesPlays >= 0)
+                    if (diagonalLanesPlay >= 0)                //    if (diagonalLanesPlays >= 0)
                     {
                         int diagonalCharStore = slotMachineArray[0, 0];
                         int diagonalCharMatch = 0;
@@ -147,18 +146,17 @@
                             {
                                 diagonalCharMatch++;
                             }
-                            if (diagonalCharMatch == DIAGONAL_LINE_LENGTH)
-                            {
-                                lineWinAmount = betPerLane * winMultiplyer;
-                                playerBalanceTotal = playerBalanceTotal + lineWinAmount;
-                                Console.WriteLine($" Win diagonal line 1 . You Won {lineWinAmount} !");
-                            }
                         }
-                        diagonalLanesPlays--;
+                        if (diagonalCharMatch == DIAGONAL_LINE_LENGTH)
+                        {
+                            lineWinAmount++;
+                            Console.WriteLine($" Win diagonal line 1 . You Won {lineWinAmount} !");
+                        }
+                        diagonalLanesPlay--;
                     }
 
                     //2nd/reverse diagonal line check
-                    if (0 < diagonalLanesPlays && diagonalLanesPlays < DIAGONAL_LINES_IN_GAME) // if diagonal line 2 is playing  (diagoanlLanesPlays = 1)
+                    if (0 < diagonalLanesPlay && diagonalLanesPlay < DIAGONAL_LINES_IN_GAME) // if diagonal line 2 is playing  (diagoanlLanesPlays = 1)
                     {
                         int diagonalCharStore = slotMachineArray[2, 0];
                         int diagonalCharMatch = 0;
@@ -170,17 +168,17 @@
                             {
                                 diagonalCharMatch++;
                             }
-                            if (diagonalCharMatch == DIAGONAL_LINE_LENGTH)
-                            {
-                                lineWinAmount = betPerLane * winMultiplyer;
-                                playerBalanceTotal = playerBalanceTotal + lineWinAmount;
-                                Console.WriteLine($" Win diagonal line 2 . You Won {lineWinAmount} !");
-                            }
                             diagonalRow++;
+                        }
+                        if (diagonalCharMatch == DIAGONAL_LINE_LENGTH)
+                        {
+                            lineWinAmount ++;
+                            Console.WriteLine($" Win diagonal line 2 . You Won {lineWinAmount} !");
                         }
                     }
                 }
 
+                playerBalanceTotal = playerBalanceTotal + (lineWinAmount * WIN_MULTIPLIER);
                 Console.WriteLine($"Your new balance {playerBalanceTotal} !");
                 Console.WriteLine("If want to play again press any key, if dont want to play press N .");
                 string playAgain = Console.ReadKey().KeyChar.ToString().ToLower();
