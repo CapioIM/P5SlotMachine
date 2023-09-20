@@ -73,6 +73,7 @@
                 }
 
                 double lineWinAmount = 0;
+                double winMultiplyer = 10;
 
                 // row lines check and output to the screen
                 for (int rowIndex = 0; rowIndex < rowsToPlay; rowIndex++)
