@@ -18,7 +18,6 @@
             int allLinesTogether = COLUMN_LINES_IN_GAME + ROW_LINES_IN_GAME + DIAGONAL_LINES_IN_GAME;
             double playerBalanceTotal = PLAYER_STARTING_BALANCE;
             int amountOfLanesPlay = 0;
-            double betPerLane = 0;
 
             while (playerBalanceTotal > 0)
             {
@@ -32,6 +31,9 @@
                 Console.WriteLine($"Your Balance is {playerBalanceTotal} !");
                 Console.WriteLine();
 
+#pragma warning disable IDE0059
+                double betPerLane = 0;
+#pragma warning restore IDE0059 
                 bool sufficientBetFunds = true;
                 while (sufficientBetFunds)  // loop for bet as long as there is enough of balance program continues
                 {
@@ -55,7 +57,6 @@
                         sufficientBetFunds = false;
                     }
                 }
-
 
                 for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)                //fill array with random strings from slotSymbols array
                 {
@@ -136,7 +137,6 @@
                         diagonalLanesPlay = amountOfLanesPlay - rowAndColumnLines;
                     }
 
-
                     if (diagonalLanesPlay >= 0)                //    if (diagonalLanesPlays >= 0)
                     {
                         diagonalLanesPlay--;
@@ -178,12 +178,11 @@
                     }
                 }
 
-
                 playerBalanceTotal += (lineWinAmount * WIN_MULTIPLIER);
                 Console.WriteLine($"Your new balance {playerBalanceTotal} !");
+
                 Console.WriteLine("If want to play again press any key, if dont want to play press N .");
                 string playAgain = Console.ReadKey().KeyChar.ToString().ToLower();
-
                 Console.Clear();
                 if (playAgain == "n")
                 {
