@@ -12,7 +12,6 @@
 
         static void Main(string[] args)
         {
-            int[] slotSymbols = { 0 };//, 1, 2, 3, 4, 5, 6, 7, 8, 9};             // test symbols
             int[,] slotMachineArray = new int[ROW_LINES_IN_GAME, COLUMN_LINES_IN_GAME];          //slot machine array size
             int rowAndColumnLines = COLUMN_LINES_IN_GAME + ROW_LINES_IN_GAME;                         //rows and column lines amount
             int allLinesTogether = COLUMN_LINES_IN_GAME + ROW_LINES_IN_GAME + DIAGONAL_LINES_IN_GAME;
@@ -58,28 +57,19 @@
                     }
                 }
 
-                for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)                //fill array with random strings from slotSymbols array
+                for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)                //fill array with random num 0-9
                 {
                     for (int columnIndex = 0; columnIndex < COLUMN_LINES_IN_GAME; columnIndex++)
                     {
-                        int randomIndex = rand.Next(slotSymbols.Length);
-                        slotMachineArray[rowIndex, columnIndex] = slotSymbols[randomIndex];
+                        int randomIndex = rand.Next(0,10);
+                        slotMachineArray[rowIndex, columnIndex] = randomIndex;
                         Console.Write($"{slotMachineArray[rowIndex, columnIndex]} ");
                     }
                     Console.WriteLine();
                 }
-
-                ////how many row lines to be played
-                //int rowsToPlay = ROW_LINES_IN_GAME;
-                //if (amountOfLanesPlay < ROW_LINES_IN_GAME)
-                //{
-                //    rowsToPlay = amountOfLanesPlay;
-                //}
-
-                int rowsToPlay = Math.Min(amountOfLanesPlay,ROW_LINES_IN_GAME);
-
                 double lineWinAmount = 0;
 
+                int rowsToPlay = Math.Min(amountOfLanesPlay, ROW_LINES_IN_GAME);
                 // row lines check and output to the screen
                 for (int rowIndex = 0; rowIndex < rowsToPlay; rowIndex++)
                 {
@@ -128,8 +118,7 @@
                 if (amountOfLanesPlay > rowAndColumnLines)
                 {
                     int diagonalLanesPlay = Math.Min(DIAGONAL_LINES_IN_GAME, amountOfLanesPlay - rowAndColumnLines);
-
-                    if (diagonalLanesPlay >= 0)                //    if (diagonalLanesPlays >= 0)
+                    if (diagonalLanesPlay >= 0)       
                     {
                         diagonalLanesPlay--;
                         int diagonalCharStoreOne = slotMachineArray[0, 0];
@@ -138,7 +127,7 @@
                         int diagonalTwoMatch = 0;
                         int diagonalColumn = 2;
 
-                        for (int diagonal = 0; diagonal < DIAGONAL_LINE_LENGTH; diagonal++)   // magic Number ????????? seems like i picked DIAGONAL_LINES_IN_GAME  BECAUSE IT FITS
+                        for (int diagonal = 0; diagonal < DIAGONAL_LINE_LENGTH; diagonal++)   
                         {
                             if (diagonalCharStoreOne == slotMachineArray[diagonal, diagonal])
                             {
@@ -146,7 +135,6 @@
                             }
                             if (diagonalLanesPlay > 0) // if diagonal line 2 is playing  (diagoanlLanesPlay = 1)
                             {
-
                                 if (diagonalCharStoreTwo == slotMachineArray[diagonal, diagonalColumn])
                                 {
                                     diagonalTwoMatch++;
