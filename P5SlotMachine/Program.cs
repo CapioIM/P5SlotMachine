@@ -69,12 +69,14 @@
                     Console.WriteLine();
                 }
 
-                //how many row lines to be played
-                int rowsToPlay = ROW_LINES_IN_GAME;
-                if (amountOfLanesPlay < ROW_LINES_IN_GAME)
-                {
-                    rowsToPlay = amountOfLanesPlay;
-                }
+                ////how many row lines to be played
+                //int rowsToPlay = ROW_LINES_IN_GAME;
+                //if (amountOfLanesPlay < ROW_LINES_IN_GAME)
+                //{
+                //    rowsToPlay = amountOfLanesPlay;
+                //}
+
+                int rowsToPlay = Math.Min(amountOfLanesPlay,ROW_LINES_IN_GAME);
 
                 double lineWinAmount = 0;
 
@@ -100,13 +102,8 @@
                 //  calculation of column lanes to be played + columns are played if amount of lanes played is more than rows in array
                 if (amountOfLanesPlay > ROW_LINES_IN_GAME)      // if columns are playable 
                 {
-                    int columnLinesToPlay = COLUMN_LINES_IN_GAME;      // set amount of playable columns to max amount
+                    int columnLinesToPlay = Math.Min(COLUMN_LINES_IN_GAME, amountOfLanesPlay - ROW_LINES_IN_GAME);      // set variable with min amount out of 2
 
-                    // if columns are playable and not max column amount are playing, calculate how many columns are playing
-                    if (ROW_LINES_IN_GAME <= amountOfLanesPlay && amountOfLanesPlay < rowAndColumnLines)
-                    {
-                        columnLinesToPlay = amountOfLanesPlay - ROW_LINES_IN_GAME;
-                    }
                     // column lanes match and output on screen
                     for (int columnIndex = 0; columnIndex < columnLinesToPlay; columnIndex++)
                     {
@@ -128,14 +125,9 @@
                 }
 
                 //Diagonal lines check
-
                 if (amountOfLanesPlay > rowAndColumnLines)
                 {
-                    int diagonalLanesPlay = DIAGONAL_LINES_IN_GAME;
-                    if (rowAndColumnLines < amountOfLanesPlay && amountOfLanesPlay <= allLinesTogether)
-                    {
-                        diagonalLanesPlay = amountOfLanesPlay - rowAndColumnLines;
-                    }
+                    int diagonalLanesPlay = Math.Min(DIAGONAL_LINES_IN_GAME, amountOfLanesPlay - rowAndColumnLines);
 
                     if (diagonalLanesPlay >= 0)                //    if (diagonalLanesPlays >= 0)
                     {
@@ -152,7 +144,6 @@
                             {
                                 diagonalOneMatch++;
                             }
-
                             if (diagonalLanesPlay > 0) // if diagonal line 2 is playing  (diagoanlLanesPlay = 1)
                             {
 
@@ -162,9 +153,7 @@
                                 }
                                 diagonalColumn--;
                             }
-
                         }
-
                         if (diagonalOneMatch == DIAGONAL_LINE_LENGTH)
                         {
                             lineWinAmount++;
@@ -178,7 +167,7 @@
                     }
                 }
 
-                playerBalanceTotal += (lineWinAmount * WIN_MULTIPLIER);
+                playerBalanceTotal += (lineWinAmount * WIN_MULTIPLIER * betPerLane);
                 Console.WriteLine($"Your new balance {playerBalanceTotal} !");
 
                 Console.WriteLine("If want to play again press any key, if dont want to play press N .");
