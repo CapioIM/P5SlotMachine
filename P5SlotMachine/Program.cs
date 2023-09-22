@@ -15,6 +15,7 @@
             int[] slotSymbols = { 0 };//, 1, 2, 3, 4, 5, 6, 7, 8, 9};             // test symbols
             int[,] slotMachineArray = new int[ROW_LINES_IN_GAME, COLUMN_LINES_IN_GAME];          //slot machine array size
             int rowAndColumnLines = COLUMN_LINES_IN_GAME + ROW_LINES_IN_GAME;                         //rows and column lines amount
+            int allLinesTogether = COLUMN_LINES_IN_GAME + ROW_LINES_IN_GAME + DIAGONAL_LINES_IN_GAME;
             double playerBalanceTotal = PLAYER_STARTING_BALANCE;
             int amountOfLanesPlay = 0;
             double betPerLane = 0;
@@ -26,7 +27,7 @@
                 Console.WriteLine($"" +
                     $" Lines: 1-{ROW_LINES_IN_GAME} Vertical!\n" +
                     $" Lines {ROW_LINES_IN_GAME + 1}-{rowAndColumnLines} vertical and horizontal!\n" +
-                    $" Lines {rowAndColumnLines + 1}-{rowAndColumnLines + DIAGONAL_LINES_IN_GAME} vertical, horizontal and diagonal");
+                    $" Lines {rowAndColumnLines + 1}-{allLinesTogether} vertical, horizontal and diagonal");
                 Console.WriteLine();
                 Console.WriteLine($"Your Balance is {playerBalanceTotal} !");
                 Console.WriteLine();
@@ -37,9 +38,9 @@
                     Console.WriteLine("How many lines would you like to play?");
                     Console.WriteLine();
                     amountOfLanesPlay = Convert.ToInt32(Console.ReadLine());                                    //enter how many lanes to play
-                    if (amountOfLanesPlay > ROW_LINES_IN_GAME + COLUMN_LINES_IN_GAME + DIAGONAL_LINES_IN_GAME)  // amountOfLanesPlay cannot be more than max amount of lanes to play
+                    if (amountOfLanesPlay > allLinesTogether)  // amountOfLanesPlay cannot be more than max amount of lanes to play
                     {
-                        amountOfLanesPlay = ROW_LINES_IN_GAME + COLUMN_LINES_IN_GAME + DIAGONAL_LINES_IN_GAME;
+                        amountOfLanesPlay = allLinesTogether;
                     }
 
                     Console.WriteLine("How much would you like to bet per lane?");
@@ -130,7 +131,7 @@
                 if (amountOfLanesPlay > rowAndColumnLines)
                 {
                     int diagonalLanesPlay = DIAGONAL_LINES_IN_GAME;
-                    if (rowAndColumnLines >= amountOfLanesPlay && amountOfLanesPlay < rowAndColumnLines + DIAGONAL_LINES_IN_GAME)
+                    if (rowAndColumnLines < amountOfLanesPlay && amountOfLanesPlay <= allLinesTogether)
                     {
                         diagonalLanesPlay = amountOfLanesPlay - rowAndColumnLines;
                     }
@@ -138,45 +139,45 @@
 
                     if (diagonalLanesPlay >= 0)                //    if (diagonalLanesPlays >= 0)
                     {
-                        int diagonalCharStore = slotMachineArray[0, 0];
-                        int diagonalCharMatch = 0;
+                        diagonalLanesPlay--;
+                        int diagonalCharStoreOne = slotMachineArray[0, 0];
+                        int diagonalOneMatch = 0;
+                        int diagonalCharStoreTwo = slotMachineArray[2, 0];
+                        int diagonalTwoMatch = 0;
+                        int diagonalColumn = 2;
+
                         for (int diagonal = 0; diagonal < DIAGONAL_LINE_LENGTH; diagonal++)   // magic Number ????????? seems like i picked DIAGONAL_LINES_IN_GAME  BECAUSE IT FITS
                         {
-                            if (diagonalCharStore == slotMachineArray[diagonal, diagonal])
+                            if (diagonalCharStoreOne == slotMachineArray[diagonal, diagonal])
                             {
-                                diagonalCharMatch++;
+                                diagonalOneMatch++;
                             }
+
+                            if (diagonalLanesPlay > 0) // if diagonal line 2 is playing  (diagoanlLanesPlay = 1)
+                            {
+
+                                if (diagonalCharStoreTwo == slotMachineArray[diagonal, diagonalColumn])
+                                {
+                                    diagonalTwoMatch++;
+                                }
+                                diagonalColumn--;
+                            }
+
                         }
-                        if (diagonalCharMatch == DIAGONAL_LINE_LENGTH)
+
+                        if (diagonalOneMatch == DIAGONAL_LINE_LENGTH)
                         {
                             lineWinAmount++;
                             Console.WriteLine($" Win diagonal line 1 !");
                         }
-                        diagonalLanesPlay--;
-                    }
-
-                    //2nd/reverse diagonal line check
-                    if (diagonalLanesPlay > 0) // if diagonal line 2 is playing  (diagoanlLanesPlay = 1)
-                    {
-                        int diagonalCharStore = slotMachineArray[2, 0];
-                        int diagonalCharMatch = 0;
-                        int diagonalColumn = 2;
-
-                        for (int diagonalRow = 0; diagonalRow <= DIAGONAL_LINES_IN_GAME; diagonalRow++)  // diagonalColumn
-                        {
-                            if (diagonalCharStore == slotMachineArray[diagonalRow, diagonalColumn])
-                            {
-                                diagonalCharMatch++;
-                            }
-                            diagonalColumn--;
-                        }
-                        if (diagonalCharMatch == DIAGONAL_LINE_LENGTH)
+                        if (diagonalTwoMatch == DIAGONAL_LINE_LENGTH)
                         {
                             lineWinAmount++;
                             Console.WriteLine($" Win diagonal line 2 !");
                         }
                     }
                 }
+
 
                 playerBalanceTotal += (lineWinAmount * WIN_MULTIPLIER);
                 Console.WriteLine($"Your new balance {playerBalanceTotal} !");
@@ -193,3 +194,4 @@
         }
     }
 }
+
