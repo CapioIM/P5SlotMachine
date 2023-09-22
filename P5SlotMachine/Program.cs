@@ -30,9 +30,7 @@
                 Console.WriteLine($"Your Balance is {playerBalanceTotal} !");
                 Console.WriteLine();
 
-#pragma warning disable IDE0059
                 double betPerLane = 0;
-#pragma warning restore IDE0059 
                 bool sufficientBetFunds = true;
                 while (sufficientBetFunds)  // loop for bet as long as there is enough of balance program continues
                 {
@@ -125,7 +123,7 @@
                         int diagonalOneMatch = 0;
                         int diagonalCharStoreTwo = slotMachineArray[2, 0];
                         int diagonalTwoMatch = 0;
-                        int diagonalColumn = 2;
+                        int diagonalColumn = 2;   
 
                         for (int diagonal = 0; diagonal < DIAGONAL_LINE_LENGTH; diagonal++)   
                         {
