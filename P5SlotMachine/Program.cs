@@ -34,16 +34,23 @@
                 bool sufficientBetFunds = true;
                 while (sufficientBetFunds)  // loop for bet as long as there is enough of balance program continues
                 {
-                    Console.WriteLine("How many lines would you like to play?");
-                    Console.WriteLine();
-                    amountOfLanesPlay = Convert.ToInt32(Console.ReadLine());                                    //enter how many lanes to play
+                    do
+                    {
+                        amountOfLanesPlay = UIMethods.AskPlayerForNumber("How many lines would you like to play?");      //enter how many lanes to play
+                    } while (amountOfLanesPlay == 0);
+
+                    do
+                    {
+                        betPerLane = UIMethods.AskPlayerForNumber("How much would you like to bet per lane?");          //enter bet per lane
+                    } while (betPerLane == 0);
+
+
                     if (amountOfLanesPlay > allLinesTogether)  // amountOfLanesPlay cannot be more than max amount of lanes to play
                     {
                         amountOfLanesPlay = allLinesTogether;
                     }
 
-                    Console.WriteLine("How much would you like to bet per lane?");
-                    betPerLane = Convert.ToInt32(Console.ReadLine());                                           //enter bet per lane
+
                     if (playerBalanceTotal < amountOfLanesPlay * betPerLane)                                         // balance has to be greater than bet * lanes
                     {
                         Console.WriteLine("You have insufficient funds! Please place lower bet!");
@@ -149,7 +156,6 @@
                     }
                 }
 
-
                 playerBalanceTotal += (lineWinAmount * WIN_MULTIPLIER * betPerLane);
                 Console.WriteLine($"Your new balance {playerBalanceTotal} !");
 
@@ -160,9 +166,7 @@
                 {
                     break;
                 }
-
             }//end of while loop
         }
     }
 }
-
