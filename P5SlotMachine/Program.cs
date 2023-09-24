@@ -118,7 +118,7 @@
                 {
                     int diagonalCharStoreOne = slotMachineArray[0, 0];
                     int diagonalOneMatch = 0;
-                    int diagonalCharStoreTwo = slotMachineArray[DIAGONAL_LINE_LENGTH - 1, 0];
+                    int diagonalCharStoreTwo = slotMachineArray[0, DIAGONAL_LINE_LENGTH - 1];
                     int diagonalTwoMatch = 0;
                     int diagonalColumn = DIAGONAL_LINE_LENGTH - 1;
 
@@ -130,11 +130,10 @@
                         }
                         if (amountOfLanesPlay == allLinesTogether)
                         {
-                            if (diagonalCharStoreTwo == slotMachineArray[diagonal, diagonalColumn])
+                            if (diagonalCharStoreTwo == slotMachineArray[diagonal, diagonalColumn - diagonal])
                             {
                                 diagonalTwoMatch++;
                             }
-                            diagonalColumn--;
                         }
                     }
                     if (diagonalOneMatch == DIAGONAL_LINE_LENGTH)
