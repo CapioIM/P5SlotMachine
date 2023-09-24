@@ -14,7 +14,7 @@
         {
             int[,] slotMachineArray = new int[ROW_LINES_IN_GAME, COLUMN_LINES_IN_GAME];          //slot machine array size
             int rowAndColumnLines = COLUMN_LINES_IN_GAME + ROW_LINES_IN_GAME;                         //rows and column lines amount
-            int allLinesTogether = COLUMN_LINES_IN_GAME + ROW_LINES_IN_GAME + DIAGONAL_LINES_IN_GAME;
+            int allLinesTogether = COLUMN_LINES_IN_GAME + ROW_LINES_IN_GAME + DIAGONAL_LINES_IN_GAME;  // sum of all lines together
             double playerBalanceTotal = PLAYER_STARTING_BALANCE;
             int amountOfLanesPlay = 0;
 
@@ -37,14 +37,15 @@
                     do
                     {
                         amountOfLanesPlay = UIMethods.AskPlayerForNumber("How many lines would you like to play?");      //enter how many lanes to play
-                    } while (amountOfLanesPlay == 0);
+                    } 
+                    while (amountOfLanesPlay == 0);
 
                     do
                     {
                         betPerLane = UIMethods.AskPlayerForNumber("How much would you like to bet per lane?");          //enter bet per lane
-                    } while (betPerLane == 0);
-
-
+                    } 
+                    while (betPerLane == 0);
+                    
                     if (amountOfLanesPlay > allLinesTogether)  // amountOfLanesPlay cannot be more than max amount of lanes to play
                     {
                         amountOfLanesPlay = allLinesTogether;
@@ -62,11 +63,11 @@
                     }
                 }
 
-                for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)                //fill array with random num 0-9
+                for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)                //fill 2-D array with random num 0-9
                 {
                     for (int columnIndex = 0; columnIndex < COLUMN_LINES_IN_GAME; columnIndex++)
                     {
-                        int randomIndex = rand.Next(0, 10);
+                        int randomIndex = rand.Next(0, 1);
                         slotMachineArray[rowIndex, columnIndex] = randomIndex;
                         Console.Write($"{slotMachineArray[rowIndex, columnIndex]} ");
                     }
@@ -77,23 +78,29 @@
 
                 int rowsToPlay = Math.Min(amountOfLanesPlay, ROW_LINES_IN_GAME);
                 // row lines check and output to the screen
+
                 for (int rowIndex = 0; rowIndex < rowsToPlay; rowIndex++)
                 {
-                    int rowCharCheck = slotMachineArray[rowIndex, 0];       // store character
+                    int rowCharStore = slotMachineArray[rowIndex, 0];       // store character
                     int rowCharMatch = 0;                                   // reset chars matched against stored character
                     for (int columnIndex = 0; columnIndex < COLUMN_LINES_IN_GAME; columnIndex++)
                     {
-                        if (rowCharCheck == slotMachineArray[rowIndex, columnIndex])        //check char against stored char
+                        if (rowCharStore == slotMachineArray[rowIndex, columnIndex])        //check char against stored char
                         {
                             rowCharMatch++;
                         }
                     }
-                    if (rowCharMatch == ROW_LINES_IN_GAME)                   // amount of chars matched has to equal to length of row
-                    {
-                        lineWinAmount++;
-                        Console.WriteLine($" Win - line nr: {rowIndex + 1} !");            //output win lane
-                    }
+                    lineWinAmount += LogicMethods.CharMatch(rowCharMatch, COLUMN_LINES_IN_GAME);
+                    UIMethods.DisplayWin(rowIndex);
+
+                    //if (rowCharMatch == ROW_LINES_IN_GAME)                   // amount of chars matched has to equal to length of row
+                    //{
+                    //    lineWinAmount++;
+                    //    Console.WriteLine($" Win - line nr: {rowIndex + 1} !");            //output win lane
+                    //}
                 }
+
+
 
                 //  calculation of column lanes to be played + columns are played if amount of lanes played is more than rows in array
                 if (amountOfLanesPlay > ROW_LINES_IN_GAME)      // if columns are playable 
@@ -112,11 +119,8 @@
                                 columnLinesMatch++;
                             }
                         }
-                        if (columnLinesMatch == COLUMN_LINES_IN_GAME)
-                        {
-                            lineWinAmount++;
-                            Console.WriteLine($" Win | line nr: {columnIndex + 1} !");
-                        }
+                        lineWinAmount += LogicMethods.CharMatch(charStore, ROW_LINES_IN_GAME);
+                        UIMethods.DisplayWin(columnIndex);
                     }
                 }
 
