@@ -65,6 +65,7 @@
                     }
                     Console.WriteLine();
                 }
+
                 double lineWinAmount = 0;
 
                 int rowsToPlay = Math.Min(amountOfLanesPlay, ROW_LINES_IN_GAME);
@@ -80,7 +81,7 @@
                             rowCharMatch++;
                         }
                     }
-                    if (rowCharMatch == COLUMN_LINES_IN_GAME)                   // amount of chars matched has to equal to length of row
+                    if (rowCharMatch == ROW_LINES_IN_GAME)                   // amount of chars matched has to equal to length of row
                     {
                         lineWinAmount++;
                         Console.WriteLine($" Win - line nr: {rowIndex + 1} !");            //output win lane
