@@ -12,7 +12,7 @@ namespace P5SlotMachine
         /// <summary>
         /// Character Match
         /// </summary>
-        /// <param name="CharMatch"> Whats the character to be matched</param>
+        /// <param name="CharMatch"> nter how many matches ,variable</param>
         /// <param name="LenghtOfMatch"> int how long is line  </param>
         /// <returns> how many lines win </returns>
         public static int CharMatch(int CharMatch, int LenghtOfMatch)

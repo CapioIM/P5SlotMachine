@@ -110,16 +110,16 @@
                     // column lanes match and output on screen
                     for (int columnIndex = 0; columnIndex < columnLinesToPlay; columnIndex++)
                     {
-                        int columnLinesMatch = 0;
+                        int columnCharMatches = 0;
                         int charStore = slotMachineArray[0, columnIndex];           // line character stored in a variable
                         for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)
                         {
                             if (charStore == slotMachineArray[rowIndex, columnIndex])       //stored character is checked against character at specific place array
                             {
-                                columnLinesMatch++;
+                                columnCharMatches++;
                             }
                         }
-                        lineWinAmount += LogicMethods.CharMatch(charStore, ROW_LINES_IN_GAME);
+                        lineWinAmount += LogicMethods.CharMatch(columnCharMatches, ROW_LINES_IN_GAME);
                         UIMethods.DisplayWin(columnIndex);
                     }
                 }
