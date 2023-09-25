@@ -20,7 +20,11 @@ namespace P5SlotMachine
             {
                 return result;
             }
-            return 0;
+            else
+            {
+                Console.WriteLine("You have entered letter ! Please try to enter Number !");
+                return 0;
+            }
         }
 
         /// <summary>
