@@ -51,7 +51,6 @@
                         amountOfLanesPlay = allLinesTogether;
                     }
 
-
                     if (playerBalanceTotal < amountOfLanesPlay * betPerLane)                                         // balance has to be greater than bet * lanes
                     {
                         Console.WriteLine("You have insufficient funds! Please place lower bet!");
@@ -79,26 +78,9 @@
                 int rowsToPlay = Math.Min(amountOfLanesPlay, ROW_LINES_IN_GAME);
                 // row lines check and output to the screen
 
-                for (int rowIndex = 0; rowIndex < rowsToPlay; rowIndex++)
-                {
-                    int rowCharStore = slotMachineArray[rowIndex, 0];       // store character
-                    int rowCharMatch = 0;                                   // reset chars matched against stored character
-                    for (int columnIndex = 0; columnIndex < COLUMN_LINES_IN_GAME; columnIndex++)
-                    {
-                        if (rowCharStore == slotMachineArray[rowIndex, columnIndex])        //check char against stored char
-                        {
-                            rowCharMatch++;
-                        }
-                    }
-                    lineWinAmount += LogicMethods.CharMatch(rowCharMatch, COLUMN_LINES_IN_GAME);
-                    UIMethods.DisplayWin(rowIndex);
 
-                    //if (rowCharMatch == ROW_LINES_IN_GAME)                   // amount of chars matched has to equal to length of row
-                    //{
-                    //    lineWinAmount++;
-                    //    Console.WriteLine($" Win - line nr: {rowIndex + 1} !");            //output win lane
-                    //}
-                }
+                // Rows matching lines loop , for now(skateboard not car)
+               lineWinAmount += LogicMethods.RowArrayLoop(slotMachineArray,COLUMN_LINES_IN_GAME,rowsToPlay);
 
 
 
@@ -120,7 +102,6 @@
                             }
                         }
                         lineWinAmount += LogicMethods.CharMatch(columnCharMatches, ROW_LINES_IN_GAME);
-                        UIMethods.DisplayWin(columnIndex);
                     }
                 }
 

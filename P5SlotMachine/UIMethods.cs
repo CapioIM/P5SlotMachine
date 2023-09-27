@@ -22,18 +22,9 @@ namespace P5SlotMachine
             }
             else
             {
-                Console.WriteLine("You have entered letter ! Please try to enter Number !");
+                Console.WriteLine("You have entered letter or zero ! Please try to enter Number,  !");
                 return 0;
             }
-        }
-
-        /// <summary>
-        /// Print Win Lane 
-        /// </summary>
-        /// <param name="line"> which line has won  </param>
-        public static void DisplayWin(int line)
-        {
-            Console.WriteLine($" Win line nr: {line + 1} !");            //output win lane
         }
     }
 }
