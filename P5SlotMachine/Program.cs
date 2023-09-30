@@ -21,14 +21,8 @@
             while (playerBalanceTotal > 0)
             {
                 // Game starting text
-                Console.WriteLine("Hello and Welcome to Slot Machine Game!");
-                Console.WriteLine($"" +
-                    $" Lines: 1-{ROW_LINES_IN_GAME} Vertical!\n" +
-                    $" Lines {ROW_LINES_IN_GAME + 1}-{rowAndColumnLines} vertical and horizontal!\n" +
-                    $" Lines {rowAndColumnLines + 1}-{allLinesTogether} vertical, horizontal and diagonal");
-                Console.WriteLine();
-                Console.WriteLine($"Your Balance is {playerBalanceTotal} !");
-                Console.WriteLine();
+                UIMethods.DisplayWelcomeScreen(slotMachineArray, DIAGONAL_LINES_IN_GAME);
+                UIMethods.DisplayPlayerBalance(playerBalanceTotal);
 
                 double betPerLane = 0;
                 bool sufficientBetFunds = true;
@@ -37,15 +31,15 @@
                     do
                     {
                         amountOfLanesPlay = UIMethods.AskPlayerForNumber("How many lines would you like to play?");      //enter how many lanes to play
-                    } 
+                    }
                     while (amountOfLanesPlay == 0);
 
                     do
                     {
                         betPerLane = UIMethods.AskPlayerForNumber("How much would you like to bet per lane?");          //enter bet per lane
-                    } 
+                    }
                     while (betPerLane == 0);
-                    
+
                     if (amountOfLanesPlay > allLinesTogether)  // amountOfLanesPlay cannot be more than max amount of lanes to play
                     {
                         amountOfLanesPlay = allLinesTogether;
@@ -66,9 +60,9 @@
                 {
                     for (int columnIndex = 0; columnIndex < COLUMN_LINES_IN_GAME; columnIndex++)
                     {
-                        int randomIndex = rand.Next(0, 1);
+                        int randomIndex = rand.Next(0, 2);
                         slotMachineArray[rowIndex, columnIndex] = randomIndex;
-                        Console.Write($"{slotMachineArray[rowIndex, columnIndex]} ");
+                        Console.Write($"{slotMachineArray[rowIndex, columnIndex]} ");           // print slot machine results to the screen
                     }
                     Console.WriteLine();
                 }
@@ -78,33 +72,17 @@
                 int rowsToPlay = Math.Min(amountOfLanesPlay, ROW_LINES_IN_GAME);
                 // row lines check and output to the screen
 
-
                 // Rows matching lines loop , for now(skateboard not car)
-               lineWinAmount += LogicMethods.RowArrayLoop(slotMachineArray,COLUMN_LINES_IN_GAME,rowsToPlay);
+                lineWinAmount += LogicMethods.GetHorizontalLineMatches(slotMachineArray, rowsToPlay);
 
 
 
                 //  calculation of column lanes to be played + columns are played if amount of lanes played is more than rows in array
                 if (amountOfLanesPlay > ROW_LINES_IN_GAME)      // if columns are playable 
                 {
-                    int columnLinesToPlay = Math.Min(COLUMN_LINES_IN_GAME, amountOfLanesPlay - ROW_LINES_IN_GAME);      // set variable with min amount out of 2
-
-                    // column lanes match and output on screen
-                    for (int columnIndex = 0; columnIndex < columnLinesToPlay; columnIndex++)
-                    {
-                        int columnCharMatches = 0;
-                        int charStore = slotMachineArray[0, columnIndex];           // line character stored in a variable
-                        for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)
-                        {
-                            if (charStore == slotMachineArray[rowIndex, columnIndex])       //stored character is checked against character at specific place array
-                            {
-                                columnCharMatches++;
-                            }
-                        }
-                        lineWinAmount += LogicMethods.CharMatch(columnCharMatches, ROW_LINES_IN_GAME);
-                    }
+                    int columnLinesToPlay = Math.Min(COLUMN_LINES_IN_GAME, amountOfLanesPlay - ROW_LINES_IN_GAME);      // set variable with min amount out of 2 numbers
+                    lineWinAmount += LogicMethods.GetVerticalLineMatches(slotMachineArray, columnLinesToPlay);
                 }
-
                 //Diagonal lines check
 
                 if (amountOfLanesPlay > rowAndColumnLines)

@@ -20,7 +20,7 @@ namespace P5SlotMachine
             int lineWinAmount = 0;
             if (CharMatch == LenghtOfMatch)         // amount of chars matched has to equal to length of row/Column
             {
-               lineWinAmount++;
+                lineWinAmount++;
             }
             return lineWinAmount;
         }
@@ -29,24 +29,25 @@ namespace P5SlotMachine
         /// Loop to Check matches in rows in Array
         /// </summary>
         /// <param name="array"> Array Name ? </param>
-        /// <param name="HowManyColumnsInArray"> array width amount to provide accurate line match </param>
-        /// <param name="rowLinesPlayCounter"> how many lanes are playing </param>
+        /// <param name="LinesPlayCounter"> specific dimension lanes playing </param>
+        /// <param name="amountOfLanesPlay"> total amount of lanes playing </param>
         /// <returns> amount of matched lanes </returns>
-        public static int RowArrayLoop(int[,] array, int HowManyColumnsInArray, int rowLinesPlayCounter)
+        public static int GetHorizontalLineMatches(int[,] array, int LinesPlayCounter)
         {
             int result = 0;
-            for (int i = 0; i < rowLinesPlayCounter; i++)
+            for (int i = 0; i < LinesPlayCounter; i++)
             {
-                int store = array[i, 0];
-                int Check = 0;
+                int store = array[i, i];
+                int CheckRow = 0;
+
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
                     if (store == array[i, j])
                     {
-                        Check++;
+                        CheckRow++;
                     }
                 }
-                if (Check == HowManyColumnsInArray)
+                if (CheckRow == array.GetLength(1))
                 {
                     result++;
                     Console.WriteLine($" Win - line nr: {i + 1} !");            //output win lane
@@ -55,5 +56,28 @@ namespace P5SlotMachine
             return result;
         }
 
+        public static int GetVerticalLineMatches(int[,] array, int LinesPlayCounter)
+        {
+            int result = 0;
+            for (int i = 0; i < LinesPlayCounter; i++)
+            {
+                int store = array[i, i];
+                int Check = 0;
+
+                for (int j = 0; j < array.GetLength(0); j++)
+                {
+                    if (store == array[j, i])
+                    {
+                        Check++;
+                    }
+                }
+                if (Check == array.GetLength(0))
+                {
+                    result++;
+                    Console.WriteLine($" Win - line nr: {i + 1} !");            //output win lane
+                }
+            }
+            return result;
+        }
     }
 }
