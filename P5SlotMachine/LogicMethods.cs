@@ -30,7 +30,6 @@ namespace P5SlotMachine
         /// </summary>
         /// <param name="array"> Array Name ? </param>
         /// <param name="LinesPlayCounter"> specific dimension lanes playing </param>
-        /// <param name="amountOfLanesPlay"> total amount of lanes playing </param>
         /// <returns> amount of matched lanes </returns>
         public static int GetHorizontalLineMatches(int[,] array, int LinesPlayCounter)
         {
@@ -50,12 +49,18 @@ namespace P5SlotMachine
                 if (CheckRow == array.GetLength(1))
                 {
                     result++;
-                    Console.WriteLine($" Win - line nr: {i + 1} !");            //output win lane
+                    UIMethods.DisplayWinMessage(i);
                 }
             }
             return result;
         }
 
+        /// <summary>
+        /// Vertical Line match and win Line Display
+        /// </summary>
+        /// <param name="array"> Enter Array </param>
+        /// <param name="LinesPlayCounter"> Loop iteretion Amount </param>
+        /// <returns> Int of matched Lanes </returns>
         public static int GetVerticalLineMatches(int[,] array, int LinesPlayCounter)
         {
             int result = 0;
@@ -74,10 +79,12 @@ namespace P5SlotMachine
                 if (Check == array.GetLength(0))
                 {
                     result++;
-                    Console.WriteLine($" Win - line nr: {i + 1} !");            //output win lane
+                    UIMethods.DisplayWinMessage(i);
                 }
             }
             return result;
         }
+
+
     }
 }

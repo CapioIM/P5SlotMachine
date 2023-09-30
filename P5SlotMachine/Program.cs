@@ -47,7 +47,7 @@
 
                     if (playerBalanceTotal < amountOfLanesPlay * betPerLane)                                         // balance has to be greater than bet * lanes
                     {
-                        Console.WriteLine("You have insufficient funds! Please place lower bet!");
+                        UIMethods.DisplayInsufficientFunds();
                     }
                     else                                                                                        // continue program if bet amount is less than money balance 
                     {
@@ -62,9 +62,9 @@
                     {
                         int randomIndex = rand.Next(0, 2);
                         slotMachineArray[rowIndex, columnIndex] = randomIndex;
-                        Console.Write($"{slotMachineArray[rowIndex, columnIndex]} ");           // print slot machine results to the screen
+                        UIMethods.DisplaySlotNumbers(slotMachineArray, rowIndex, columnIndex);      // print slot machine results to the screen
                     }
-                    Console.WriteLine();
+                    UIMethods.NewLine();
                 }
 
                 double lineWinAmount = 0;
@@ -72,10 +72,8 @@
                 int rowsToPlay = Math.Min(amountOfLanesPlay, ROW_LINES_IN_GAME);
                 // row lines check and output to the screen
 
-                // Rows matching lines loop , for now(skateboard not car)
+                // Rows matching lines loop 
                 lineWinAmount += LogicMethods.GetHorizontalLineMatches(slotMachineArray, rowsToPlay);
-
-
 
                 //  calculation of column lanes to be played + columns are played if amount of lanes played is more than rows in array
                 if (amountOfLanesPlay > ROW_LINES_IN_GAME)      // if columns are playable 
@@ -120,15 +118,13 @@
                 }
 
                 playerBalanceTotal += (lineWinAmount * WIN_MULTIPLIER * betPerLane);
-                Console.WriteLine($"Your new balance {playerBalanceTotal} !");
+                UIMethods.DisplayPlayerBalance(playerBalanceTotal);
 
-                Console.WriteLine("If want to play again press any key, if dont want to play press N .");
-                string playAgain = Console.ReadKey().KeyChar.ToString().ToLower();
-                Console.Clear();
-                if (playAgain == "n")
+                if (UIMethods.ContinueGameDecision() == false)
                 {
-                    break;
+                    Environment.Exit(0);
                 }
+
             }//end of while loop
         }
     }
