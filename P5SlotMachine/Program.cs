@@ -6,9 +6,17 @@
 
         static void Main(string[] args)
         {
-            int[,] slotMachineArray = new int[LogicMethods.ROW_LINES_IN_GAME, LogicMethods.COLUMN_LINES_IN_GAME];          //slot machine array size
-            int rowAndColumnLines = LogicMethods.COLUMN_LINES_IN_GAME + LogicMethods.ROW_LINES_IN_GAME;                         //rows and column lines amount
-            int allLinesTogether = LogicMethods.COLUMN_LINES_IN_GAME + LogicMethods.ROW_LINES_IN_GAME + LogicMethods.DIAGONAL_LINES_IN_GAME;  // sum of all lines together
+            int[,] slotMachineArray = new int[
+                LogicMethods.ROW_LINES_IN_GAME,
+                LogicMethods.COLUMN_LINES_IN_GAME];          //slot machine array size
+            int rowAndColumnLines = 
+                LogicMethods.COLUMN_LINES_IN_GAME +
+                LogicMethods.ROW_LINES_IN_GAME;                         //rows and column lines amount
+            int allLinesTogether = 
+                LogicMethods.COLUMN_LINES_IN_GAME + 
+                LogicMethods.ROW_LINES_IN_GAME + 
+                LogicMethods.DIAGONAL_LINES_IN_GAME;  // sum of all lines together
+
             double playerBalanceTotal = LogicMethods.PLAYER_STARTING_BALANCE;
             int amountOfLanesPlay = 0;
 
@@ -20,6 +28,7 @@
 
                 double betPerLane = 0;
                 bool sufficientBetFunds = true;
+
                 while (sufficientBetFunds)  // loop for bet as long as there is enough of balance program continues
                 {
                     do
@@ -50,18 +59,7 @@
                     }
                 }
 
-                LogicMethods.PrintSlotMachine(slotMachineArray);
-
-                //for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)                //fill 2-D array with random num 0-9
-                //{
-                //    for (int columnIndex = 0; columnIndex < COLUMN_LINES_IN_GAME; columnIndex++)
-                //    {
-                //        int randomIndex = rand.Next(0, 2);
-                //        slotMachineArray[rowIndex, columnIndex] = randomIndex;
-                //        UIMethods.DisplaySlotNumbers(slotMachineArray, rowIndex, columnIndex);      // print slot machine results to the screen
-                //    }
-                //    UIMethods.PrintEmptyNewLine();
-                //}
+                LogicMethods.PrintSlotMachine(slotMachineArray);  //fill 2D array with numbers
 
                 double lineWinAmount = 0;
 
