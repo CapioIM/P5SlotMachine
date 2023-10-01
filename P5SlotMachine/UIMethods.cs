@@ -56,11 +56,11 @@ namespace P5SlotMachine
         /// Prints array numbers to the screen
         /// </summary>
         /// <param name="array"> array variable/name</param>
-        /// <param name="RowIndex"> Row Index </param>
-        /// <param name="ColumnIndex"> Column Index </param>
-        public static void DisplaySlotNumbers(int[,] array, int RowIndex, int ColumnIndex)
+        /// <param name="rowIndex"> Row Index </param>
+        /// <param name="columnIndex"> Column Index </param>
+        public static void DisplaySlotNumbers(int[,] array, int rowIndex, int columnIndex)
         {
-            Console.Write($"{array[RowIndex, ColumnIndex]} ");
+            Console.Write($"{array[rowIndex, columnIndex]} ");
         }
 
 

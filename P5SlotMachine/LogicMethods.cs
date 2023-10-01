@@ -17,12 +17,12 @@ namespace P5SlotMachine
         /// loop to match 2 diagonal lines in array
         /// </summary>
         /// <param name="array"> name of array loop will match through </param>
-        /// <param name="PlayerPlaysLanes"> How many Lanes Player want to play </param>
+        /// <param name="playerPlaysLanes"> How many Lanes Player want to play </param>
         /// <returns> Returns amount of matching lanes </returns>
-        public static int GetDiagonalLineMatch(int[,] array, int PlayerPlaysLanes)
+        public static int GetDiagonalLineMatch(int[,] array, int playerPlaysLanes)
         {
             int result = 0;
-            if (PlayerPlaysLanes > Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME)                            
+            if (playerPlaysLanes > Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME)                            
             {
                 int diagonalCharStoreOne = array[0, 0];
                 int diagonalOneMatch = 0;
@@ -36,7 +36,7 @@ namespace P5SlotMachine
                     {
                         diagonalOneMatch++;
                     }
-                    if (PlayerPlaysLanes == Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME + Constants.DIAGONAL_LINES_IN_GAME)  // execute code only when max lanes amount is chosen
+                    if (playerPlaysLanes == Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME + Constants.DIAGONAL_LINES_IN_GAME)  // execute code only when max lanes amount is chosen
                     {
                         if (diagonalCharStoreTwo == array[diagonal, diagonalColumn - diagonal])
                         {
@@ -78,12 +78,12 @@ namespace P5SlotMachine
         /// Loop to Check matches in rows in Array
         /// </summary>
         /// <param name="array"> Array Name ? </param>
-        /// <param name="LinesPlayCounter"> specific dimension lanes playing </param>
+        /// <param name="linesPlayCounter"> specific dimension lanes playing </param>
         /// <returns> amount of matched lanes </returns>
-        public static int GetHorizontalLineMatches(int[,] array, int LinesPlayCounter)
+        public static int GetHorizontalLineMatches(int[,] array, int linesPlayCounter)
         {
             int result = 0;
-            for (int RowIndex = 0; RowIndex < LinesPlayCounter; RowIndex++)
+            for (int RowIndex = 0; RowIndex < linesPlayCounter; RowIndex++)
             {
                 int store = array[RowIndex, RowIndex];
                 int CheckRow = 0;
@@ -111,12 +111,12 @@ namespace P5SlotMachine
         /// Vertical Line match and win Line Display
         /// </summary>
         /// <param name="array"> Enter Array </param>
-        /// <param name="LinesPlayCounter"> Loop iteretion Amount </param>
+        /// <param name="linesPlayCounter"> Loop iteretion Amount </param>
         /// <returns> Int of matched Lanes </returns>
-        public static int GetVerticalLineMatches(int[,] array, int LinesPlayCounter)
+        public static int GetVerticalLineMatches(int[,] array, int linesPlayCounter)
         {
             int result = 0;
-            for (int ColumnIndex = 0; ColumnIndex < LinesPlayCounter; ColumnIndex++)
+            for (int ColumnIndex = 0; ColumnIndex < linesPlayCounter; ColumnIndex++)
             {
                 int store = array[ColumnIndex, ColumnIndex];
                 int Check = 0;
