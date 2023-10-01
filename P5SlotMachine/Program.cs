@@ -56,16 +56,18 @@
                     }
                 }
 
-                for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)                //fill 2-D array with random num 0-9
-                {
-                    for (int columnIndex = 0; columnIndex < COLUMN_LINES_IN_GAME; columnIndex++)
-                    {
-                        int randomIndex = rand.Next(0, 2);
-                        slotMachineArray[rowIndex, columnIndex] = randomIndex;
-                        UIMethods.DisplaySlotNumbers(slotMachineArray, rowIndex, columnIndex);      // print slot machine results to the screen
-                    }
-                    UIMethods.PrintEmptyNewLine();
-                }
+                LogicMethods.PrintSlotMachine(slotMachineArray);
+
+                //for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)                //fill 2-D array with random num 0-9
+                //{
+                //    for (int columnIndex = 0; columnIndex < COLUMN_LINES_IN_GAME; columnIndex++)
+                //    {
+                //        int randomIndex = rand.Next(0, 2);
+                //        slotMachineArray[rowIndex, columnIndex] = randomIndex;
+                //        UIMethods.DisplaySlotNumbers(slotMachineArray, rowIndex, columnIndex);      // print slot machine results to the screen
+                //    }
+                //    UIMethods.PrintEmptyNewLine();
+                //}
 
                 double lineWinAmount = 0;
 

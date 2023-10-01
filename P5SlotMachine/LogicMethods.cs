@@ -6,8 +6,33 @@ using System.Threading.Tasks;
 
 namespace P5SlotMachine
 {
+
+
     internal class LogicMethods
     {
+
+        public static Random rand = new Random();
+        public const int ROW_LINES_IN_GAME = 3;      // how many vertical lines
+        public const int COLUMN_LINES_IN_GAME = 3;     //how many horizontal lines
+        public const int DIAGONAL_LINES_IN_GAME = 2;   // how many diagonal lines
+        public const int DIAGONAL_LINE_LENGTH = 3;     //length of diagonal line
+        public const int PLAYER_STARTING_BALANCE = 50;   // player starting balance
+        public const double WIN_MULTIPLIER = 10;        //win multiplier
+
+        public static void PrintSlotMachine(int[,] slotMachineArray)
+        {
+            for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)                //fill 2-D array with random num 0-9
+            {
+                for (int columnIndex = 0; columnIndex < COLUMN_LINES_IN_GAME; columnIndex++)
+                {
+                    int randomIndex = rand.Next(0, 2);
+                    slotMachineArray[rowIndex, columnIndex] = randomIndex;
+                    UIMethods.DisplaySlotNumbers(slotMachineArray, rowIndex, columnIndex);      // print slot machine results to the screen
+                }
+                UIMethods.PrintEmptyNewLine();
+            }
+        }
+
 
         /// <summary>
         /// Loop to Check matches in rows in Array
