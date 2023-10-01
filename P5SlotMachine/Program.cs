@@ -7,8 +7,8 @@
         const int COLUMN_LINES_IN_GAME = 3;     //how many horizontal lines
         const int DIAGONAL_LINES_IN_GAME = 2;   // how many diagonal lines
         const int DIAGONAL_LINE_LENGTH = 3;     //length of diagonal line
-        const int PLAYER_STARTING_BALANCE = 50;
-        const double WIN_MULTIPLIER = 10;
+        const int PLAYER_STARTING_BALANCE = 50;   // player starting balance
+        const double WIN_MULTIPLIER = 10;        //win multiplier
 
         static void Main(string[] args)
         {

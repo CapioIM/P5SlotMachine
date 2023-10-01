@@ -92,12 +92,6 @@ namespace P5SlotMachine
             }
         }
 
-
-        public static void DisplayWinMessage(int WhichLineWin)
-        {
-            Console.WriteLine($" Win - line nr: {WhichLineWin + 1} !");            //output win lane
-        }
-
         public static void DiagonalLineWinOne()
         {
             Console.WriteLine($" Win diagonal line 1 !");

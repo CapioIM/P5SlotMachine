@@ -34,14 +34,14 @@ namespace P5SlotMachine
         public static int GetHorizontalLineMatches(int[,] array, int LinesPlayCounter)
         {
             int result = 0;
-            for (int i = 0; i < LinesPlayCounter; i++)
+            for (int RowIndex = 0; RowIndex < LinesPlayCounter; RowIndex++)
             {
-                int store = array[i, i];
+                int store = array[RowIndex, RowIndex];
                 int CheckRow = 0;
 
-                for (int j = 0; j < array.GetLength(1); j++)
+                for (int ColumnIndex = 0; ColumnIndex < array.GetLength(1); ColumnIndex++)
                 {
-                    if (store == array[i, j])
+                    if (store == array[RowIndex, ColumnIndex])
                     {
                         CheckRow++;
                     }
@@ -49,7 +49,7 @@ namespace P5SlotMachine
                 if (CheckRow == array.GetLength(1))
                 {
                     result++;
-                    UIMethods.DisplayWinMessage(i);
+                    Console.WriteLine($" Win - line nr: {RowIndex + 1} !");
                 }
             }
             return result;
@@ -79,7 +79,7 @@ namespace P5SlotMachine
                 if (Check == array.GetLength(0))
                 {
                     result++;
-                    UIMethods.DisplayWinMessage(ColumnIndex);
+                    Console.WriteLine($" Win - line nr: {ColumnIndex + 1} !");
                 }
             }
             return result;
