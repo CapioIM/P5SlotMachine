@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -102,6 +103,9 @@ namespace P5SlotMachine
             Console.WriteLine($" Win diagonal line 2 !");
         }
 
+        /// <summary>
+        /// Enum with short Question discription
+        /// </summary>
         public enum Questions
         {
             HowManyLanes,
@@ -110,9 +114,14 @@ namespace P5SlotMachine
             ContinueGame
         }
 
-        public static string DisplayQuestionToPlayer(Questions choice)
+        /// <summary>
+        /// List of questions to ask Player
+        /// </summary>
+        /// <param name="questionRelevance"></param>
+        /// <returns> prints chosen question </returns>
+        public static string DisplayQuestionToPlayer(Questions questionRelevance)
         {
-            switch (choice)
+            switch (questionRelevance)
             {
                 case Questions.HowManyLanes:
                     Console.WriteLine("How many lines would you like to play?");
@@ -127,7 +136,7 @@ namespace P5SlotMachine
                     Console.WriteLine("Do you want to continue game? Y = Yes , N = No");
                     break;
             }
-            return choice.ToString();
+            return questionRelevance.ToString();
         }
     }
 }
