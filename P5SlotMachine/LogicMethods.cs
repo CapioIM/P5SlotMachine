@@ -10,8 +10,12 @@ namespace P5SlotMachine
 
     internal class LogicMethods
     {
+        public static int[,] slotMachineArray = new int[
+                        Constants.ROW_LINES_IN_GAME,
+                        Constants.COLUMN_LINES_IN_GAME];
 
         public static Random rand = new Random();
+
 
         /// <summary>
         /// loop to match 2 diagonal lines in array
@@ -22,7 +26,7 @@ namespace P5SlotMachine
         public static int GetDiagonalLineMatch(int[,] array, int playerPlaysLanes)
         {
             int result = 0;
-            if (playerPlaysLanes > Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME)                            
+            if (playerPlaysLanes > Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME)
             {
                 int diagonalCharStoreOne = array[0, 0];
                 int diagonalOneMatch = 0;

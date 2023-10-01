@@ -2,13 +2,8 @@
 {
     internal class Program
     {
-        static Random rand = new Random();
-
         static void Main(string[] args)
         {
-            int[,] slotMachineArray = new int[
-                Constants.ROW_LINES_IN_GAME,
-                Constants.COLUMN_LINES_IN_GAME];          //slot machine array size
             int rowAndColumnLines =
                 Constants.COLUMN_LINES_IN_GAME +
                 Constants.ROW_LINES_IN_GAME;              //rows and column lines amount
@@ -23,7 +18,7 @@
             while (playerBalanceTotal > 0)
             {
                 // Game starting text
-                UIMethods.DisplayWelcomeScreen(slotMachineArray, Constants.DIAGONAL_LINES_IN_GAME);
+                UIMethods.DisplayWelcomeScreen(LogicMethods.slotMachineArray, Constants.DIAGONAL_LINES_IN_GAME);
                 UIMethods.DisplayPlayerBalance(playerBalanceTotal);
 
                 double betPerLane = 0;
@@ -61,7 +56,7 @@
                     }
                 }
 
-                LogicMethods.PrintSlotMachine(slotMachineArray);  //fill 2D array with numbers
+                LogicMethods.PrintSlotMachine(LogicMethods.slotMachineArray);  //fill 2D array with numbers
 
                 double lineWinAmount = 0;
 
@@ -69,7 +64,7 @@
                 // row lines check and output to the screen
 
                 // Rows matching lines loop 
-                lineWinAmount += LogicMethods.GetHorizontalLineMatches(slotMachineArray, rowsToPlay);
+                lineWinAmount += LogicMethods.GetHorizontalLineMatches(LogicMethods.slotMachineArray, rowsToPlay);
 
                 //  calculation of column lanes to be played + columns are played if amount of lanes played is more than rows in array
                 if (amountOfLanesPlay > Constants.ROW_LINES_IN_GAME)      // if columns are playable 
@@ -78,13 +73,13 @@
                         Constants.COLUMN_LINES_IN_GAME,
                         amountOfLanesPlay - Constants.ROW_LINES_IN_GAME);      // set variable with min amount out of 2 numbers
 
-                    lineWinAmount += LogicMethods.GetVerticalLineMatches(slotMachineArray, columnLinesToPlay);
+                    lineWinAmount += LogicMethods.GetVerticalLineMatches(LogicMethods.slotMachineArray, columnLinesToPlay);
                 }
 
                 //Diagonal lines check
                 if (amountOfLanesPlay > rowAndColumnLines)
                 {
-                    lineWinAmount += LogicMethods.GetDiagonalLineMatch(slotMachineArray, amountOfLanesPlay);
+                    lineWinAmount += LogicMethods.GetDiagonalLineMatch(LogicMethods.slotMachineArray, amountOfLanesPlay);
                 }
 
                 playerBalanceTotal += (lineWinAmount * Constants.WIN_MULTIPLIER * betPerLane);
