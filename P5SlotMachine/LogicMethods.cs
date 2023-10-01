@@ -16,7 +16,6 @@ namespace P5SlotMachine
 
         public static Random rand = new Random();
 
-
         /// <summary>
         /// loop to match 2 diagonal lines in array
         /// </summary>
@@ -62,7 +61,10 @@ namespace P5SlotMachine
             return result;
         }
 
-
+        /// <summary>
+        /// Fills array with random numbers and displays them
+        /// </summary>
+        /// <param name="slotMachineArray"> array name to fill with random numbers </param>
         public static void PrintSlotMachine(int[,] slotMachineArray)
         {
             for (int rowIndex = 0; rowIndex < Constants.ROW_LINES_IN_GAME; rowIndex++)                //fill 2-D array with random num 0-9
@@ -77,12 +79,11 @@ namespace P5SlotMachine
             }
         }
 
-
         /// <summary>
         /// Loop to Check matches in rows in Array
         /// </summary>
         /// <param name="array"> Array Name ? </param>
-        /// <param name="linesPlayCounter"> specific dimension lanes playing </param>
+        /// <param name="linesPlayCounter"> specific dimension,amount of lanes playing </param>
         /// <returns> amount of matched lanes </returns>
         public static int GetHorizontalLineMatches(int[,] array, int linesPlayCounter)
         {
@@ -90,23 +91,20 @@ namespace P5SlotMachine
             for (int RowIndex = 0; RowIndex < linesPlayCounter; RowIndex++)
             {
                 int store = array[RowIndex, RowIndex];
-                int CheckRow = 0;
+                int check = 0;
 
                 for (int ColumnIndex = 0; ColumnIndex < array.GetLength(1); ColumnIndex++)
                 {
 
                     if (store == array[RowIndex, ColumnIndex])
                     {
-                        CheckRow++;
+                        check++;
                     }
 
                 }
 
-                if (CheckRow == array.GetLength(1))
-                {
-                    result++;
-                    Console.WriteLine($" Win - line nr: {RowIndex + 1} !");
-                }
+                // check if whole lane match , display win lane, increments win moneys
+                result += GetAndDisplayWinLine(check, slotMachineArray, RowIndex, GetLengthRowOrColumn(RowOrColumn.Rows));
             }
             return result;
         }
@@ -114,8 +112,8 @@ namespace P5SlotMachine
         /// <summary>
         /// Vertical Line match and win Line Display
         /// </summary>
-        /// <param name="array"> Enter Array </param>
-        /// <param name="linesPlayCounter"> Loop iteretion Amount </param>
+        /// <param name="array"> Enter Array name </param>
+        /// <param name="linesPlayCounter"> specific dimension,amount of lanes playing </param>
         /// <returns> Int of matched Lanes </returns>
         public static int GetVerticalLineMatches(int[,] array, int linesPlayCounter)
         {
@@ -123,23 +121,66 @@ namespace P5SlotMachine
             for (int ColumnIndex = 0; ColumnIndex < linesPlayCounter; ColumnIndex++)
             {
                 int store = array[ColumnIndex, ColumnIndex];
-                int Check = 0;
+                int check = 0;
 
                 for (int RowIndex = 0; RowIndex < array.GetLength(0); RowIndex++)
                 {
                     if (store == array[RowIndex, ColumnIndex])
                     {
-                        Check++;
+                        check++;
                     }
                 }
 
-                if (Check == array.GetLength(0))
-                {
-                    result++;
-                    Console.WriteLine($" Win | line nr: {ColumnIndex + 1} !");
-                }
+                // check if whole lane match , display win lane, increments win moneys
+                result += GetAndDisplayWinLine(check, slotMachineArray, ColumnIndex, GetLengthRowOrColumn(RowOrColumn.Columns));
             }
             return result;
         }
+
+        /// <summary>
+        /// number of matches is same as length of array, display win message and return win lane to pay winnings
+        /// </summary>
+        /// <param name="matches"> amount of matched chars in line </param>
+        /// <param name="array"> array name </param>
+        /// <param name="lineMatchingIndex"> Which line is being checked </param>
+        /// <param name="getLengthDimension"> GetLength() method dimension 0 - rows , 1 - columns </param>
+        /// <returns> Returns amount of win lines </returns>
+        public static int GetAndDisplayWinLine(int matches, int[,] array, int lineMatchingIndex, int getLengthDimension)
+        {
+            int result = 0;
+            if (matches == array.GetLength(getLengthDimension))
+            {
+                result++;
+                Console.WriteLine($"$$$ Win line nr: {lineMatchingIndex + 1} ! $$$");
+            }
+            return result;
+        }
+        /// <summary>
+        /// Enum for row and column
+        /// </summary>
+        public enum RowOrColumn
+        {
+            Rows,
+            Columns,
+        }
+        /// <summary>
+        /// provides with 0 or 1 for GetLength() method
+        /// </summary>
+        /// <param name="dimensionChoice"> Row - 0 , Column - 1 </param>
+        /// <returns> Number 0 or 1 depending on dimension choice </returns>
+        public static int GetLengthRowOrColumn(RowOrColumn dimensionChoice)
+        {
+            int result = 0;
+            if (dimensionChoice == RowOrColumn.Rows)
+            {
+                result = 0;
+            }
+            if (dimensionChoice == RowOrColumn.Columns)
+            {
+                result = 1;
+            }
+            return result;
+        }
+
     }
 }

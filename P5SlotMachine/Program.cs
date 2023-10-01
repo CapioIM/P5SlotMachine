@@ -31,14 +31,14 @@
                         UIMethods.DisplayQuestionToPlayer(UIMethods.Questions.HowManyLanes);     //Display/print question
                         amountOfLanesPlay = UIMethods.GetNumberFromPlayer();                       //enter how many lanes to play
                     }
-                    while (amountOfLanesPlay == 0);
+                    while (amountOfLanesPlay == 0);                                                 //torture untill number is entered
 
                     do
                     {
                         UIMethods.DisplayQuestionToPlayer(UIMethods.Questions.HowMuchBetPerLane);  // display question Bet amount per lane
                         betPerLane = UIMethods.GetNumberFromPlayer();                               //enter bet per lane
                     }
-                    while (betPerLane == 0);
+                    while (betPerLane == 0);                                                        //torture untill number is entered
 
                     if (amountOfLanesPlay > allLinesTogether)  // amountOfLanesPlay cannot be more than max amount of total lanes
                     {
@@ -51,20 +51,18 @@
                     }
                     else                                                                                        // continue program if bet amount is less than money balance 
                     {
-                        playerBalanceTotal -= amountOfLanesPlay * betPerLane;
-                        sufficientBetFunds = false;
+                        playerBalanceTotal -= amountOfLanesPlay * betPerLane;                                   //deduct bet from balance
+                        sufficientBetFunds = false;                                                             //if enough balance program continues
                     }
                 }
 
-                LogicMethods.PrintSlotMachine(LogicMethods.slotMachineArray);  //fill 2D array with numbers
+                LogicMethods.PrintSlotMachine(LogicMethods.slotMachineArray);  //fill 2D array with numbers and display 2D array
 
                 double lineWinAmount = 0;
-
+                //rows
                 int rowsToPlay = Math.Min(amountOfLanesPlay, Constants.ROW_LINES_IN_GAME); // how many row lines should be checked/played
-
                 lineWinAmount += LogicMethods.GetHorizontalLineMatches(LogicMethods.slotMachineArray, rowsToPlay);  // row lines match,+print win lines, and count win lines
-
-                //  calculation of column lanes to be played + columns are played if amount of lanes played is more than rows in array
+                //columns
                 if (amountOfLanesPlay > Constants.ROW_LINES_IN_GAME)      // if columns are playable 
                 {
                     int columnLinesToPlay = Math.Min(
