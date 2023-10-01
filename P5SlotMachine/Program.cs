@@ -108,12 +108,12 @@
                     if (diagonalOneMatch == DIAGONAL_LINE_LENGTH)
                     {
                         lineWinAmount++;
-                        UIMethods.DiagonalLineWinOne();
+                        UIMethods.PrintDiagonalLineWinOne();
                     }
                     if (diagonalTwoMatch == DIAGONAL_LINE_LENGTH)
                     {
                         lineWinAmount++;
-                        UIMethods.DiagonalLineWinTwo();
+                        UIMethods.PrintDiagonalLineWinTwo();
                     }
                 }
 

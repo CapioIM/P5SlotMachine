@@ -77,7 +77,7 @@ namespace P5SlotMachine
         /// <summary>
         /// Asks Player question, if answer is no game Closes, if yes Continues
         /// </summary>
-        /// <returns></returns>
+        /// <returns> returns false if answer N/n , otherwise returns true </returns>
         public static bool ContinueGameDecision()
         {
             Console.WriteLine("Do you want to continue game? Y = Yes , N = No");
@@ -92,11 +92,18 @@ namespace P5SlotMachine
             }
         }
 
-        public static void DiagonalLineWinOne()
+        /// <summary>
+        /// prints to the screen diagonal line win 1
+        /// </summary>
+        public static void PrintDiagonalLineWinOne()
         {
             Console.WriteLine($" Win diagonal line 1 !");
         }
-        public static void DiagonalLineWinTwo()
+
+        /// <summary>
+        /// prints to the screen diagonal line win 2
+        /// </summary>
+        public static void PrintDiagonalLineWinTwo()
         {
             Console.WriteLine($" Win diagonal line 2 !");
         }
