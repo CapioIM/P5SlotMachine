@@ -61,13 +61,15 @@ namespace P5SlotMachine
         /// Prints array numbers to the screen
         /// </summary>
         /// <param name="array"> array variable/name</param>
-        /// <param name="i"> Row Index </param>
-        /// <param name="j"> Column Index </param>
-        public static void DisplaySlotNumbers(int[,] array, int i, int j)
+        /// <param name="RowIndex"> Row Index </param>
+        /// <param name="ColumnIndex"> Column Index </param>
+        public static void DisplaySlotNumbers(int[,] array, int RowIndex, int ColumnIndex)
         {
-            Console.Write($"{array[i, j]} ");
+            Console.Write($"{array[RowIndex, ColumnIndex]} ");
         }
-        public static void NewLine()
+
+
+        public static void PrintEmptyNewLine()
         {
             Console.WriteLine();
         }
@@ -90,9 +92,19 @@ namespace P5SlotMachine
             }
         }
 
-        public static void DisplayWinMessage(int i)
+
+        public static void DisplayWinMessage(int WhichLineWin)
         {
-            Console.WriteLine($" Win - line nr: {i + 1} !");            //output win lane
+            Console.WriteLine($" Win - line nr: {WhichLineWin + 1} !");            //output win lane
+        }
+
+        public static void DiagonalLineWinOne()
+        {
+            Console.WriteLine($" Win diagonal line 1 !");
+        }
+        public static void DiagonalLineWinTwo()
+        {
+            Console.WriteLine($" Win diagonal line 2 !");
         }
     }
 }

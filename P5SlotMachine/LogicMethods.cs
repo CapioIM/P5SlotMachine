@@ -64,14 +64,14 @@ namespace P5SlotMachine
         public static int GetVerticalLineMatches(int[,] array, int LinesPlayCounter)
         {
             int result = 0;
-            for (int i = 0; i < LinesPlayCounter; i++)
+            for (int ColumnIndex = 0; ColumnIndex < LinesPlayCounter; ColumnIndex++)
             {
-                int store = array[i, i];
+                int store = array[ColumnIndex, ColumnIndex];
                 int Check = 0;
 
-                for (int j = 0; j < array.GetLength(0); j++)
+                for (int RowIndex = 0; RowIndex < array.GetLength(0); RowIndex++)
                 {
-                    if (store == array[j, i])
+                    if (store == array[RowIndex, ColumnIndex])
                     {
                         Check++;
                     }
@@ -79,7 +79,7 @@ namespace P5SlotMachine
                 if (Check == array.GetLength(0))
                 {
                     result++;
-                    UIMethods.DisplayWinMessage(i);
+                    UIMethods.DisplayWinMessage(ColumnIndex);
                 }
             }
             return result;

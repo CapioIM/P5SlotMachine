@@ -64,7 +64,7 @@
                         slotMachineArray[rowIndex, columnIndex] = randomIndex;
                         UIMethods.DisplaySlotNumbers(slotMachineArray, rowIndex, columnIndex);      // print slot machine results to the screen
                     }
-                    UIMethods.NewLine();
+                    UIMethods.PrintEmptyNewLine();
                 }
 
                 double lineWinAmount = 0;
@@ -108,12 +108,12 @@
                     if (diagonalOneMatch == DIAGONAL_LINE_LENGTH)
                     {
                         lineWinAmount++;
-                        Console.WriteLine($" Win diagonal line 1 !");
+                        UIMethods.DiagonalLineWinOne();
                     }
                     if (diagonalTwoMatch == DIAGONAL_LINE_LENGTH)
                     {
                         lineWinAmount++;
-                        Console.WriteLine($" Win diagonal line 2 !");
+                        UIMethods.DiagonalLineWinTwo();
                     }
                 }
 
