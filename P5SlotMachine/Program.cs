@@ -43,8 +43,8 @@
                     }
                     while (betPerLane == 0);
 
-                    if (amountOfLanesPlay > allLinesTogether)  // amountOfLanesPlay cannot be more than max amount of lanes to play
-                    {
+                    if (amountOfLanesPlay > allLinesTogether)  // amountOfLanesPlay cannot be more than max amount of total lanes
+                    { 
                         amountOfLanesPlay = allLinesTogether;
                     }
 
@@ -75,42 +75,14 @@
                     int columnLinesToPlay = Math.Min(
                         LogicMethods.COLUMN_LINES_IN_GAME,
                         amountOfLanesPlay - LogicMethods.ROW_LINES_IN_GAME);      // set variable with min amount out of 2 numbers
+
                     lineWinAmount += LogicMethods.GetVerticalLineMatches(slotMachineArray, columnLinesToPlay);
                 }
                 //Diagonal lines check
 
                 if (amountOfLanesPlay > rowAndColumnLines)
                 {
-                    int diagonalCharStoreOne = slotMachineArray[0, 0];
-                    int diagonalOneMatch = 0;
-                    int diagonalCharStoreTwo = slotMachineArray[0, LogicMethods.DIAGONAL_LINE_LENGTH - 1];
-                    int diagonalTwoMatch = 0;
-                    int diagonalColumn = LogicMethods.DIAGONAL_LINE_LENGTH - 1;
-
-                    for (int diagonal = 0; diagonal < LogicMethods.DIAGONAL_LINE_LENGTH; diagonal++)
-                    {
-                        if (diagonalCharStoreOne == slotMachineArray[diagonal, diagonal])
-                        {
-                            diagonalOneMatch++;
-                        }
-                        if (amountOfLanesPlay == allLinesTogether)
-                        {
-                            if (diagonalCharStoreTwo == slotMachineArray[diagonal, diagonalColumn - diagonal])
-                            {
-                                diagonalTwoMatch++;
-                            }
-                        }
-                    }
-                    if (diagonalOneMatch == LogicMethods.DIAGONAL_LINE_LENGTH)
-                    {
-                        lineWinAmount++;
-                        UIMethods.PrintDiagonalLineWinOne();
-                    }
-                    if (diagonalTwoMatch == LogicMethods.DIAGONAL_LINE_LENGTH)
-                    {
-                        lineWinAmount++;
-                        UIMethods.PrintDiagonalLineWinTwo();
-                    }
+                    lineWinAmount += LogicMethods.DiagonalLineMatch(slotMachineArray,amountOfLanesPlay);
                 }
 
                 playerBalanceTotal += (lineWinAmount * LogicMethods.WIN_MULTIPLIER * betPerLane);

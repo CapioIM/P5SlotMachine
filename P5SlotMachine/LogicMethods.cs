@@ -19,6 +19,47 @@ namespace P5SlotMachine
         public const int PLAYER_STARTING_BALANCE = 50;   // player starting balance
         public const double WIN_MULTIPLIER = 10;        //win multiplier
 
+
+        public static int DiagonalLineMatch(int[,] array, int PlayerPlaysLanes)
+        {
+            int result = 0;
+            if (PlayerPlaysLanes > ROW_LINES_IN_GAME + COLUMN_LINES_IN_GAME)
+            {
+                int diagonalCharStoreOne = array[0, 0];
+                int diagonalOneMatch = 0;
+                int diagonalCharStoreTwo = array[0, DIAGONAL_LINE_LENGTH - 1];
+                int diagonalTwoMatch = 0;
+                int diagonalColumn = DIAGONAL_LINE_LENGTH - 1;
+
+                for (int diagonal = 0; diagonal < DIAGONAL_LINE_LENGTH; diagonal++)
+                {
+                    if (diagonalCharStoreOne == array[diagonal, diagonal])
+                    {
+                        diagonalOneMatch++;
+                    }
+                    if (PlayerPlaysLanes == ROW_LINES_IN_GAME + COLUMN_LINES_IN_GAME + DIAGONAL_LINES_IN_GAME)
+                    {
+                        if (diagonalCharStoreTwo == array[diagonal, diagonalColumn - diagonal])
+                        {
+                            diagonalTwoMatch++;
+                        }
+                    }
+                }
+                if (diagonalOneMatch == DIAGONAL_LINE_LENGTH)
+                {
+                    result++;
+                    UIMethods.PrintDiagonalLineWinOne();
+                }
+                if (diagonalTwoMatch == DIAGONAL_LINE_LENGTH)
+                {
+                    result++;
+                    UIMethods.PrintDiagonalLineWinTwo();
+                }
+            }
+            return result;
+        }
+
+
         public static void PrintSlotMachine(int[,] slotMachineArray)
         {
             for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)                //fill 2-D array with random num 0-9
