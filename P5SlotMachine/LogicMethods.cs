@@ -104,7 +104,7 @@ namespace P5SlotMachine
                 }
 
                 // check if whole lane match , display win lane, increments win moneys
-                result += GetAndDisplayWinLine(check, slotMachineArray, RowIndex, GetLengthRowOrColumn(RowOrColumn.Rows));
+                result += GetAndDisplayWinLine(check, slotMachineArray, RowIndex, GetLengthRowOrColumn(RowOrColumn.Columns));
             }
             return result;
         }
@@ -132,7 +132,7 @@ namespace P5SlotMachine
                 }
 
                 // check if whole lane match , display win lane, increments win moneys
-                result += GetAndDisplayWinLine(check, slotMachineArray, ColumnIndex, GetLengthRowOrColumn(RowOrColumn.Columns));
+                result += GetAndDisplayWinLine(check, slotMachineArray, ColumnIndex, GetLengthRowOrColumn(RowOrColumn.Rows));
             }
             return result;
         }
@@ -167,7 +167,7 @@ namespace P5SlotMachine
         /// provides with 0 or 1 for GetLength() method
         /// </summary>
         /// <param name="dimensionChoice"> Row - 0 , Column - 1 </param>
-        /// <returns> Number 0 or 1 depending on dimension choice </returns>
+        /// <returns> Number 0 for Row, 1 for Columns </returns>
         public static int GetLengthRowOrColumn(RowOrColumn dimensionChoice)
         {
             int result = 0;
