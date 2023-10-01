@@ -3,25 +3,19 @@
     internal class Program
     {
         static Random rand = new Random();
-        const int ROW_LINES_IN_GAME = 3;      // how many vertical lines
-        const int COLUMN_LINES_IN_GAME = 3;     //how many horizontal lines
-        const int DIAGONAL_LINES_IN_GAME = 2;   // how many diagonal lines
-        const int DIAGONAL_LINE_LENGTH = 3;     //length of diagonal line
-        const int PLAYER_STARTING_BALANCE = 50;   // player starting balance
-        const double WIN_MULTIPLIER = 10;        //win multiplier
 
         static void Main(string[] args)
         {
-            int[,] slotMachineArray = new int[ROW_LINES_IN_GAME, COLUMN_LINES_IN_GAME];          //slot machine array size
-            int rowAndColumnLines = COLUMN_LINES_IN_GAME + ROW_LINES_IN_GAME;                         //rows and column lines amount
-            int allLinesTogether = COLUMN_LINES_IN_GAME + ROW_LINES_IN_GAME + DIAGONAL_LINES_IN_GAME;  // sum of all lines together
-            double playerBalanceTotal = PLAYER_STARTING_BALANCE;
+            int[,] slotMachineArray = new int[LogicMethods.ROW_LINES_IN_GAME, LogicMethods.COLUMN_LINES_IN_GAME];          //slot machine array size
+            int rowAndColumnLines = LogicMethods.COLUMN_LINES_IN_GAME + LogicMethods.ROW_LINES_IN_GAME;                         //rows and column lines amount
+            int allLinesTogether = LogicMethods.COLUMN_LINES_IN_GAME + LogicMethods.ROW_LINES_IN_GAME + LogicMethods.DIAGONAL_LINES_IN_GAME;  // sum of all lines together
+            double playerBalanceTotal = LogicMethods.PLAYER_STARTING_BALANCE;
             int amountOfLanesPlay = 0;
 
             while (playerBalanceTotal > 0)
             {
                 // Game starting text
-                UIMethods.DisplayWelcomeScreen(slotMachineArray, DIAGONAL_LINES_IN_GAME);
+                UIMethods.DisplayWelcomeScreen(slotMachineArray, LogicMethods.DIAGONAL_LINES_IN_GAME);
                 UIMethods.DisplayPlayerBalance(playerBalanceTotal);
 
                 double betPerLane = 0;
@@ -47,7 +41,7 @@
 
                     if (playerBalanceTotal < amountOfLanesPlay * betPerLane)                                         // balance has to be greater than bet * lanes
                     {
-                        UIMethods.DisplayInsufficientFunds();
+                        UIMethods.DisplayInsufficientFundsMessage();
                     }
                     else                                                                                        // continue program if bet amount is less than money balance 
                     {
@@ -71,16 +65,18 @@
 
                 double lineWinAmount = 0;
 
-                int rowsToPlay = Math.Min(amountOfLanesPlay, ROW_LINES_IN_GAME);
+                int rowsToPlay = Math.Min(amountOfLanesPlay, LogicMethods.ROW_LINES_IN_GAME);
                 // row lines check and output to the screen
 
                 // Rows matching lines loop 
                 lineWinAmount += LogicMethods.GetHorizontalLineMatches(slotMachineArray, rowsToPlay);
 
                 //  calculation of column lanes to be played + columns are played if amount of lanes played is more than rows in array
-                if (amountOfLanesPlay > ROW_LINES_IN_GAME)      // if columns are playable 
+                if (amountOfLanesPlay > LogicMethods.ROW_LINES_IN_GAME)      // if columns are playable 
                 {
-                    int columnLinesToPlay = Math.Min(COLUMN_LINES_IN_GAME, amountOfLanesPlay - ROW_LINES_IN_GAME);      // set variable with min amount out of 2 numbers
+                    int columnLinesToPlay = Math.Min(
+                        LogicMethods.COLUMN_LINES_IN_GAME,
+                        amountOfLanesPlay - LogicMethods.ROW_LINES_IN_GAME);      // set variable with min amount out of 2 numbers
                     lineWinAmount += LogicMethods.GetVerticalLineMatches(slotMachineArray, columnLinesToPlay);
                 }
                 //Diagonal lines check
@@ -89,11 +85,11 @@
                 {
                     int diagonalCharStoreOne = slotMachineArray[0, 0];
                     int diagonalOneMatch = 0;
-                    int diagonalCharStoreTwo = slotMachineArray[0, DIAGONAL_LINE_LENGTH - 1];
+                    int diagonalCharStoreTwo = slotMachineArray[0, LogicMethods.DIAGONAL_LINE_LENGTH - 1];
                     int diagonalTwoMatch = 0;
-                    int diagonalColumn = DIAGONAL_LINE_LENGTH - 1;
+                    int diagonalColumn = LogicMethods.DIAGONAL_LINE_LENGTH - 1;
 
-                    for (int diagonal = 0; diagonal < DIAGONAL_LINE_LENGTH; diagonal++)
+                    for (int diagonal = 0; diagonal < LogicMethods.DIAGONAL_LINE_LENGTH; diagonal++)
                     {
                         if (diagonalCharStoreOne == slotMachineArray[diagonal, diagonal])
                         {
@@ -107,19 +103,19 @@
                             }
                         }
                     }
-                    if (diagonalOneMatch == DIAGONAL_LINE_LENGTH)
+                    if (diagonalOneMatch == LogicMethods.DIAGONAL_LINE_LENGTH)
                     {
                         lineWinAmount++;
                         UIMethods.PrintDiagonalLineWinOne();
                     }
-                    if (diagonalTwoMatch == DIAGONAL_LINE_LENGTH)
+                    if (diagonalTwoMatch == LogicMethods.DIAGONAL_LINE_LENGTH)
                     {
                         lineWinAmount++;
                         UIMethods.PrintDiagonalLineWinTwo();
                     }
                 }
 
-                playerBalanceTotal += (lineWinAmount * WIN_MULTIPLIER * betPerLane);
+                playerBalanceTotal += (lineWinAmount * LogicMethods.WIN_MULTIPLIER * betPerLane);
                 UIMethods.DisplayPlayerBalance(playerBalanceTotal);
 
                 if (UIMethods.ContinueGameDecision() == false)

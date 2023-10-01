@@ -52,7 +52,7 @@ namespace P5SlotMachine
             Console.WriteLine();
         }
 
-        public static void DisplayInsufficientFunds()
+        public static void DisplayInsufficientFundsMessage()
         {
             Console.WriteLine("You have insufficient funds! Please place lower bet!");
         }
