@@ -12,12 +12,6 @@ namespace P5SlotMachine
     {
 
         public static Random rand = new Random();
-        public const int ROW_LINES_IN_GAME = 3;      // how many vertical lines
-        public const int COLUMN_LINES_IN_GAME = 3;     //how many horizontal lines
-        public const int DIAGONAL_LINES_IN_GAME = 2;   // how many diagonal lines
-        public const int DIAGONAL_LINE_LENGTH = 3;     //length of diagonal line
-        public const int PLAYER_STARTING_BALANCE = 50;   // player starting balance
-        public const double WIN_MULTIPLIER = 10;        //win multiplier
 
         /// <summary>
         /// loop to match 2 diagonal lines in array
@@ -28,21 +22,21 @@ namespace P5SlotMachine
         public static int GetDiagonalLineMatch(int[,] array, int PlayerPlaysLanes)
         {
             int result = 0;
-            if (PlayerPlaysLanes > ROW_LINES_IN_GAME + COLUMN_LINES_IN_GAME)
+            if (PlayerPlaysLanes > Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME)                            
             {
                 int diagonalCharStoreOne = array[0, 0];
                 int diagonalOneMatch = 0;
-                int diagonalCharStoreTwo = array[0, DIAGONAL_LINE_LENGTH - 1];
+                int diagonalCharStoreTwo = array[0, Constants.DIAGONAL_LINE_LENGTH - 1];
                 int diagonalTwoMatch = 0;
-                int diagonalColumn = DIAGONAL_LINE_LENGTH - 1;
+                int diagonalColumn = Constants.DIAGONAL_LINE_LENGTH - 1;
 
-                for (int diagonal = 0; diagonal < DIAGONAL_LINE_LENGTH; diagonal++)
+                for (int diagonal = 0; diagonal < Constants.DIAGONAL_LINE_LENGTH; diagonal++)
                 {
                     if (diagonalCharStoreOne == array[diagonal, diagonal])
                     {
                         diagonalOneMatch++;
                     }
-                    if (PlayerPlaysLanes == ROW_LINES_IN_GAME + COLUMN_LINES_IN_GAME + DIAGONAL_LINES_IN_GAME)
+                    if (PlayerPlaysLanes == Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME + Constants.DIAGONAL_LINES_IN_GAME)  // execute code only when max lanes amount is chosen
                     {
                         if (diagonalCharStoreTwo == array[diagonal, diagonalColumn - diagonal])
                         {
@@ -50,12 +44,12 @@ namespace P5SlotMachine
                         }
                     }
                 }
-                if (diagonalOneMatch == DIAGONAL_LINE_LENGTH)
+                if (diagonalOneMatch == Constants.DIAGONAL_LINE_LENGTH)
                 {
                     result++;
                     UIMethods.PrintDiagonalLineWinOne();
                 }
-                if (diagonalTwoMatch == DIAGONAL_LINE_LENGTH)
+                if (diagonalTwoMatch == Constants.DIAGONAL_LINE_LENGTH)
                 {
                     result++;
                     UIMethods.PrintDiagonalLineWinTwo();
@@ -67,9 +61,9 @@ namespace P5SlotMachine
 
         public static void PrintSlotMachine(int[,] slotMachineArray)
         {
-            for (int rowIndex = 0; rowIndex < ROW_LINES_IN_GAME; rowIndex++)                //fill 2-D array with random num 0-9
+            for (int rowIndex = 0; rowIndex < Constants.ROW_LINES_IN_GAME; rowIndex++)                //fill 2-D array with random num 0-9
             {
-                for (int columnIndex = 0; columnIndex < COLUMN_LINES_IN_GAME; columnIndex++)
+                for (int columnIndex = 0; columnIndex < Constants.COLUMN_LINES_IN_GAME; columnIndex++)
                 {
                     int randomIndex = rand.Next(0, 2);
                     slotMachineArray[rowIndex, columnIndex] = randomIndex;
