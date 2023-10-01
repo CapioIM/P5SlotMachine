@@ -19,8 +19,13 @@ namespace P5SlotMachine
         public const int PLAYER_STARTING_BALANCE = 50;   // player starting balance
         public const double WIN_MULTIPLIER = 10;        //win multiplier
 
-
-        public static int DiagonalLineMatch(int[,] array, int PlayerPlaysLanes)
+        /// <summary>
+        /// loop to match 2 diagonal lines in array
+        /// </summary>
+        /// <param name="array"> name of array loop will match through </param>
+        /// <param name="PlayerPlaysLanes"> How many Lanes Player want to play </param>
+        /// <returns> Returns amount of matching lanes </returns>
+        public static int GetDiagonalLineMatch(int[,] array, int PlayerPlaysLanes)
         {
             int result = 0;
             if (PlayerPlaysLanes > ROW_LINES_IN_GAME + COLUMN_LINES_IN_GAME)
@@ -91,11 +96,14 @@ namespace P5SlotMachine
 
                 for (int ColumnIndex = 0; ColumnIndex < array.GetLength(1); ColumnIndex++)
                 {
+
                     if (store == array[RowIndex, ColumnIndex])
                     {
                         CheckRow++;
                     }
+
                 }
+
                 if (CheckRow == array.GetLength(1))
                 {
                     result++;
@@ -134,7 +142,5 @@ namespace P5SlotMachine
             }
             return result;
         }
-
-
     }
 }

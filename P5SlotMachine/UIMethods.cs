@@ -11,11 +11,10 @@ namespace P5SlotMachine
         /// <summary>
         /// Ask Player For Number
         /// </summary>
-        /// <param name="t"> Enter Question </param>
+        /// <param name="AskQuestion"> Enter Question </param>
         /// <returns> returns number 1-999.... or 0 if letter is used </returns>
-        public static int AskPlayerForNumber(string t)           // Ask player to enter number
+        public static int GetNumberFromPlayer()           // Get player to enter number
         {
-            Console.WriteLine(t);
             if (int.TryParse(Console.ReadLine(), out int result))
             {
                 return result;
@@ -52,11 +51,6 @@ namespace P5SlotMachine
             Console.WriteLine();
         }
 
-        public static void DisplayInsufficientFundsMessage()
-        {
-            Console.WriteLine("You have insufficient funds! Please place lower bet!");
-        }
-
         /// <summary>
         /// Prints array numbers to the screen
         /// </summary>
@@ -80,7 +74,7 @@ namespace P5SlotMachine
         /// <returns> returns false if answer N/n , otherwise returns true </returns>
         public static bool ContinueGameDecision()
         {
-            Console.WriteLine("Do you want to continue game? Y = Yes , N = No");
+            DisplayQuestionToPlayer(Questions.ContinueGame);
             if (Console.ReadKey().KeyChar.ToString().ToLower() != "n")
             {
                 Console.Clear();
@@ -106,6 +100,34 @@ namespace P5SlotMachine
         public static void PrintDiagonalLineWinTwo()
         {
             Console.WriteLine($" Win diagonal line 2 !");
+        }
+
+        public enum Questions
+        {
+            HowManyLanes,
+            HowMuchBetPerLane,
+            InsufficientFunds,
+            ContinueGame
+        }
+
+        public static string DisplayQuestionToPlayer(Questions choice)
+        {
+            switch (choice)
+            {
+                case Questions.HowManyLanes:
+                    Console.WriteLine("How many lines would you like to play?");
+                    break;
+                case Questions.HowMuchBetPerLane:
+                    Console.WriteLine("How much would you like to bet per lane?");
+                    break;
+                case Questions.InsufficientFunds:
+                    Console.WriteLine("You have insufficient funds! Please place lower bet!");
+                    break;
+                case Questions.ContinueGame:
+                    Console.WriteLine("Do you want to continue game? Y = Yes , N = No");
+                    break;
+            }
+            return choice.ToString();
         }
     }
 }

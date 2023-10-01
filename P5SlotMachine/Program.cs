@@ -9,12 +9,12 @@
             int[,] slotMachineArray = new int[
                 LogicMethods.ROW_LINES_IN_GAME,
                 LogicMethods.COLUMN_LINES_IN_GAME];          //slot machine array size
-            int rowAndColumnLines = 
+            int rowAndColumnLines =
                 LogicMethods.COLUMN_LINES_IN_GAME +
-                LogicMethods.ROW_LINES_IN_GAME;                         //rows and column lines amount
-            int allLinesTogether = 
-                LogicMethods.COLUMN_LINES_IN_GAME + 
-                LogicMethods.ROW_LINES_IN_GAME + 
+                LogicMethods.ROW_LINES_IN_GAME;              //rows and column lines amount
+            int allLinesTogether =
+                LogicMethods.COLUMN_LINES_IN_GAME +
+                LogicMethods.ROW_LINES_IN_GAME +
                 LogicMethods.DIAGONAL_LINES_IN_GAME;  // sum of all lines together
 
             double playerBalanceTotal = LogicMethods.PLAYER_STARTING_BALANCE;
@@ -33,24 +33,26 @@
                 {
                     do
                     {
-                        amountOfLanesPlay = UIMethods.AskPlayerForNumber("How many lines would you like to play?");      //enter how many lanes to play
+                        UIMethods.DisplayQuestionToPlayer(UIMethods.Questions.HowManyLanes);     //Display quiestion
+                        amountOfLanesPlay = UIMethods.GetNumberFromPlayer();                       //enter how many lanes to play
                     }
                     while (amountOfLanesPlay == 0);
 
                     do
                     {
-                        betPerLane = UIMethods.AskPlayerForNumber("How much would you like to bet per lane?");          //enter bet per lane
+                        UIMethods.DisplayQuestionToPlayer(UIMethods.Questions.HowMuchBetPerLane);  // display question Bet amount per lane
+                        betPerLane = UIMethods.GetNumberFromPlayer();                               //enter bet per lane
                     }
                     while (betPerLane == 0);
 
                     if (amountOfLanesPlay > allLinesTogether)  // amountOfLanesPlay cannot be more than max amount of total lanes
-                    { 
+                    {
                         amountOfLanesPlay = allLinesTogether;
                     }
 
-                    if (playerBalanceTotal < amountOfLanesPlay * betPerLane)                                         // balance has to be greater than bet * lanes
+                    if (playerBalanceTotal < amountOfLanesPlay * betPerLane)                                    // balance has to be greater than bet * lanes
                     {
-                        UIMethods.DisplayInsufficientFundsMessage();
+                        UIMethods.DisplayQuestionToPlayer(UIMethods.Questions.InsufficientFunds);               // Display quiestion 
                     }
                     else                                                                                        // continue program if bet amount is less than money balance 
                     {
@@ -78,11 +80,11 @@
 
                     lineWinAmount += LogicMethods.GetVerticalLineMatches(slotMachineArray, columnLinesToPlay);
                 }
-                //Diagonal lines check
 
+                //Diagonal lines check
                 if (amountOfLanesPlay > rowAndColumnLines)
                 {
-                    lineWinAmount += LogicMethods.DiagonalLineMatch(slotMachineArray,amountOfLanesPlay);
+                    lineWinAmount += LogicMethods.GetDiagonalLineMatch(slotMachineArray, amountOfLanesPlay);
                 }
 
                 playerBalanceTotal += (lineWinAmount * LogicMethods.WIN_MULTIPLIER * betPerLane);

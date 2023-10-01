@@ -9,12 +9,7 @@ namespace P5SlotMachine
 
     internal class DataMethods
     {
-        public enum LinesList
-        {
-            Rows,
-            Columns,
-            Diagonals
-        }
+
 
         
     }
