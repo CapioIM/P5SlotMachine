@@ -6,7 +6,7 @@
         {
             int rowAndColumnLines =
                 Constants.COLUMN_LINES_IN_GAME +
-                Constants.ROW_LINES_IN_GAME;              //rows and column lines amount
+                Constants.ROW_LINES_IN_GAME;//rows and column lines amount
             int allLinesTogether =
                 Constants.COLUMN_LINES_IN_GAME +
                 Constants.ROW_LINES_IN_GAME +
@@ -28,7 +28,7 @@
                 {
                     do
                     {
-                        UIMethods.DisplayQuestionToPlayer(UIMethods.Questions.HowManyLanes);     //Display quiestion
+                        UIMethods.DisplayQuestionToPlayer(UIMethods.Questions.HowManyLanes);     //Display/print question
                         amountOfLanesPlay = UIMethods.GetNumberFromPlayer();                       //enter how many lanes to play
                     }
                     while (amountOfLanesPlay == 0);
@@ -60,32 +60,30 @@
 
                 double lineWinAmount = 0;
 
-                int rowsToPlay = Math.Min(amountOfLanesPlay, Constants.ROW_LINES_IN_GAME);
-                // row lines check and output to the screen
+                int rowsToPlay = Math.Min(amountOfLanesPlay, Constants.ROW_LINES_IN_GAME); // how many row lines should be checked/played
 
-                // Rows matching lines loop 
-                lineWinAmount += LogicMethods.GetHorizontalLineMatches(LogicMethods.slotMachineArray, rowsToPlay);
+                lineWinAmount += LogicMethods.GetHorizontalLineMatches(LogicMethods.slotMachineArray, rowsToPlay);  // row lines match,+print win lines, and count win lines
 
                 //  calculation of column lanes to be played + columns are played if amount of lanes played is more than rows in array
                 if (amountOfLanesPlay > Constants.ROW_LINES_IN_GAME)      // if columns are playable 
                 {
                     int columnLinesToPlay = Math.Min(
-                        Constants.COLUMN_LINES_IN_GAME,
-                        amountOfLanesPlay - Constants.ROW_LINES_IN_GAME);      // set variable with min amount out of 2 numbers
+                        Constants.COLUMN_LINES_IN_GAME,                         // set variable with min amount out of 2 numbers 
+                        amountOfLanesPlay - Constants.ROW_LINES_IN_GAME);      // for how many column lines should be checked/played
 
-                    lineWinAmount += LogicMethods.GetVerticalLineMatches(LogicMethods.slotMachineArray, columnLinesToPlay);
+                    lineWinAmount += LogicMethods.GetVerticalLineMatches(LogicMethods.slotMachineArray, columnLinesToPlay);  // column lines match,+print win lines, and count win lines
                 }
 
                 //Diagonal lines check
                 if (amountOfLanesPlay > rowAndColumnLines)
                 {
-                    lineWinAmount += LogicMethods.GetDiagonalLineMatch(LogicMethods.slotMachineArray, amountOfLanesPlay);
+                    lineWinAmount += LogicMethods.GetDiagonalLineMatch(LogicMethods.slotMachineArray, amountOfLanesPlay);   //diagonal lines match, and print win lines, + count win lines
                 }
 
-                playerBalanceTotal += (lineWinAmount * Constants.WIN_MULTIPLIER * betPerLane);
-                UIMethods.DisplayPlayerBalance(playerBalanceTotal);
+                playerBalanceTotal += (lineWinAmount * Constants.WIN_MULTIPLIER * betPerLane);      // calculation of win and add to the balance
+                UIMethods.DisplayPlayerBalance(playerBalanceTotal);                                 //print player balance
 
-                if (UIMethods.ContinueGameDecision() == false)
+                if (UIMethods.ContinueGameDecision() == false)                                      //repeat game ?
                 {
                     Environment.Exit(0);
                 }

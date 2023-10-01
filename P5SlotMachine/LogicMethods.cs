@@ -132,6 +132,7 @@ namespace P5SlotMachine
                         Check++;
                     }
                 }
+
                 if (Check == array.GetLength(0))
                 {
                     result++;
