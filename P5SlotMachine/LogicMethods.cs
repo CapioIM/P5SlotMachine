@@ -96,15 +96,15 @@ namespace P5SlotMachine
         public static int GetHorizontalLineMatches(int[,] array, int linesPlayCounter)
         {
             int result = 0;
-            for (int RowIndex = 0; RowIndex < linesPlayCounter; RowIndex++)
+            for (int rowIndex = 0; rowIndex < linesPlayCounter; rowIndex++)
             {
-                int store = array[RowIndex, RowIndex];
+                int store = array[rowIndex, rowIndex];
                 int check = 0;
 
-                for (int ColumnIndex = 0; ColumnIndex < array.GetLength(1); ColumnIndex++)
+                for (int columnIndex = 0; columnIndex < array.GetLength(1); columnIndex++)
                 {
 
-                    if (store == array[RowIndex, ColumnIndex])
+                    if (store == array[rowIndex, columnIndex])
                     {
                         check++;
                     }
@@ -112,7 +112,7 @@ namespace P5SlotMachine
                 }
 
                 // check if whole lane match , display win lane, increments win moneys
-                result += GetAndDisplayWinLine(check, slotMachineArray, RowIndex, GetLengthRowOrColumn(RowOrColumn.Columns));
+                result += GetAndDisplayWinLine(check, slotMachineArray, rowIndex, GetLengthRowOrColumn(RowOrColumn.Columns));
             }
             return result;
         }
@@ -126,21 +126,21 @@ namespace P5SlotMachine
         public static int GetVerticalLineMatches(int[,] array, int linesPlayCounter)
         {
             int result = 0;
-            for (int ColumnIndex = 0; ColumnIndex < linesPlayCounter; ColumnIndex++)
+            for (int columnIndex = 0; columnIndex < linesPlayCounter; columnIndex++)
             {
-                int store = array[ColumnIndex, ColumnIndex];
+                int store = array[columnIndex, columnIndex];
                 int check = 0;
 
-                for (int RowIndex = 0; RowIndex < array.GetLength(0); RowIndex++)
+                for (int rowIndex = 0; rowIndex < array.GetLength(0); rowIndex++)
                 {
-                    if (store == array[RowIndex, ColumnIndex])
+                    if (store == array[rowIndex, columnIndex])
                     {
                         check++;
                     }
                 }
 
                 // check if whole lane match , display win lane, increments win moneys
-                result += GetAndDisplayWinLine(check, slotMachineArray, ColumnIndex, GetLengthRowOrColumn(RowOrColumn.Rows));
+                result += GetAndDisplayWinLine(check, slotMachineArray, columnIndex, GetLengthRowOrColumn(RowOrColumn.Rows));
             }
             return result;
         }
