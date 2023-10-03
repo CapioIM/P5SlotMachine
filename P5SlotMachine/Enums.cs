@@ -9,12 +9,12 @@ namespace P5SlotMachine
     internal class Enums
     {
         /// <summary>
-        /// Enum for row and column
+        /// Enum for rows and columns, Rows = 0 , Columns = 1
         /// </summary>
         public enum RowOrColumn
         {
-            Rows,
-            Columns,
+            Rows = 0,
+            Columns = 1
         }
 
 

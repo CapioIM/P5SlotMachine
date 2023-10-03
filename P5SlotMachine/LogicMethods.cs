@@ -94,7 +94,7 @@ namespace P5SlotMachine
                 int store = array[rowIndex, rowIndex];
                 int check = 0;
 
-                for (int columnIndex = 0; columnIndex < array.GetLength(1); columnIndex++)
+                for (int columnIndex = 0; columnIndex < array.GetLength((int)Enums.RowOrColumn.Columns); columnIndex++)
                 {
 
                     if (store == array[rowIndex, columnIndex])
@@ -104,7 +104,7 @@ namespace P5SlotMachine
 
                 }
                 // check if whole lane match , display win lane, increments win moneys
-                result += GetAndDisplayWinLine(check, slotMachineArray, rowIndex, GetLengthRowOrColumn(Enums.RowOrColumn.Columns));
+                result += GetAndDisplayWinLine(check, slotMachineArray, rowIndex, (int)Enums.RowOrColumn.Columns);
             }
             return result;
         }
@@ -123,7 +123,7 @@ namespace P5SlotMachine
                 int store = array[columnIndex, columnIndex];
                 int check = 0;
 
-                for (int rowIndex = 0; rowIndex < array.GetLength(0); rowIndex++)
+                for (int rowIndex = 0; rowIndex < array.GetLength((int)Enums.RowOrColumn.Rows); rowIndex++)
                 {
                     if (store == array[rowIndex, columnIndex])
                     {
@@ -132,7 +132,7 @@ namespace P5SlotMachine
                 }
 
                 // check if whole lane match , display win lane, increments win moneys
-                result += GetAndDisplayWinLine(check, slotMachineArray, columnIndex, GetLengthRowOrColumn(Enums.RowOrColumn.Rows));
+                result += GetAndDisplayWinLine(check, slotMachineArray, columnIndex,(int) Enums.RowOrColumn.Rows);
             }
             return result;
         }
@@ -155,24 +155,5 @@ namespace P5SlotMachine
             }
             return result;
         }
-        /// <summary>
-        /// provides with 0 or 1 for GetLength() method
-        /// </summary>
-        /// <param name="dimensionChoice"> Row - 0 , Column - 1 </param>
-        /// <returns> Number 0 for Row, 1 for Columns </returns>
-        public static int GetLengthRowOrColumn(Enums.RowOrColumn dimensionChoice)
-        {
-            int result = 0;
-            if (dimensionChoice == Enums.RowOrColumn.Rows)
-            {
-                result = 0;
-            }
-            if (dimensionChoice == Enums.RowOrColumn.Columns)
-            {
-                result = 1;
-            }
-            return result;
-        }
-
     }
 }
