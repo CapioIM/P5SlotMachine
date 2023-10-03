@@ -28,14 +28,14 @@
                 {
                     do
                     {
-                        UIMethods.DisplayQuestionToPlayer(UIMethods.Questions.HowManyLanes);     //Display/print question
+                        UIMethods.DisplayQuestionToPlayer(Enums.Questions.HowManyLanes);     //Display/print question
                         amountOfLanesPlay = UIMethods.GetNumberFromPlayer();                       //enter how many lanes to play
                     }
                     while (amountOfLanesPlay == 0);                                                 //torture untill number is entered
 
                     do
                     {
-                        UIMethods.DisplayQuestionToPlayer(UIMethods.Questions.HowMuchBetPerLane);  // display question Bet amount per lane
+                        UIMethods.DisplayQuestionToPlayer(Enums.Questions.HowMuchBetPerLane);  // display question Bet amount per lane
                         betPerLane = UIMethods.GetNumberFromPlayer();                               //enter bet per lane
                     }
                     while (betPerLane == 0);                                                        //torture untill number is entered
@@ -47,7 +47,7 @@
 
                     if (playerBalanceTotal < amountOfLanesPlay * betPerLane)                                    // balance has to be greater than bet * lanes
                     {
-                        UIMethods.DisplayQuestionToPlayer(UIMethods.Questions.InsufficientFunds);               // Display quiestion 
+                        UIMethods.DisplayQuestionToPlayer(Enums.Questions.InsufficientFunds);               // Display quiestion 
                     }
                     else                                                                                        // continue program if bet amount is less than money balance 
                     {

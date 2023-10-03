@@ -11,17 +11,6 @@ namespace P5SlotMachine
     {
 
         /// <summary>
-        /// Enum with short Question discription
-        /// </summary>
-        public enum Questions
-        {
-            HowManyLanes,
-            HowMuchBetPerLane,
-            InsufficientFunds,
-            ContinueGame
-        }
-
-        /// <summary>
         /// Ask Player For Number
         /// </summary>
         /// <param name="AskQuestion"> Enter Question </param>
@@ -93,7 +82,7 @@ namespace P5SlotMachine
         /// <returns> returns false if answer N/n , otherwise returns true </returns>
         public static bool ContinueGameDecision()
         {
-            DisplayQuestionToPlayer(Questions.ContinueGame);
+            DisplayQuestionToPlayer(Enums.Questions.ContinueGame);
             if (Console.ReadKey().KeyChar.ToString().ToLower() != "n")
             {
                 Console.Clear();
@@ -126,20 +115,20 @@ namespace P5SlotMachine
         /// </summary>
         /// <param name="questionRelevance"></param>
         /// <returns> prints chosen question </returns>
-        public static string DisplayQuestionToPlayer(Questions questionRelevance)
+        public static string DisplayQuestionToPlayer(Enums.Questions questionRelevance)
         {
             switch (questionRelevance)
             {
-                case Questions.HowManyLanes:
+                case Enums.Questions.HowManyLanes:
                     Console.WriteLine("How many lines would you like to play?");
                     break;
-                case Questions.HowMuchBetPerLane:
+                case Enums.Questions.HowMuchBetPerLane:
                     Console.WriteLine("How much would you like to bet per lane?");
                     break;
-                case Questions.InsufficientFunds:
+                case Enums.Questions.InsufficientFunds:
                     Console.WriteLine("You have insufficient funds! Please place lower bet!");
                     break;
-                case Questions.ContinueGame:
+                case Enums.Questions.ContinueGame:
                     Console.WriteLine("Do you want to continue game? Y = Yes , N = No");
                     break;
             }

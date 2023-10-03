@@ -10,14 +10,7 @@ namespace P5SlotMachine
 
     internal class LogicMethods
     {
-        /// <summary>
-        /// Enum for row and column
-        /// </summary>
-        public enum RowOrColumn
-        {
-            Rows,
-            Columns,
-        }
+
 
         public static int[,] slotMachineArray = new int[
                         Constants.ROW_LINES_IN_GAME,
@@ -110,9 +103,8 @@ namespace P5SlotMachine
                     }
 
                 }
-
                 // check if whole lane match , display win lane, increments win moneys
-                result += GetAndDisplayWinLine(check, slotMachineArray, rowIndex, GetLengthRowOrColumn(RowOrColumn.Columns));
+                result += GetAndDisplayWinLine(check, slotMachineArray, rowIndex, GetLengthRowOrColumn(Enums.RowOrColumn.Columns));
             }
             return result;
         }
@@ -140,7 +132,7 @@ namespace P5SlotMachine
                 }
 
                 // check if whole lane match , display win lane, increments win moneys
-                result += GetAndDisplayWinLine(check, slotMachineArray, columnIndex, GetLengthRowOrColumn(RowOrColumn.Rows));
+                result += GetAndDisplayWinLine(check, slotMachineArray, columnIndex, GetLengthRowOrColumn(Enums.RowOrColumn.Rows));
             }
             return result;
         }
@@ -168,14 +160,14 @@ namespace P5SlotMachine
         /// </summary>
         /// <param name="dimensionChoice"> Row - 0 , Column - 1 </param>
         /// <returns> Number 0 for Row, 1 for Columns </returns>
-        public static int GetLengthRowOrColumn(RowOrColumn dimensionChoice)
+        public static int GetLengthRowOrColumn(Enums.RowOrColumn dimensionChoice)
         {
             int result = 0;
-            if (dimensionChoice == RowOrColumn.Rows)
+            if (dimensionChoice == Enums.RowOrColumn.Rows)
             {
                 result = 0;
             }
-            if (dimensionChoice == RowOrColumn.Columns)
+            if (dimensionChoice == Enums.RowOrColumn.Columns)
             {
                 result = 1;
             }
