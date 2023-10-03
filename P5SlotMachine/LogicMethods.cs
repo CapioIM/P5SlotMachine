@@ -10,6 +10,15 @@ namespace P5SlotMachine
 
     internal class LogicMethods
     {
+        /// <summary>
+        /// Enum for row and column
+        /// </summary>
+        public enum RowOrColumn
+        {
+            Rows,
+            Columns,
+        }
+
         public static int[,] slotMachineArray = new int[
                         Constants.ROW_LINES_IN_GAME,
                         Constants.COLUMN_LINES_IN_GAME];
@@ -65,7 +74,7 @@ namespace P5SlotMachine
         /// Fills array with random numbers and displays them
         /// </summary>
         /// <param name="slotMachineArray"> array name to fill with random numbers </param>
-        public static void PrintSlotMachine(int[,] slotMachineArray)
+        public static void FillArraySlotMachine(int[,] slotMachineArray)
         {
             for (int rowIndex = 0; rowIndex < Constants.ROW_LINES_IN_GAME; rowIndex++)                //fill 2-D array with random num 0-9
             {
@@ -73,7 +82,6 @@ namespace P5SlotMachine
                 {
                     int randomIndex = rand.Next(0, 2);
                     slotMachineArray[rowIndex, columnIndex] = randomIndex;
-                    UIMethods.DisplaySlotNumbers(slotMachineArray, rowIndex, columnIndex);      // print slot machine results to the screen
                 }
                 UIMethods.PrintEmptyNewLine();
             }
@@ -154,14 +162,6 @@ namespace P5SlotMachine
                 Console.WriteLine($"$$$ Win line nr: {lineMatchingIndex + 1} ! $$$");
             }
             return result;
-        }
-        /// <summary>
-        /// Enum for row and column
-        /// </summary>
-        public enum RowOrColumn
-        {
-            Rows,
-            Columns,
         }
         /// <summary>
         /// provides with 0 or 1 for GetLength() method

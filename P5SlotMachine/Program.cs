@@ -56,8 +56,8 @@
                     }
                 }
 
-                LogicMethods.PrintSlotMachine(LogicMethods.slotMachineArray);  //fill 2D array with numbers and display 2D array
-
+                LogicMethods.FillArraySlotMachine(LogicMethods.slotMachineArray);  //fill 2D array 
+                UIMethods.DisplaySlotNumbers(LogicMethods.slotMachineArray);
                 double lineWinAmount = 0;
                 //rows
                 int rowsToPlay = Math.Min(amountOfLanesPlay, Constants.ROW_LINES_IN_GAME); // how many row lines should be checked/played

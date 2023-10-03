@@ -9,6 +9,17 @@ namespace P5SlotMachine
 {
     internal class UIMethods
     {
+
+        /// <summary>
+        /// Enum with short Question discription
+        /// </summary>
+        public enum Questions
+        {
+            HowManyLanes,
+            HowMuchBetPerLane,
+            InsufficientFunds,
+            ContinueGame
+        }
         /// <summary>
         /// Ask Player For Number
         /// </summary>
@@ -58,9 +69,16 @@ namespace P5SlotMachine
         /// <param name="array"> array variable/name</param>
         /// <param name="rowIndex"> Row Index </param>
         /// <param name="columnIndex"> Column Index </param>
-        public static void DisplaySlotNumbers(int[,] array, int rowIndex, int columnIndex)
+        public static void DisplaySlotNumbers(int[,] array)
         {
-            Console.Write($"{array[rowIndex, columnIndex]} ");
+            for (int rowIndex = 0; rowIndex < array.GetLength(0); rowIndex++)
+            {
+                for (int columnIndex = 0; columnIndex < array.GetLength(1); columnIndex++)
+                {
+                    Console.Write(array[rowIndex,columnIndex] + " ");
+                }
+                Console.WriteLine();
+            }
         }
 
 
@@ -101,17 +119,6 @@ namespace P5SlotMachine
         public static void PrintDiagonalLineWinTwo()
         {
             Console.WriteLine($" Win diagonal line 2 !");
-        }
-
-        /// <summary>
-        /// Enum with short Question discription
-        /// </summary>
-        public enum Questions
-        {
-            HowManyLanes,
-            HowMuchBetPerLane,
-            InsufficientFunds,
-            ContinueGame
         }
 
         /// <summary>
