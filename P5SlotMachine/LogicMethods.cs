@@ -80,7 +80,7 @@ namespace P5SlotMachine
             {
                 for (int columnIndex = 0; columnIndex < Constants.COLUMN_LINES_IN_GAME; columnIndex++)
                 {
-                    int randomIndex = rand.Next(0, 2);
+                    int randomIndex = rand.Next(0, Constants.MAX_SLOT_NUMBER_OPTIONS);
                     slotMachineArray[rowIndex, columnIndex] = randomIndex;
                 }
                 UIMethods.PrintEmptyNewLine();

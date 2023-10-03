@@ -20,6 +20,7 @@ namespace P5SlotMachine
             InsufficientFunds,
             ContinueGame
         }
+
         /// <summary>
         /// Ask Player For Number
         /// </summary>
