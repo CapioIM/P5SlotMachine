@@ -68,8 +68,7 @@ namespace P5SlotMachine
         /// Prints array numbers to the screen
         /// </summary>
         /// <param name="array"> array variable/name</param>
-        /// <param name="rowIndex"> Row Index </param>
-        /// <param name="columnIndex"> Column Index </param>
+
         public static void DisplaySlotNumbers(int[,] array)
         {
             for (int rowIndex = 0; rowIndex < array.GetLength(0); rowIndex++)
