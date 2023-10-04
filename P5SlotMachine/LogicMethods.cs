@@ -10,13 +10,12 @@ namespace P5SlotMachine
 
     internal class LogicMethods
     {
-
+        public static Random rand = new Random();
 
         public static int[,] slotMachineArray = new int[
                         Constants.ROW_LINES_IN_GAME,
                         Constants.COLUMN_LINES_IN_GAME];
 
-        public static Random rand = new Random();
 
         /// <summary>
         /// loop to match 2 diagonal lines in array
@@ -73,7 +72,7 @@ namespace P5SlotMachine
             {
                 for (int columnIndex = 0; columnIndex < Constants.COLUMN_LINES_IN_GAME; columnIndex++)
                 {
-                    int randomIndex = rand.Next(0, Constants.MAX_SLOT_NUMBER_OPTIONS);
+                    int randomIndex = rand.Next(0, Constants.MAX_SLOT_NUMBER_OPTIONS + 1);
                     slotMachineArray[rowIndex, columnIndex] = randomIndex;
                 }
                 UIMethods.PrintEmptyNewLine();
