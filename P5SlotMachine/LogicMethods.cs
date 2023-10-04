@@ -66,7 +66,7 @@ namespace P5SlotMachine
         /// Fills array with random numbers and displays them
         /// </summary>
         /// <param name="slotMachineArray"> array name to fill with random numbers </param>
-        public static void FillArraySlotMachine(int[,] slotMachineArray)
+        public static int[,] ReturnFilledArray(int[,] slotMachineArray)
         {
             for (int rowIndex = 0; rowIndex < Constants.ROW_LINES_IN_GAME; rowIndex++)                //fill 2-D array with random num 0-9
             {
@@ -75,8 +75,9 @@ namespace P5SlotMachine
                     int randomIndex = rand.Next(0, Constants.MAX_SLOT_NUMBER_OPTIONS + 1);
                     slotMachineArray[rowIndex, columnIndex] = randomIndex;
                 }
-                UIMethods.PrintEmptyNewLine();
             }
+            int[,] newArray =(int[,]) slotMachineArray.Clone();
+            return newArray;
         }
 
         /// <summary>
