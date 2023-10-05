@@ -51,10 +51,10 @@
             return result;
         }
 
-        /// <summary>
-        /// Fills array with random numbers and displays them
-        /// </summary>
-        /// <param name="slotMachineArray"> array name to fill with random numbers </param>
+/// <summary>
+/// Fills 2D array with random numbers and returns to Array
+/// </summary>
+/// <returns> Array with Numbers </returns>
         public static int[,] ReturnFilledArray()
         {
             int[,] slotMachineArray = new int[

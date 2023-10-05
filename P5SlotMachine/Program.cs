@@ -4,10 +4,9 @@
     {
         static void Main(string[] args)
         {
-
             int rowAndColumnLines =
                 Constants.COLUMN_LINES_IN_GAME +
-                Constants.ROW_LINES_IN_GAME;//rows and column lines amount
+                Constants.ROW_LINES_IN_GAME;        //rows and column lines amount
 
             double playerBalanceTotal = Constants.PLAYER_STARTING_BALANCE;
             int amountOfLanesPlay = 0;
@@ -43,9 +42,11 @@
 
                 UIMethods.DisplaySlotNumbers(slotMachineArray);        //Display Array
                 double lineWinAmount = 0;
+
                 //rows
                 int rowsToPlay = Math.Min(amountOfLanesPlay, Constants.ROW_LINES_IN_GAME); // how many row lines should be checked/played
                 lineWinAmount += LogicMethods.GetHorizontalLineMatches(slotMachineArray, rowsToPlay);  // row lines match,+print win lines, and count win lines
+
                 //columns
                 if (amountOfLanesPlay > Constants.ROW_LINES_IN_GAME)      // if columns are playable 
                 {
