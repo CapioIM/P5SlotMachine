@@ -10,24 +10,30 @@
         /// <returns> returns number 1-999.... or 0 if letter is used </returns>
         public static int GetNumberFromPlayer()           // Get player to enter number
         {
-
-            if (int.TryParse(Console.ReadLine(), out int result))
+            int allLinesInGame = Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME + Constants.DIAGONAL_LINES_IN_GAME;
+            do
             {
-                if (result > 0)
+                if (int.TryParse(Console.ReadLine(), out int result))
                 {
-                    return result;
+                    if (result > 0 && result < allLinesInGame)
+                    {
+                        return result;
+                    }
+                 else   if (result <=0 || result > allLinesInGame)
+                    {
+                        Console.WriteLine($"Try something between 0 and {allLinesInGame + 1}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No Cheating !!!");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("No Cheating !!!");
-                    return 0;
+                    Console.WriteLine("You have entered letter or zero ! Please try to enter Number,  !");
                 }
             }
-            else
-            {
-                Console.WriteLine("You have entered letter or zero ! Please try to enter Number,  !");
-                return 0;
-            }
+            while (true);
         }
 
         /// <summary>

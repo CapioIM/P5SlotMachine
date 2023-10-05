@@ -8,10 +8,6 @@
             int rowAndColumnLines =
                 Constants.COLUMN_LINES_IN_GAME +
                 Constants.ROW_LINES_IN_GAME;//rows and column lines amount
-            int allLinesTogether =
-                Constants.COLUMN_LINES_IN_GAME +
-                Constants.ROW_LINES_IN_GAME +
-                Constants.DIAGONAL_LINES_IN_GAME;  // sum of all lines together
 
             double playerBalanceTotal = Constants.PLAYER_STARTING_BALANCE;
             int amountOfLanesPlay = 0;
@@ -28,19 +24,11 @@
 
                 while (sufficientBetFunds)  // loop for bet as long as there is enough of balance program continues
                 {
-                    do
-                    {
-                        UIMethods.DisplayQuestionToPlayer(Enums.Questions.HowManyLanes);     //Display/print question
-                        amountOfLanesPlay = UIMethods.GetNumberFromPlayer();                       //enter how many lanes to play
-                    }
-                    while (amountOfLanesPlay == 0  && amountOfLanesPlay <= allLinesTogether);                                                 //torture untill number is entered
+                    UIMethods.DisplayQuestionToPlayer(Enums.Questions.HowManyLanes); //Display/print question
+                    amountOfLanesPlay = UIMethods.GetNumberFromPlayer();     //enter how many lanes to play
 
-                    do
-                    {
-                        UIMethods.DisplayQuestionToPlayer(Enums.Questions.HowMuchBetPerLane);  // display question Bet amount per lane
-                        betPerLane = UIMethods.GetNumberFromPlayer();                               //enter bet per lane
-                    }
-                    while (betPerLane == 0);                                                        //torture untill number is entered
+                    UIMethods.DisplayQuestionToPlayer(Enums.Questions.HowMuchBetPerLane);  // display question Bet amount per lane
+                    betPerLane = UIMethods.GetNumberFromPlayer();                               //enter bet per lane
 
                     if (playerBalanceTotal < amountOfLanesPlay * betPerLane)                                    // balance has to be greater than bet * lanes
                     {
