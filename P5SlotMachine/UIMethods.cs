@@ -6,23 +6,22 @@
         /// <summary>
         /// Ask Player For Number
         /// </summary>
-        /// <param name="AskQuestion"> Enter Question </param>
         /// <returns> returns number 1-999.... or 0 if letter is used </returns>
         public static int GetNumberFromPlayer()           // Get player to enter number
         {
-            int allLinesInGame = Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME + Constants.DIAGONAL_LINES_IN_GAME;
+          //  int allLinesInGame = Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME + Constants.DIAGONAL_LINES_IN_GAME;
             do
             {
                 if (int.TryParse(Console.ReadLine(), out int result))
                 {
-                    if (result > 0 && result < allLinesInGame)
+                    if (result > 0 )//&& result < allLinesInGame)
                     {
                         return result;
                     }
-                 else   if (result <=0 || result > allLinesInGame)
-                    {
-                        Console.WriteLine($"Try something between 0 and {allLinesInGame + 1}");
-                    }
+                    //else if (result <= 0 || result > allLinesInGame)
+                    //{
+                    //    Console.WriteLine($"Try something between 0 and {allLinesInGame + 1}");
+                    //}
                     else
                     {
                         Console.WriteLine("No Cheating !!!");
@@ -39,8 +38,7 @@
         /// <summary>
         /// prints welcome screen
         /// </summary>
-        /// <param name="array"> slot machine array name </param>
-        /// <param name="diagonal"> enter how many diagonal lines in game </param>
+
         public static void DisplayWelcomeScreen()
         {
             Console.WriteLine("Hello and Welcome to Slot Machine Game!");
@@ -86,8 +84,7 @@
         public static bool ContinueGameDecision()
         {
             DisplayQuestionToPlayer(Enums.Questions.ContinueGame);
-            //  if (Console.ReadKey().KeyChar.ToString().ToLower() != "n")
-            if (Console.ReadLine().ToLower() != "n")
+            if (Console.ReadKey().KeyChar.ToString().ToLower() != "n")
             {
                 Console.Clear();
                 return true;
