@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace P5SlotMachine
+﻿namespace P5SlotMachine
 {
     internal class UIMethods
     {
@@ -33,13 +26,13 @@ namespace P5SlotMachine
         /// </summary>
         /// <param name="array"> slot machine array name </param>
         /// <param name="diagonal"> enter how many diagonal lines in game </param>
-        public static void DisplayWelcomeScreen(int[,] array, int diagonal)
+        public static void DisplayWelcomeScreen()
         {
             Console.WriteLine("Hello and Welcome to Slot Machine Game!");
             Console.WriteLine($"" +
-                $" Lines: 1-{array.GetLength(0)} Vertical!\n" +
-                $" Lines {array.GetLength(0) + 1}-{array.GetLength(0) + array.GetLength(1)} vertical and horizontal!\n" +
-                $" Lines {array.GetLength(0) + array.GetLength(1) + 1}-{array.GetLength(0) + array.GetLength(1) + diagonal} vertical, horizontal and diagonal");
+                $" Lines: 1-{Constants.ROW_LINES_IN_GAME} Vertical!\n" +
+                $" Lines {Constants.ROW_LINES_IN_GAME + 1}-{Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME} vertical and horizontal!\n" +
+                $" Lines {Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME + 1}-{Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME + Constants.DIAGONAL_LINES_IN_GAME} vertical, horizontal and diagonal");
             Console.WriteLine();
         }
 
@@ -70,11 +63,6 @@ namespace P5SlotMachine
             }
         }
 
-
-        public static void PrintEmptyNewLine()
-        {
-            Console.WriteLine();
-        }
 
         /// <summary>
         /// Asks Player question, if answer is no game Closes, if yes Continues

@@ -4,6 +4,7 @@
     {
         static void Main(string[] args)
         {
+
             int rowAndColumnLines =
                 Constants.COLUMN_LINES_IN_GAME +
                 Constants.ROW_LINES_IN_GAME;//rows and column lines amount
@@ -17,8 +18,9 @@
 
             while (playerBalanceTotal > 0)
             {
+                int[,] slotMachineArray = LogicMethods.ReturnFilledArray();  //fill 2D array 
                 // Game starting text
-                UIMethods.DisplayWelcomeScreen(LogicMethods.slotMachineArray, Constants.DIAGONAL_LINES_IN_GAME);
+                UIMethods.DisplayWelcomeScreen();
                 UIMethods.DisplayPlayerBalance(playerBalanceTotal);
 
                 double betPerLane = 0;
@@ -31,7 +33,7 @@
                         UIMethods.DisplayQuestionToPlayer(Enums.Questions.HowManyLanes);     //Display/print question
                         amountOfLanesPlay = UIMethods.GetNumberFromPlayer();                       //enter how many lanes to play
                     }
-                    while (amountOfLanesPlay == 0);                                                 //torture untill number is entered
+                    while (amountOfLanesPlay == 0  && amountOfLanesPlay <= Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME + Constants.DIAGONAL_LINES_IN_GAME);                                                 //torture untill number is entered
 
                     do
                     {
@@ -39,11 +41,6 @@
                         betPerLane = UIMethods.GetNumberFromPlayer();                               //enter bet per lane
                     }
                     while (betPerLane == 0);                                                        //torture untill number is entered
-
-                    if (amountOfLanesPlay > allLinesTogether)  // amountOfLanesPlay cannot be more than max amount of total lanes
-                    {
-                        amountOfLanesPlay = allLinesTogether;
-                    }
 
                     if (playerBalanceTotal < amountOfLanesPlay * betPerLane)                                    // balance has to be greater than bet * lanes
                     {
@@ -56,12 +53,11 @@
                     }
                 }
 
-                int[,] slotArray = LogicMethods.ReturnFilledArray(LogicMethods.slotMachineArray);  //fill 2D array 
-                UIMethods.DisplaySlotNumbers(slotArray);        //Display Array
+                UIMethods.DisplaySlotNumbers(slotMachineArray);        //Display Array
                 double lineWinAmount = 0;
                 //rows
                 int rowsToPlay = Math.Min(amountOfLanesPlay, Constants.ROW_LINES_IN_GAME); // how many row lines should be checked/played
-                lineWinAmount += LogicMethods.GetHorizontalLineMatches(LogicMethods.slotMachineArray, rowsToPlay);  // row lines match,+print win lines, and count win lines
+                lineWinAmount += LogicMethods.GetHorizontalLineMatches(slotMachineArray, rowsToPlay);  // row lines match,+print win lines, and count win lines
                 //columns
                 if (amountOfLanesPlay > Constants.ROW_LINES_IN_GAME)      // if columns are playable 
                 {
@@ -69,13 +65,13 @@
                         Constants.COLUMN_LINES_IN_GAME,                         // set variable with min amount out of 2 numbers 
                         amountOfLanesPlay - Constants.ROW_LINES_IN_GAME);      // for how many column lines should be checked/played
 
-                    lineWinAmount += LogicMethods.GetVerticalLineMatches(LogicMethods.slotMachineArray, columnLinesToPlay);  // column lines match,+print win lines, and count win lines
+                    lineWinAmount += LogicMethods.GetVerticalLineMatches(slotMachineArray, columnLinesToPlay);  // column lines match,+print win lines, and count win lines
                 }
 
                 //Diagonal lines check
                 if (amountOfLanesPlay > rowAndColumnLines)
                 {
-                    lineWinAmount += LogicMethods.GetDiagonalLineMatch(LogicMethods.slotMachineArray, amountOfLanesPlay);   //diagonal lines match, and print win lines, + count win lines
+                    lineWinAmount += LogicMethods.GetDiagonalLineMatch(slotMachineArray, amountOfLanesPlay);   //diagonal lines match, and print win lines, + count win lines
                 }
 
                 playerBalanceTotal += (lineWinAmount * Constants.WIN_MULTIPLIER * betPerLane);      // calculation of win and add to the balance
