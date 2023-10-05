@@ -33,7 +33,7 @@
                         UIMethods.DisplayQuestionToPlayer(Enums.Questions.HowManyLanes);     //Display/print question
                         amountOfLanesPlay = UIMethods.GetNumberFromPlayer();                       //enter how many lanes to play
                     }
-                    while (amountOfLanesPlay == 0  && amountOfLanesPlay <= Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME + Constants.DIAGONAL_LINES_IN_GAME);                                                 //torture untill number is entered
+                    while (amountOfLanesPlay == 0  && amountOfLanesPlay <= allLinesTogether);                                                 //torture untill number is entered
 
                     do
                     {

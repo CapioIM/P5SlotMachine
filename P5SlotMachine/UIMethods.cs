@@ -10,9 +10,18 @@
         /// <returns> returns number 1-999.... or 0 if letter is used </returns>
         public static int GetNumberFromPlayer()           // Get player to enter number
         {
+
             if (int.TryParse(Console.ReadLine(), out int result))
             {
-                return result;
+                if (result > 0)
+                {
+                    return result;
+                }
+                else
+                {
+                    Console.WriteLine("No Cheating !!!");
+                    return 0;
+                }
             }
             else
             {
@@ -57,7 +66,7 @@
             {
                 for (int columnIndex = 0; columnIndex < array.GetLength(1); columnIndex++)
                 {
-                    Console.Write(array[rowIndex,columnIndex] + " ");
+                    Console.Write(array[rowIndex, columnIndex] + " ");
                 }
                 Console.WriteLine();
             }
@@ -71,7 +80,8 @@
         public static bool ContinueGameDecision()
         {
             DisplayQuestionToPlayer(Enums.Questions.ContinueGame);
-            if (Console.ReadKey().KeyChar.ToString().ToLower() != "n")
+            //  if (Console.ReadKey().KeyChar.ToString().ToLower() != "n")
+            if (Console.ReadLine().ToLower() != "n")
             {
                 Console.Clear();
                 return true;
