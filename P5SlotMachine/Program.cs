@@ -29,9 +29,9 @@
                     UIMethods.DisplayQuestionToPlayer(Enums.Questions.HowMuchBetPerLane);  // display question Bet amount per lane
                     betPerLane = UIMethods.GetNumberFromPlayer();                               //enter bet per lane
 
-                    sufficientBetFunds = LogicMethods.EnoughFunds(playerBalanceTotal, amountOfLanesPlay, betPerLane);            //if enough balance program continues
+                    sufficientBetFunds = LogicMethods.GetEnoughFunds(playerBalanceTotal, amountOfLanesPlay, betPerLane, Enums.Questions.InsufficientFunds);            //if enough balance program continues
                 }
-
+                playerBalanceTotal -= amountOfLanesPlay * betPerLane;   //deduct bet from balance
                 UIMethods.DisplaySlotNumbers(slotMachineArray);        //Display Array
                 double lineWinAmount = 0;
 

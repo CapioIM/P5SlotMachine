@@ -4,18 +4,46 @@
 
     internal class LogicMethods
     {
-        public static Random rand = new Random();
-
-
-        public static bool EnoughFunds(double balance,int linesPlays,double bet)
+        /// <summary>
+        /// Get sum of row and column constants
+        /// </summary>
+        /// <returns> int sum of row and column</returns>
+        public static int GetRowAndColumnLines()
         {
-            if (balance < linesPlays * bet)                                    // balance has to be greater than bet * lanes
+            int result =
+                Constants.ROW_LINES_IN_GAME +
+                Constants.COLUMN_LINES_IN_GAME;
+            return result;
+        }
+
+        /// <summary>
+        /// Sum of rows,columns and diagonal constants
+        /// </summary>
+        /// <returns> Sum of rows,columns and diagonal lines </returns>
+        public static int GetMaxPlayableLines()
+        {
+            int result =
+                Constants.ROW_LINES_IN_GAME +
+                Constants.COLUMN_LINES_IN_GAME +
+                Constants.DIAGONAL_LINES_IN_GAME;
+            return result;
+        }
+        /// <summary>
+        /// Compare total bet to the balance
+        /// </summary>
+        /// <param name="balance"> Player balance to check against other parameteres </param>
+        /// <param name="linesPlays"> how many lines were chosen to play </param>
+        /// <param name="betPerLane"> What is bet per lane </param>
+        /// <param name="message"> returns false when balance is more than multiplier of other parametres </param>
+        /// <returns></returns>
+        public static bool GetEnoughFunds(double balance, int linesPlays, double betPerLane, Enums.Questions message)
+        {
+            if (balance < linesPlays * betPerLane)                                    // balance has to be greater than bet * lanes
             {
-                UIMethods.DisplayQuestionToPlayer(Enums.Questions.InsufficientFunds);               // Display quiestion 
+                UIMethods.DisplayQuestionToPlayer(message);               // Display quiestion 
             }
             else                                                                                        // continue program if bet amount is less than money balance 
             {
-                balance -= linesPlays * bet;                                   //deduct bet from balance
                 return false;                                                             //if enough balance program continues
             }
             return true;
@@ -30,7 +58,7 @@
         public static int GetDiagonalLineMatch(int[,] array, int playerPlaysLanes)
         {
             int result = 0;
-            if (playerPlaysLanes > Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME)
+            if (playerPlaysLanes > GetRowAndColumnLines())
             {
                 int diagonalCharStoreOne = array[0, 0];
                 int diagonalOneMatch = 0;
@@ -44,7 +72,7 @@
                     {
                         diagonalOneMatch++;
                     }
-                    if (playerPlaysLanes == Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME + Constants.DIAGONAL_LINES_IN_GAME)  // execute code only when max lanes amount is chosen
+                    if (playerPlaysLanes == GetMaxPlayableLines())  // execute code only when max lanes amount is chosen
                     {
                         if (diagonalCharStoreTwo == array[diagonal, diagonalColumn - diagonal])
                         {
@@ -66,12 +94,13 @@
             return result;
         }
 
-/// <summary>
-/// Fills 2D array with random numbers and returns to Array
-/// </summary>
-/// <returns> Array with Numbers </returns>
+        /// <summary>
+        /// Fills 2D array with random numbers and returns to Array
+        /// </summary>
+        /// <returns> Array with Numbers </returns>
         public static int[,] ReturnFilledArray()
         {
+            Random rand = new Random();
             int[,] slotMachineArray = new int[
                         Constants.ROW_LINES_IN_GAME,
                         Constants.COLUMN_LINES_IN_GAME];
@@ -138,7 +167,7 @@
                 }
 
                 // check if whole lane match , display win lane, increments win moneys
-                result += GetAndDisplayWinLine(check, columnIndex,Constants.ROW_LINES_IN_GAME);
+                result += GetAndDisplayWinLine(check, columnIndex, Constants.ROW_LINES_IN_GAME);
             }
             return result;
         }
@@ -150,7 +179,7 @@
         /// <param name="lineMatchingIndex"> Displays which lane wins </param>
         /// <param name="dimensionLinesInGameLength"> amount of checked value has to match length of line characters/this int/number </param>
         /// <returns> Returns amount of win lines </returns>
-        public static int GetAndDisplayWinLine(int matches, int lineMatchingIndex,int dimensionLinesInGameLength)
+        public static int GetAndDisplayWinLine(int matches, int lineMatchingIndex, int dimensionLinesInGameLength)
         {
             int result = 0;
             if (matches == dimensionLinesInGameLength)
