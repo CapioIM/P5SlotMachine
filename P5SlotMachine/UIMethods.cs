@@ -9,30 +9,17 @@
         /// <returns> returns number 1-999.... or 0 if letter is used </returns>
         public static int GetNumberFromPlayer()           // Get player to enter number
         {
-          //  int allLinesInGame = Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME + Constants.DIAGONAL_LINES_IN_GAME;
-            do
+            while (true)
             {
                 if (int.TryParse(Console.ReadLine(), out int result))
                 {
-                    if (result > 0 )//&& result < allLinesInGame)
-                    {
-                        return result;
-                    }
-                    //else if (result <= 0 || result > allLinesInGame)
-                    //{
-                    //    Console.WriteLine($"Try something between 0 and {allLinesInGame + 1}");
-                    //}
-                    else
-                    {
-                        Console.WriteLine("No Cheating !!!");
-                    }
+                    return Math.Abs(result);
                 }
                 else
                 {
-                    Console.WriteLine("You have entered letter or zero ! Please try to enter Number,  !");
+                    Console.WriteLine("Invalid number! Try again !");
                 }
             }
-            while (true);
         }
 
         /// <summary>
@@ -44,8 +31,8 @@
             Console.WriteLine("Hello and Welcome to Slot Machine Game!");
             Console.WriteLine($"" +
                 $" Lines: 1-{Constants.ROW_LINES_IN_GAME} Vertical!\n" +
-                $" Lines {Constants.ROW_LINES_IN_GAME + 1}-{Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME} vertical and horizontal!\n" +
-                $" Lines {Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME + 1}-{Constants.ROW_LINES_IN_GAME + Constants.COLUMN_LINES_IN_GAME + Constants.DIAGONAL_LINES_IN_GAME} vertical, horizontal and diagonal");
+                $" Lines {Constants.ROW_LINES_IN_GAME + 1}-{LogicMethods.GetRowAndColumnLines()} vertical and horizontal!\n" +
+                $" Lines {LogicMethods.GetRowAndColumnLines() + 1}-{LogicMethods.GetMaxPlayableLines()} vertical, horizontal and diagonal");
             Console.WriteLine();
         }
 
