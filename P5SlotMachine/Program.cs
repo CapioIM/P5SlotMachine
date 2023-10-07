@@ -4,10 +4,6 @@
     {
         static void Main(string[] args)
         {
-            int rowAndColumnLines =
-                Constants.COLUMN_LINES_IN_GAME +
-                Constants.ROW_LINES_IN_GAME;        //rows and column lines amount
-
             double playerBalanceTotal = Constants.PLAYER_STARTING_BALANCE;
             int amountOfLanesPlay = 0;
 
@@ -31,9 +27,10 @@
 
                     sufficientBetFunds = LogicMethods.GetEnoughFunds(playerBalanceTotal, amountOfLanesPlay, betPerLane, Enums.Questions.InsufficientFunds);            //if enough balance program continues
                 }
+
                 playerBalanceTotal -= amountOfLanesPlay * betPerLane;   //deduct bet from balance
-                UIMethods.DisplaySlotNumbers(slotMachineArray);        //Display Array
-                double lineWinAmount = 0;
+                UIMethods.DisplaySlotNumbers(slotMachineArray);        //Display Array/ slot machine values
+                double lineWinAmount = 0;                                // for amount of won lanes
 
                 //rows
                 int rowsToPlay = Math.Min(amountOfLanesPlay, Constants.ROW_LINES_IN_GAME); // how many row lines should be checked/played
@@ -50,7 +47,7 @@
                 }
 
                 //Diagonal lines check
-                if (amountOfLanesPlay > rowAndColumnLines)
+                if (amountOfLanesPlay > LogicMethods.GetRowAndColumnLines())
                 {
                     lineWinAmount += LogicMethods.GetDiagonalLineMatch(slotMachineArray, amountOfLanesPlay);   //diagonal lines match, and print win lines, + count win lines
                 }

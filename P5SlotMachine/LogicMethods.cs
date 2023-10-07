@@ -1,9 +1,8 @@
 ﻿namespace P5SlotMachine
 {
-
-
     internal class LogicMethods
     {
+
         /// <summary>
         /// Get sum of row and column constants
         /// </summary>
@@ -28,6 +27,7 @@
                 Constants.DIAGONAL_LINES_IN_GAME;
             return result;
         }
+
         /// <summary>
         /// Compare total bet to the balance
         /// </summary>
@@ -65,7 +65,6 @@
                 int diagonalCharStoreTwo = array[0, Constants.DIAGONAL_LINE_LENGTH - 1];
                 int diagonalTwoMatch = 0;
                 int diagonalColumn = Constants.DIAGONAL_LINE_LENGTH - 1;
-
                 for (int diagonal = 0; diagonal < Constants.DIAGONAL_LINE_LENGTH; diagonal++)
                 {
                     if (diagonalCharStoreOne == array[diagonal, diagonal])
@@ -128,15 +127,12 @@
             {
                 int store = array[rowIndex, rowIndex];
                 int check = 0;
-
-                for (int columnIndex = 0; columnIndex < array.GetLength((int)Enums.RowOrColumn.Columns); columnIndex++)
+                for (int columnIndex = 0; columnIndex < array.GetLength(1); columnIndex++)
                 {
-
                     if (store == array[rowIndex, columnIndex])
                     {
                         check++;
                     }
-
                 }
                 // check if whole lane match , display win lane, increments win moneys
                 result += GetAndDisplayWinLine(check, rowIndex, Constants.COLUMN_LINES_IN_GAME);
@@ -157,15 +153,13 @@
             {
                 int store = array[columnIndex, columnIndex];
                 int check = 0;
-
-                for (int rowIndex = 0; rowIndex < array.GetLength((int)Enums.RowOrColumn.Rows); rowIndex++)
+                for (int rowIndex = 0; rowIndex < array.GetLength(0); rowIndex++)
                 {
                     if (store == array[rowIndex, columnIndex])
                     {
                         check++;
                     }
                 }
-
                 // check if whole lane match , display win lane, increments win moneys
                 result += GetAndDisplayWinLine(check, columnIndex, Constants.ROW_LINES_IN_GAME);
             }
