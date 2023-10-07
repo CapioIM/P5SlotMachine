@@ -19,12 +19,7 @@
                 while (sufficientBetFunds)  // loop for bet as long as there is enough of balance program continues
                 {
                     UIMethods.DisplayQuestionToPlayer(Enums.Questions.HowManyLanes); //Display/print question
-                    amountOfLanesPlay = UIMethods.GetNumberFromPlayer();     // int how many lanes to play
-
-                    if (amountOfLanesPlay > LogicMethods.GetMaxPlayableLines())
-                    {
-                        amountOfLanesPlay = LogicMethods.GetMaxPlayableLines();
-                    }
+                    amountOfLanesPlay = UIMethods.GetNumberFromPlayer(Enums.Questions.HowManyLanes);     // int how many lanes to play
 
                     UIMethods.DisplayQuestionToPlayer(Enums.Questions.HowMuchBetPerLane);  // display question Bet amount per lane
                     betPerLane = UIMethods.GetNumberFromPlayer();                               //int bet per lane

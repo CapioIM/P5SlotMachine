@@ -21,6 +21,32 @@
                 }
             }
         }
+        /// <summary>
+        /// Enter number/get number
+        /// </summary>
+        /// <param name="message"> if Enums.Questions.HowManyLanes entered , causes to return 0 < result > GetMaxPlayableLines  </result> </param>
+        /// <returns> int positive 0 - GetMaxPlayableLines </returns>
+        public static int GetNumberFromPlayer(Enums.Questions message)
+        {
+            while (true)
+            {
+                if (int.TryParse(Console.ReadLine(), out int result))
+                {
+                    if (Enums.Questions.HowManyLanes == message)
+                    {
+                        if (result > LogicMethods.GetMaxPlayableLines())
+                        {
+                            result = LogicMethods.GetMaxPlayableLines();
+                        }
+                    }
+                    return Math.Abs(result);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid number! Try again !");
+                }
+            }
+        }
 
         /// <summary>
         /// prints welcome screen
@@ -57,7 +83,7 @@
             {
                 for (int columnIndex = 0; columnIndex < array.GetLength(1); columnIndex++)
                 {
-                    Console.Write(" " +array[rowIndex, columnIndex]);
+                    Console.Write(" " + array[rowIndex, columnIndex]);
                 }
                 Console.WriteLine();
             }
