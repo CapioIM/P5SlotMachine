@@ -6,6 +6,21 @@
     {
         public static Random rand = new Random();
 
+
+        public static bool EnoughFunds(double balance,int linesPlays,double bet)
+        {
+            if (balance < linesPlays * bet)                                    // balance has to be greater than bet * lanes
+            {
+                UIMethods.DisplayQuestionToPlayer(Enums.Questions.InsufficientFunds);               // Display quiestion 
+            }
+            else                                                                                        // continue program if bet amount is less than money balance 
+            {
+                balance -= linesPlays * bet;                                   //deduct bet from balance
+                return false;                                                             //if enough balance program continues
+            }
+            return true;
+        }
+
         /// <summary>
         /// loop to match 2 diagonal lines in array
         /// </summary>

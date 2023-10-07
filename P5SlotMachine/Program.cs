@@ -29,15 +29,7 @@
                     UIMethods.DisplayQuestionToPlayer(Enums.Questions.HowMuchBetPerLane);  // display question Bet amount per lane
                     betPerLane = UIMethods.GetNumberFromPlayer();                               //enter bet per lane
 
-                    if (playerBalanceTotal < amountOfLanesPlay * betPerLane)                                    // balance has to be greater than bet * lanes
-                    {
-                        UIMethods.DisplayQuestionToPlayer(Enums.Questions.InsufficientFunds);               // Display quiestion 
-                    }
-                    else                                                                                        // continue program if bet amount is less than money balance 
-                    {
-                        playerBalanceTotal -= amountOfLanesPlay * betPerLane;                                   //deduct bet from balance
-                        sufficientBetFunds = false;                                                             //if enough balance program continues
-                    }
+                    sufficientBetFunds = LogicMethods.EnoughFunds(playerBalanceTotal, amountOfLanesPlay, betPerLane);            //if enough balance program continues
                 }
 
                 UIMethods.DisplaySlotNumbers(slotMachineArray);        //Display Array
