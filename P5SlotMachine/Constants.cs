@@ -7,7 +7,7 @@
         public const int DIAGONAL_LINES_IN_GAME = 2;   // how many diagonal lines
         public const int DIAGONAL_LINE_LENGTH = 3;     //length of diagonal line
         public const int PLAYER_STARTING_BALANCE = 50;   // player starting balance
-        public const double WIN_MULTIPLIER = 10;        //win multiplier
+        public const int WIN_MULTIPLIER = 100;        //win multiplier
         public const int MAX_SLOT_NUMBER_OPTIONS = 9;  // slot number options to generate with random option in slot machine
     }
 }

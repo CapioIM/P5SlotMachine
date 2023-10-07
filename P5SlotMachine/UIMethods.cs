@@ -31,8 +31,8 @@
             Console.WriteLine("Hello and Welcome to Slot Machine Game!");
             Console.WriteLine($"" +
                 $" Lines: 1-{Constants.ROW_LINES_IN_GAME} Vertical!\n" +
-                $" Lines {Constants.ROW_LINES_IN_GAME + 1}-{LogicMethods.GetRowAndColumnLines()} vertical and horizontal!\n" +
-                $" Lines {LogicMethods.GetRowAndColumnLines() + 1}-{LogicMethods.GetMaxPlayableLines()} vertical, horizontal and diagonal");
+                $" Lines {Constants.ROW_LINES_IN_GAME + 1}-{LogicMethods.GetRowAndColumnLines()} Vertical and Horizontal!\n" +
+                $" Lines {LogicMethods.GetRowAndColumnLines() + 1}-{LogicMethods.GetMaxPlayableLines()} Vertical, Horizontal and Diagonal");
             Console.WriteLine();
         }
 
@@ -42,7 +42,7 @@
         /// <param name="balance"> enter player starting balance (double) </param>
         public static void DisplayPlayerBalance(double balance)
         {
-            Console.WriteLine($"Your Balance is {balance} !");
+            Console.WriteLine($"Your Balance is $ {balance} !");
             Console.WriteLine();
         }
 
@@ -57,12 +57,11 @@
             {
                 for (int columnIndex = 0; columnIndex < array.GetLength(1); columnIndex++)
                 {
-                    Console.Write(array[rowIndex, columnIndex] + " ");
+                    Console.Write(" " +array[rowIndex, columnIndex]);
                 }
                 Console.WriteLine();
             }
         }
-
 
         /// <summary>
         /// Asks Player question, if answer is no game Closes, if yes Continues
@@ -108,10 +107,10 @@
             switch (questionRelevance)
             {
                 case Enums.Questions.HowManyLanes:
-                    Console.WriteLine("How many lines would you like to play?");
+                    Console.Write("How many lines would you like to play? : ");
                     break;
                 case Enums.Questions.HowMuchBetPerLane:
-                    Console.WriteLine("How much would you like to bet per lane?");
+                    Console.Write("How much would you like to bet per lane? : $ ");
                     break;
                 case Enums.Questions.InsufficientFunds:
                     Console.WriteLine("You have insufficient funds! Please place lower bet!");

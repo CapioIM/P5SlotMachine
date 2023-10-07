@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            double playerBalanceTotal = Constants.PLAYER_STARTING_BALANCE;
+            int playerBalanceTotal = Constants.PLAYER_STARTING_BALANCE;
             int amountOfLanesPlay = 0;
 
             while (playerBalanceTotal > 0)
@@ -14,12 +14,17 @@
                 UIMethods.DisplayWelcomeScreen();
                 UIMethods.DisplayPlayerBalance(playerBalanceTotal);
 
-                double betPerLane = 0;
+                int betPerLane = 0;
                 bool sufficientBetFunds = true;
                 while (sufficientBetFunds)  // loop for bet as long as there is enough of balance program continues
                 {
                     UIMethods.DisplayQuestionToPlayer(Enums.Questions.HowManyLanes); //Display/print question
                     amountOfLanesPlay = UIMethods.GetNumberFromPlayer();     // int how many lanes to play
+
+                    if (amountOfLanesPlay > LogicMethods.GetMaxPlayableLines())
+                    {
+                        amountOfLanesPlay = LogicMethods.GetMaxPlayableLines();
+                    }
 
                     UIMethods.DisplayQuestionToPlayer(Enums.Questions.HowMuchBetPerLane);  // display question Bet amount per lane
                     betPerLane = UIMethods.GetNumberFromPlayer();                               //int bet per lane
@@ -29,7 +34,7 @@
 
                 playerBalanceTotal -= amountOfLanesPlay * betPerLane;   //deduct bet from balance
                 UIMethods.DisplaySlotNumbers(slotMachineArray);        //Display Array/ slot machine values
-                double lineWinAmount = 0;                                // for amount of won lanes
+                int lineWinAmount = 0;                                // for amount of won lanes
 
                 //rows
                 int rowsToPlay = Math.Min(amountOfLanesPlay, Constants.ROW_LINES_IN_GAME); // how many row lines should be checked/played
@@ -58,8 +63,7 @@
                 {
                     Environment.Exit(0);
                 }
-
-            }//end of while loop
+            }//end of while/game loop
         }
     }
 }

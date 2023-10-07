@@ -38,13 +38,13 @@
         /// <returns></returns>
         public static bool GetEnoughBalance(double balance, int linesPlays, double betPerLane, Enums.Questions message)
         {
-            if (balance < linesPlays * betPerLane)                                    // balance has to be greater than bet * lanes
+            if (balance < linesPlays * betPerLane)                   // balance has to be greater than bet * lanes
             {
-                UIMethods.DisplayQuestionToPlayer(message);               // Display quiestion 
+                UIMethods.DisplayQuestionToPlayer(message);          // Display quiestion 
             }
-            else                                                                                        // continue program if bet amount is less than money balance 
+            else                                                     // insufficient balance
             {
-                return false;                                                             //if enough balance program continues
+                return false;                                       
             }
             return true;
         }
@@ -115,7 +115,7 @@
         }
 
         /// <summary>
-        /// Loop to Check matches in rows in Array
+        /// Loop to Check matches of rows in Array and display line nr
         /// </summary>
         /// <param name="array"> Array Name ? </param>
         /// <param name="linesPlayCounter"> specific dimension,amount of lanes playing </param>
@@ -141,7 +141,7 @@
         }
 
         /// <summary>
-        /// Vertical Line match and win Line Display
+        /// Loop to Check matches of columns in Array and display line nr
         /// </summary>
         /// <param name="array"> Enter Array name </param>
         /// <param name="linesPlayCounter"> specific dimension,amount of lanes playing </param>
