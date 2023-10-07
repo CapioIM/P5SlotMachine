@@ -4,9 +4,9 @@
     {
 
         /// <summary>
-        /// Ask Player For Number
+        /// Ask Player For Number and torturte untill number is entered
         /// </summary>
-        /// <returns> returns number 1-999.... or 0 if letter is used </returns>
+        /// <returns> returns positive number </returns>
         public static int GetNumberFromPlayer()           // Get player to enter number
         {
             while (true)
@@ -39,7 +39,7 @@
         /// <summary>
         /// prints player balance
         /// </summary>
-        /// <param name="balance"> enter player starting balance </param>
+        /// <param name="balance"> enter player starting balance (double) </param>
         public static void DisplayPlayerBalance(double balance)
         {
             Console.WriteLine($"Your Balance is {balance} !");

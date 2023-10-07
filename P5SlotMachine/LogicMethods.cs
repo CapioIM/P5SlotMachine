@@ -36,7 +36,7 @@
         /// <param name="betPerLane"> What is bet per lane </param>
         /// <param name="message"> returns false when balance is more than multiplier of other parametres </param>
         /// <returns></returns>
-        public static bool GetEnoughFunds(double balance, int linesPlays, double betPerLane, Enums.Questions message)
+        public static bool GetEnoughBalance(double balance, int linesPlays, double betPerLane, Enums.Questions message)
         {
             if (balance < linesPlays * betPerLane)                                    // balance has to be greater than bet * lanes
             {
@@ -52,7 +52,7 @@
         /// <summary>
         /// loop to match 2 diagonal lines in array
         /// </summary>
-        /// <param name="array"> name of array loop will match through </param>
+        /// <param name="array"> name of array, loop will match through </param>
         /// <param name="playerPlaysLanes"> How many Lanes Player want to play </param>
         /// <returns> Returns amount of matching lanes </returns>
         public static int GetDiagonalLineMatch(int[,] array, int playerPlaysLanes)
