@@ -5,7 +5,7 @@
         /// <summary>
         /// Enum with short Question discription
         /// </summary>
-        public enum Questions
+        public enum QuestionsText
         {
             HowManyLanes,
             HowMuchBetPerLane,

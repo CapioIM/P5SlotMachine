@@ -24,21 +24,17 @@
         /// <summary>
         /// Enter number/get number
         /// </summary>
-        /// <param name="message"> if Enums.Questions.HowManyLanes entered , causes to return 0 < result > GetMaxPlayableLines  </result> </param>
         /// <returns> int positive 0 - GetMaxPlayableLines </returns>
-        public static int GetNumberFromPlayer(Enums.Questions message)
+        public static int GetAmountOfLinesFromPlayer()
         {
             while (true)
             {
                 if (int.TryParse(Console.ReadLine(), out int result))
                 {
-                    if (Enums.Questions.HowManyLanes == message)
-                    {
                         if (result > LogicMethods.GetMaxPlayableLines())
                         {
                             result = LogicMethods.GetMaxPlayableLines();
                         }
-                    }
                     return Math.Abs(result);
                 }
                 else
@@ -95,7 +91,7 @@
         /// <returns> returns false if answer N/n , otherwise returns true </returns>
         public static bool ContinueGameDecision()
         {
-            DisplayQuestionToPlayer(Enums.Questions.ContinueGame);
+            DisplayQuestionToPlayer(Enums.QuestionsText.ContinueGame);
             if (Console.ReadKey().KeyChar.ToString().ToLower() != "n")
             {
                 Console.Clear();
@@ -128,20 +124,20 @@
         /// </summary>
         /// <param name="questionRelevance"></param>
         /// <returns> prints chosen question </returns>
-        public static string DisplayQuestionToPlayer(Enums.Questions questionRelevance)
+        public static string DisplayQuestionToPlayer(Enums.QuestionsText questionRelevance)
         {
             switch (questionRelevance)
             {
-                case Enums.Questions.HowManyLanes:
+                case Enums.QuestionsText.HowManyLanes:
                     Console.Write("How many lines would you like to play? : ");
                     break;
-                case Enums.Questions.HowMuchBetPerLane:
+                case Enums.QuestionsText.HowMuchBetPerLane:
                     Console.Write("How much would you like to bet per lane? : $ ");
                     break;
-                case Enums.Questions.InsufficientFunds:
+                case Enums.QuestionsText.InsufficientFunds:
                     Console.WriteLine("You have insufficient funds! Please place lower bet!");
                     break;
-                case Enums.Questions.ContinueGame:
+                case Enums.QuestionsText.ContinueGame:
                     Console.WriteLine("Do you want to continue game? Y = Yes , N = No");
                     break;
             }
