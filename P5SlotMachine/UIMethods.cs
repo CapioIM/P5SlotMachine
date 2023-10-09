@@ -31,10 +31,10 @@
             {
                 if (int.TryParse(Console.ReadLine(), out int result))
                 {
-                        if (result > LogicMethods.GetMaxPlayableLines())
-                        {
-                            result = LogicMethods.GetMaxPlayableLines();
-                        }
+                    if (result > LogicMethods.GetMaxPlayableLines())
+                    {
+                        result = LogicMethods.GetMaxPlayableLines();
+                    }
                     return Math.Abs(result);
                 }
                 else
