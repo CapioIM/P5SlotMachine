@@ -36,7 +36,7 @@
         /// <param name="betPerLane"> What is bet per lane </param>
         /// <param name="message"> returns false when balance is more than multiplier of other parametres </param>
         /// <returns></returns>
-        public static bool GetEnoughBalance(double balance, int linesPlays, double betPerLane, Enums.QuestionsText message)
+        public static bool GetEnoughBalance(double balance, int linesPlays, double betPerLane, QuestionTexts.QuestionsText message)
         {
             if (balance < linesPlays * betPerLane)                   // balance has to be greater than bet * lanes
             {

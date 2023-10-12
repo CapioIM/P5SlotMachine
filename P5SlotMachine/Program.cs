@@ -18,13 +18,13 @@
                 bool sufficientBetFunds = true;
                 while (sufficientBetFunds)  // loop for bet as long as there is enough of balance program continues
                 {
-                    UIMethods.DisplayQuestionToPlayer(Enums.QuestionsText.HowManyLanes); //Display/print question
+                    UIMethods.DisplayQuestionToPlayer(QuestionTexts.QuestionsText.HowManyLanes); //Display/print question
                     amountOfLanesPlay = UIMethods.GetAmountOfLinesFromPlayer();     // int how many lanes to play
 
-                    UIMethods.DisplayQuestionToPlayer(Enums.QuestionsText.HowMuchBetPerLane);  // display question Bet amount per lane
+                    UIMethods.DisplayQuestionToPlayer(QuestionTexts.QuestionsText.HowMuchBetPerLane);  // display question Bet amount per lane
                     betPerLane = UIMethods.GetNumberFromPlayer();                               //int bet per lane
 
-                    sufficientBetFunds = LogicMethods.GetEnoughBalance(playerBalanceTotal, amountOfLanesPlay, betPerLane, Enums.QuestionsText.InsufficientFunds);            //if enough balance program continues
+                    sufficientBetFunds = LogicMethods.GetEnoughBalance(playerBalanceTotal, amountOfLanesPlay, betPerLane, QuestionTexts.QuestionsText.InsufficientFunds);            //if enough balance program continues
                 }
 
                 playerBalanceTotal -= amountOfLanesPlay * betPerLane;   //deduct bet from balance

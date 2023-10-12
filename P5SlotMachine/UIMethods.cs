@@ -47,7 +47,6 @@
         /// <summary>
         /// prints welcome screen
         /// </summary>
-
         public static void DisplayWelcomeScreen()
         {
             Console.WriteLine("Hello and Welcome to Slot Machine Game!");
@@ -91,7 +90,7 @@
         /// <returns> returns false if answer N/n , otherwise returns true </returns>
         public static bool ContinueGameDecision()
         {
-            DisplayQuestionToPlayer(Enums.QuestionsText.ContinueGame);
+            DisplayQuestionToPlayer(QuestionTexts.QuestionsText.ContinueGame);
             if (Console.ReadKey().KeyChar.ToString().ToLower() != "n")
             {
                 Console.Clear();
@@ -124,20 +123,20 @@
         /// </summary>
         /// <param name="questionRelevance"></param>
         /// <returns> prints chosen question </returns>
-        public static string DisplayQuestionToPlayer(Enums.QuestionsText questionRelevance)
+        public static string DisplayQuestionToPlayer(QuestionTexts.QuestionsText questionRelevance)
         {
             switch (questionRelevance)
             {
-                case Enums.QuestionsText.HowManyLanes:
+                case QuestionTexts.QuestionsText.HowManyLanes:
                     Console.Write("How many lines would you like to play? : ");
                     break;
-                case Enums.QuestionsText.HowMuchBetPerLane:
+                case QuestionTexts.QuestionsText.HowMuchBetPerLane:
                     Console.Write("How much would you like to bet per lane? : $ ");
                     break;
-                case Enums.QuestionsText.InsufficientFunds:
+                case QuestionTexts.QuestionsText.InsufficientFunds:
                     Console.WriteLine("You have insufficient funds! Please place lower bet!");
                     break;
-                case Enums.QuestionsText.ContinueGame:
+                case QuestionTexts.QuestionsText.ContinueGame:
                     Console.WriteLine("Do you want to continue game? Y = Yes , N = No");
                     break;
             }

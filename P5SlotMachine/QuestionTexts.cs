@@ -1,6 +1,6 @@
 ﻿namespace P5SlotMachine
 {
-    internal class Enums
+    internal class QuestionTexts
     {
         /// <summary>
         /// Enum with short Question discription
