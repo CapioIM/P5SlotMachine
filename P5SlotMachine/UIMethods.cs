@@ -27,23 +27,13 @@
         /// <returns> int positive 0 - GetMaxPlayableLines </returns>
         public static int GetAmountOfLinesFromPlayer()
         {
-            while (true)
+            int result = GetNumberFromPlayer();
+            if (result > LogicMethods.GetMaxPlayableLines())
             {
-                if (int.TryParse(Console.ReadLine(), out int result))
-                {
-                    if (result > LogicMethods.GetMaxPlayableLines())
-                    {
-                        result = LogicMethods.GetMaxPlayableLines();
-                    }
-                    return Math.Abs(result);
-                }
-                else
-                {
-                    Console.WriteLine("Invalid number! Try again !");
-                }
+                result = LogicMethods.GetMaxPlayableLines();
             }
+            return Math.Abs(result);
         }
-
         /// <summary>
         /// prints welcome screen
         /// </summary>
